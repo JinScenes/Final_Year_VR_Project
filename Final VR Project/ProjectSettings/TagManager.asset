@@ -3,23 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Surface
-  - XR Rig
-  - Zombie
-  - Pistol
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Grab
+  - 
   - Water
   - UI
-  - Ground
   - 
   - 
-  - 
-  - 
+  - Restricted
+  - Player
+  - Grabbable
   - 
   - 
   - 

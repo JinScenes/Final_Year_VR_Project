@@ -85,7 +85,7 @@
     },
     "com.unity.inputsystem": {
       "version": "1.6.3",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"
@@ -263,7 +263,7 @@
     },
     "com.unity.xr.oculus": {
       "version": "4.0.0",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.management": "4.2.0"
