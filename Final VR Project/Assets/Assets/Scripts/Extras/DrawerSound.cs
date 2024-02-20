@@ -17,7 +17,7 @@ public class DrawerSound : MonoBehaviour {
             
         // Open Sound
         if(drawerValue < DrawerOpenValue && !playedOpenSound && DrawerOpenSound != null) {
-            VRUtils.Instance.PlaySpatialClipAt(DrawerOpenSound, transform.position, 1f);
+            XRManager.Instance.PlaySpatialClipAt(DrawerOpenSound, transform.position, 1f);
             playedOpenSound = true;
         }
         // Reset Open Sound
@@ -27,7 +27,7 @@ public class DrawerSound : MonoBehaviour {
 
         // Close Sound
         if (drawerValue > DrawerCloseValue && !playedCloseSound && DrawerCloseSound != null) {
-            VRUtils.Instance.PlaySpatialClipAt(DrawerCloseSound, transform.position, 1f);
+            XRManager.Instance.PlaySpatialClipAt(DrawerCloseSound, transform.position, 1f);
             playedCloseSound = true;
         }
 

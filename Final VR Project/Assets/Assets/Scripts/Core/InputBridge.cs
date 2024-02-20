@@ -1,14 +1,9 @@
-﻿#define VRIF
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-#if UNITY_2018_4_OR_NEWER
 using UnityEngine.XR;
-#endif
-#if STEAM_VR_SDK
-using Valve.VR;
-#endif
+
 
 #region Enums
 public enum ControllerHand {
@@ -17,9 +12,6 @@ public enum ControllerHand {
     None
 }
 
-/// <summary>
-/// Controller Options available to bind buttons to via Inspector. You can use GetControllerBindingValue() to determine if that button has been pressed.
-/// </summary>
 public enum ControllerBinding {
     None,
     AButton,
@@ -48,15 +40,11 @@ public enum ControllerBinding {
     BackButtonDown
 }
 
-/// <summary>
-/// Controller Options available to bind buttons to via Inspector. Input is relative to the controller holding it.
-/// Ex : Button 1 = Button A if held in Right controller, Button X if held in Left.
-/// </summary>
 public enum GrabbedControllerBinding {
     None,
-    Button1, // Button A, X
+    Button1,
     Button1Down,
-    Button2, // Button B, Y
+    Button2,
     Button2Down,
     Trigger,
     TriggerDown,
@@ -119,9 +107,6 @@ public enum SDKProvider {
 
 #endregion
 
-/// <summary>
-/// A proxy for handling input from various input providers such as OVRInput, XRInput, and SteamVR. 
-/// </summary>
 public class InputBridge : MonoBehaviour {
 
     #region Singleton
@@ -438,17 +423,18 @@ public class InputBridge : MonoBehaviour {
     public bool ShowInputDebugger = false;
     #endregion
 
-    private void Awake() {
-        // Destroy any duplicate instances that may have been created
-        if (_instance != null && _instance != this) {
+    private void Awake() 
+    {
+        if (_instance != null && _instance != this) 
+        {
             Destroy(this);
             return;
         }
 
         _instance = this;
 
-        // Update all device properties
-        if(GetSupportsXRInput()) {
+        if(GetSupportsXRInput()) 
+        {
             List<InputDevice> devices = new List<InputDevice>();
             InputDevices.GetDevices(devices);
 
@@ -456,173 +442,60 @@ public class InputBridge : MonoBehaviour {
         }
     }       
 
-    void Start() {
-
-        // Set tracking mode to floor, device, etc. on Start
-        if(GetSupportsXRInput()) {
+    void Start() 
+    {
+        if(GetSupportsXRInput()) 
+        {
             SetTrackingOriginMode(TrackingOrigin);
         }
-
-#if STEAM_VR_SDK
-        SteamVRSupport = true;
-
-        // Warn that input source has not been set, even though the SteamVR SDK is present.
-        if(InputSource != XRInputSource.SteamVR) {
-            Debug.Log("SteamVR SDK detected, but not set as source on InputBridge. Recommend switching input Source from " + InputSource.ToString() + " to SteamVR.");
-        }
-
-        // Set the default action set if not provided
-        SteamVR_ActivateActionSetOnLoad VRIFLoader = FindObjectOfType<SteamVR_ActivateActionSetOnLoad>();
-        if (VRIFLoader == null) {
-            Debug.Log("SteamVR_ActivateActionSetOnLoad component not found - adding VRIF custom actions default.");
-            VRIFLoader = gameObject.AddComponent<SteamVR_ActivateActionSetOnLoad>();
-            VRIFLoader.actionSet = SteamVR_Actions.VRIF;
-        }
-
-        SteamVR.Initialize();
-#endif
     }
 
-    void OnEnable() {
-#if UNITY_WEBGL
-        if(Application.isEditor) {
-            // Update in editor device changed
-            InputDevices.deviceConfigChanged += onDeviceChanged;
-            InputDevices.deviceConnected += onDeviceChanged;
-            InputDevices.deviceDisconnected += onDeviceChanged;
-        }
-
-#elif UNITY_2019_3_OR_NEWER
+    void OnEnable() 
+    {
         InputDevices.deviceConfigChanged += onDeviceChanged;
         InputDevices.deviceConnected += onDeviceChanged;
         InputDevices.deviceDisconnected += onDeviceChanged;
-#endif
+
         CreateUnityInputActions();
         EnableActions();
     }        
 
-    void OnDisable() {
-#if UNITY_2019_3_OR_NEWER
+    void OnDisable() 
+    {
         InputDevices.deviceConfigChanged -= onDeviceChanged;
         InputDevices.deviceConnected -= onDeviceChanged;
         InputDevices.deviceDisconnected -= onDeviceChanged;
-#endif
+
         DisableActions();
     }        
 
-    void Update() {
+    void Update() 
+    {
         UpdateDeviceActive();
         UpdateInputs();
     }
 
-    public virtual void UpdateInputs() {
-
-        // SteamVR uses an action system. Only update if HMD is reported as Active
-        if (InputSource == XRInputSource.SteamVR && SteamVRSupport && HMDActive) {
-            UpdateSteamInput();
-        }
-        // Use OVRInput to get more Oculus Specific inputs, such as "Near Touch"
-        else if (InputSource == XRInputSource.OVRInput) {
-            UpdateOVRInput();
-        }
-        // Use XRInput
-        else if(InputSource == XRInputSource.XRInput) {
+    public virtual void UpdateInputs() 
+    {
+        if(InputSource == XRInputSource.XRInput) 
+        {
             UpdateXRInput();
         }
-        // New Unity Input System
-        else if(InputSource == XRInputSource.UnityInput) {
+        else if (InputSource == XRInputSource.OVRInput) 
+        {
+            UpdateOVRInput();
+        }
+        else if(InputSource == XRInputSource.UnityInput) 
+        {
             UpdateUnityInput();
         }
-        // Pico
-        else if(InputSource == XRInputSource.Pico) {
+        else if(InputSource == XRInputSource.Pico) 
+        {
             UpdatePicoInput();
         }
 
-        // Call events
         OnInputsUpdated?.Invoke();
     }
-
-    #region SteamVR Action Input
-    public virtual void UpdateSteamInput() {
-#if STEAM_VR_SDK
-
-        LeftThumbstickAxis = ApplyDeadZones(SteamVR_Actions.vRIF_LeftThumbstickAxis.axis, ThumbstickDeadzoneX, ThumbstickDeadzoneY);
-        RightThumbstickAxis = ApplyDeadZones(SteamVR_Actions.vRIF_RightThumbstickAxis.axis, ThumbstickDeadzoneX, ThumbstickDeadzoneY);
-
-        var prevBool = LeftThumbstick;
-        LeftThumbstick = SteamVR_Actions.vRIF_LeftThumbstickDown.state;
-        // LeftThumbstickDown = SteamVR_Actions.vRIF_LeftThumbstickDown.stateDown;
-        LeftThumbstickDown = prevBool == false && LeftThumbstick == true;
-        LeftThumbstickUp = prevBool == true && LeftThumbstick == false;
-
-        prevBool = RightThumbstick;
-        RightThumbstick = SteamVR_Actions.vRIF_RightThumbstickDown.state;
-        // RightThumbstickDown = SteamVR_Actions.vRIF_RightThumbstickDown.stateDown;
-        RightThumbstickDown = prevBool == false && RightThumbstick == true;
-        RightThumbstickUp = prevBool == true && RightThumbstick == false;
-            
-        LeftThumbNear = SteamVR_Actions.vRIF_LeftThumbstickNear.state;
-        //LeftThumbNear = SteamVR_Actions.vRIF_LeftTrackpadNear.state;
-        RightThumbNear = SteamVR_Actions.vRIF_RightThumbstickNear.state;
-        //RightThumbNear = SteamVR_Actions.vRIF_RightTrackpadNear.state;
-
-        var prevVal = LeftGrip;
-        LeftGrip = LeftGrip = correctValue(SteamVR_Actions.vRIF_LeftGrip.axis);
-        LeftGripDown = prevVal < _downThreshold && LeftGrip >= _downThreshold;
-
-        prevVal = RightGrip;
-        RightGrip = correctValue(SteamVR_Actions.vRIF_RightGrip.axis);
-        RightGripDown = prevVal < _downThreshold && RightGrip >= _downThreshold;
-
-        prevVal = LeftTrigger;
-        LeftTrigger = correctValue(SteamVR_Actions.vRIF_LeftTrigger.axis);
-        LeftTriggerDown = prevVal < _downThreshold && LeftTrigger >= _downThreshold;
-        LeftTriggerUp = prevVal > _downThreshold && LeftTrigger < _downThreshold;
-        LeftTriggerNear = SteamVR_Actions.vRIF_LeftTriggerNear.state;
-
-        prevVal = RightTrigger;
-        RightTrigger = correctValue(SteamVR_Actions.vRIF_RightTrigger.axis);
-        RightTriggerDown = prevVal < _downThreshold && RightTrigger >= _downThreshold;
-        RightTriggerUp = prevVal > _downThreshold && RightTrigger < _downThreshold;
-        RightTriggerNear = SteamVR_Actions.vRIF_RightTriggerNear.state;
-
-        AButton = SteamVR_Actions.vRIF_AButton.state;
-        AButtonDown = SteamVR_Actions.vRIF_AButton.stateDown;
-        AButtonUp = SteamVR_Actions.vRIF_AButton.stateUp;
-        BButton = SteamVR_Actions.vRIF_BButton.state;
-        BButtonDown = SteamVR_Actions.vRIF_BButton.stateDown;
-        BButtonUp = SteamVR_Actions.vRIF_AButton.stateUp;
-        XButton = SteamVR_Actions.vRIF_XButton.state;
-        XButtonDown = SteamVR_Actions.vRIF_XButton.stateDown;
-        XButtonUp = SteamVR_Actions.vRIF_XButton.stateUp;
-        YButton = SteamVR_Actions.vRIF_YButton.state;
-        YButtonDown = SteamVR_Actions.vRIF_YButton.stateDown;
-        YButtonUp = SteamVR_Actions.vRIF_YButton.stateUp;
-
-        // Hand Tracking (Ie Valve Knuckles Finger Tracking)
-        LeftThumbCurl = SteamVR_Actions.vRIF_SkeletonLeftHand.thumbCurl;
-        LeftIndexCurl = SteamVR_Actions.vRIF_SkeletonLeftHand.indexCurl;
-        LeftMiddleCurl = SteamVR_Actions.vRIF_SkeletonLeftHand.middleCurl;
-        LeftRingCurl = SteamVR_Actions.vRIF_SkeletonLeftHand.ringCurl;
-        LeftPinkyCurl = SteamVR_Actions.vRIF_SkeletonLeftHand.pinkyCurl;
-
-        RightThumbCurl = SteamVR_Actions.vRIF_SkeletonRightHand.thumbCurl;
-        RightIndexCurl = SteamVR_Actions.vRIF_SkeletonRightHand.indexCurl;
-        RightMiddleCurl = SteamVR_Actions.vRIF_SkeletonRightHand.middleCurl;
-        RightRingCurl = SteamVR_Actions.vRIF_SkeletonRightHand.ringCurl;
-        RightPinkyCurl = SteamVR_Actions.vRIF_SkeletonRightHand.pinkyCurl;
-
-        //prevBool = StartButton;
-        //StartButton = SteamVR_Actions.vRIF_StartButton.state;
-        //StartButtonDown = prevBool == false && StartButton == true;
-
-        //prevBool = BackButton;
-        //BackButton = SteamVR_Actions.vRIF_BackButton.state;
-        //BackButtonDown = prevBool == false && BackButton == true;
-#endif
-    }
-
-    #endregion
 
     #region XR Input
 #if UNITY_2019_3_OR_NEWER
@@ -1040,16 +913,15 @@ public class InputBridge : MonoBehaviour {
 
     public virtual void UpdateDeviceActive() {
 
-        // Check XR Input to see if we can get active status
-        if(GetSupportsXRInput()) {
+        if(GetSupportsXRInput()) 
+        {
             InputDevice hmd = GetHMD();
 
-            // Check if hmd is valid from XRInput
-            if (hmd.isValid == false) {
+            if (hmd.isValid == false) 
+            {
                 HMDActive = false;
             }
 
-            // Make sure the device supports the presence feature
             bool userPresent = false;
             bool presenceFeatureSupported = hmd.TryGetFeatureValue(CommonUsages.userPresence, out userPresent);
             if (presenceFeatureSupported) {
@@ -1059,31 +931,17 @@ public class InputBridge : MonoBehaviour {
                 HMDActive = XRSettings.isDeviceActive;
             }
         }
-
-#if STEAM_VR_SDK
-        if(!HMDActive) {
-            // SteamVR doesn't always directly report as active, but we can double check against the device name
-            if(!string.IsNullOrEmpty(GetHMDName())) {
-                HMDActive = true;
-            }
-        }
-#endif
     }
 
-    /// <summary>
-    /// Round to nearest thousandth. This can alleviate some floating point precision errors found when using certain inputs.
-    /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
-    float correctValue(float inputValue) {
+    float correctValue(float inputValue) 
+    {
         return (float)System.Math.Round(inputValue * 1000f) / 1000f;
     }
 
-
-    /// <summary>
-    /// Returns true if the given binding is pressed
-    /// </summary>
-    public bool GetControllerBindingValue(ControllerBinding val) {
+    public bool GetControllerBindingValue(ControllerBinding val) 
+    {
         if (val == ControllerBinding.AButton && AButton) { return true; }
         if (val == ControllerBinding.AButtonDown && AButtonDown) { return true; }
         if (val == ControllerBinding.BButton && BButton) { return true; }
@@ -1112,8 +970,10 @@ public class InputBridge : MonoBehaviour {
         return false;
     }
 
-    public bool GetGrabbedControllerBinding(GrabbedControllerBinding val, ControllerHand hand) {
-        if(hand == ControllerHand.Right) {
+    public bool GetGrabbedControllerBinding(GrabbedControllerBinding val, ControllerHand hand) 
+    {
+        if(hand == ControllerHand.Right) 
+        {
             if (val == GrabbedControllerBinding.Button1 && AButton) { return true; }
             if (val == GrabbedControllerBinding.Button1Down && AButtonDown) { return true; }
             if (val == GrabbedControllerBinding.Button2 && BButton) { return true; }
@@ -1123,7 +983,8 @@ public class InputBridge : MonoBehaviour {
             if (val == GrabbedControllerBinding.Trigger && RightTrigger > _downThreshold) { return true; }
             if (val == GrabbedControllerBinding.TriggerDown && RightTriggerDown) { return true; }
         }
-        else if (hand == ControllerHand.Left) {
+        else if (hand == ControllerHand.Left) 
+        {
             if (val == GrabbedControllerBinding.Button1 && XButton) { return true; }
             if (val == GrabbedControllerBinding.Button1Down && XButtonDown) { return true; }
             if (val == GrabbedControllerBinding.Button2 && YButton) { return true; }
@@ -1137,7 +998,8 @@ public class InputBridge : MonoBehaviour {
         return false;
     }
 
-    public Vector2 GetInputAxisValue(InputAxis val) {
+    public Vector2 GetInputAxisValue(InputAxis val) 
+    {
         if (val == InputAxis.LeftThumbStickAxis) { return LeftThumbstickAxis; }
         if (val == InputAxis.RightThumbStickAxis) { return RightThumbstickAxis; }
         if (val == InputAxis.LeftTouchPadAxis) { return LeftTouchPadAxis; }
@@ -1146,21 +1008,24 @@ public class InputBridge : MonoBehaviour {
         return Vector3.zero;
     }
 
-    Vector2 ApplyDeadZones(Vector2 pos, float deadZoneX, float deadZoneY) {
+    Vector2 ApplyDeadZones(Vector2 pos, float deadZoneX, float deadZoneY) 
+    {
 
-        if (Mathf.Abs(pos.x) < deadZoneX) {
+        if (Mathf.Abs(pos.x) < deadZoneX) 
+        {
             pos.x = 0f;
         }
 
-        if (Mathf.Abs(pos.y) < deadZoneY) {
+        if (Mathf.Abs(pos.y) < deadZoneY) 
+        {
             pos.y = 0f;
         }
 
         return pos;
     }
 
-    // Called when an input device has changed (connect / disconnect, etc.)
-    void onDeviceChanged(InputDevice inputDevice) {
+    void onDeviceChanged(InputDevice inputDevice) 
+    {
 
         setDeviceProperties();
 
@@ -1169,45 +1034,33 @@ public class InputBridge : MonoBehaviour {
 
     void setDeviceProperties() {
 
-        // Update device properties such as device name, controller properties, etc.
-        // We only want to update this information if a device has changed in order to skip unnecessary checks every frame
         IsOculusDevice = GetIsOculusDevice();
         IsOculusQuest = GetIsOculusQuest();
         IsHTCDevice = GetIsHTCDevice();
         IsPicoDevice = GetIsPicoDevice();
         IsValveIndexController = GetIsValveIndexController();
 
-        // Set the SDK we are using
         LoadedSDK = GetLoadedSDK();
 
-        // Get specific device support
         SupportsIndexTouch = GetSupportsIndexTouch();
         SupportsThumbTouch = GetSupportsThumbTouch();
 
-        // Currently only the Valve Index has both a touchpad and a joystick on the same controller
         SupportsBothTouchPadAndJoystick = IsValveIndexController;
 
-        // Update Controller Type
         ConnectedControllerType = GetControllerType();
 
-        // Call any events
-        if(!string.IsNullOrEmpty(InputBridge.Instance.GetControllerName())) {
+        if(!string.IsNullOrEmpty(InputBridge.Instance.GetControllerName())) 
+        {
             OnControllerFound?.Invoke();
         }
     }
 
     public virtual bool GetSupportsXRInput() {
 
-#if UNITY_WEBGL
-        // WebGL cannot handle calls to XRInput
-        return false;
-#endif
-        // Most Input Sources support XRInput in some form. Skip for WebXR since it will throw errors
         if (InputSource == XRInputSource.WebXR) {
             return false;
         }
 
-        // Let the user call any XRInput related functions in their own input provider
         if (InputSource == XRInputSource.None) {
             return false;
         }
@@ -1215,110 +1068,81 @@ public class InputBridge : MonoBehaviour {
         return true;
     }
 
-    /// <summary>
-    /// Returns true if the controllers support the 'indexTouch' XR input mapping.Currently only Oculus devices on the Oculus SDK support index touch. OpenVR is not supported.
-    /// </summary>
     /// <returns></returns>
-    public virtual bool GetSupportsIndexTouch() {
-        //if(IsOculusDevice && LoadedSDK == SDKProvider.OculusSDK) {
-        //    return true;
-        //}
-
+    public virtual bool GetSupportsIndexTouch() 
+    {
         return true;
     }
 
-    public virtual SDKProvider GetLoadedSDK() {
-
-        // Can exit early if no device name has been picked up yet
-        if (XRSettings.loadedDeviceName == null) {
+    public virtual SDKProvider GetLoadedSDK() 
+    {
+        if (XRSettings.loadedDeviceName == null) 
+        {
             return SDKProvider.Unknown;
         }
 
         string deviceName = XRSettings.loadedDeviceName.ToLower();
 
-        // Example : "oculus display"
-        if (deviceName.StartsWith("oculus")) {
+        if (deviceName.StartsWith("oculus")) 
+        {
             return SDKProvider.OculusSDK;
         }
-        // Example : "OpenVR Display"
-        else if (deviceName.StartsWith("openvr")) {
+        else if (deviceName.StartsWith("openvr")) 
+        {
             return SDKProvider.OpenVR;
         }
 
         return SDKProvider.Unknown;
     }
 
-    public virtual bool GetSupportsThumbTouch() {
-        //if (IsOculusDevice && LoadedSDK == SDKProvider.OculusSDK) {
-        //    return true;
-        //}
-
+    public virtual bool GetSupportsThumbTouch() 
+    {
         return true;
     }
 
-    public virtual bool GetIsOculusDevice() {
+    public virtual bool GetIsOculusDevice() 
+    {
 
         var primaryHMD = GetHMD();
 
-        // OpenVR Format
         if (primaryHMD != null && primaryHMD.manufacturer == "Oculus") {
             return true;
         }
 
-#if UNITY_2019_2_OR_NEWER
         return XRSettings.loadedDeviceName != null && XRSettings.loadedDeviceName.ToLower().Contains("oculus");
-#else
-        return true;
-#endif
     }
 
-    public virtual bool GetIsOculusQuest() {
-#if UNITY_2019_2_OR_NEWER
-
+    public virtual bool GetIsOculusQuest() 
+    {
         var primaryHMD = GetHMD();
 
-        // Example : "OpenVR Headset(Oculus Quest)"
-        if (primaryHMD != null && primaryHMD.name != null && primaryHMD.name.EndsWith("(Oculus Quest)")) {
+        if (primaryHMD != null && primaryHMD.name != null && primaryHMD.name.EndsWith("(Oculus Quest)")) 
+        {
             return true;
         }
-        // Non-OpenVR version use "contains" on string. 
-        else if (primaryHMD != null && primaryHMD.name != null && primaryHMD.name.Contains("Oculus Quest")) {
+        else if (primaryHMD != null && primaryHMD.name != null && primaryHMD.name.Contains("Oculus Quest")) 
+        {
             return true;
         }
 
-        //  Fallback to refresh rate
         return GetIsOculusDevice() && XRDevice.refreshRate == 72f;
-#else
-        if (Application.platform == RuntimePlatform.Android) {
-            return true;
-        }
-            
-        return false;
-#endif
     }
 
-    public virtual bool GetIsHTCDevice() {
-        // Is HTC Device
-#if UNITY_2019_2_OR_NEWER
+    public virtual bool GetIsHTCDevice() 
+    {
         var primaryHMD = GetHMD();
 
-        // OpenVR Format
-        if (primaryHMD != null && primaryHMD.manufacturer == "HTC") {
+        if (primaryHMD != null && primaryHMD.manufacturer == "HTC") 
+        {
             return true;
         }
 
         return XRSettings.loadedDeviceName.StartsWith("HTC");
-#else
-        return false;
-#endif
     }
 
-    public virtual bool GetIsPicoDevice() {
-#if UNITY_2019_2_OR_NEWER
+    public virtual bool GetIsPicoDevice() 
+    {
         return InputSource == XRInputSource.Pico || XRSettings.loadedDeviceName.StartsWith("Pico");
-#else
-        return InputSource == XRInputSource.Pico;
-#endif
     }
 
     public InputDevice GetHMD() {
@@ -1332,21 +1156,21 @@ public class InputBridge : MonoBehaviour {
         return hmds.FirstOrDefault();
     }
 
-
-    /// <summary>
-    /// Returns the name of the InputDevice if found. Returns String.empty if not found
-    /// </summary>
     /// <returns>  The name of the InputDevice if found, or String.empty if not found</returns>
-    public string GetHMDName() {
+    public string GetHMDName() 
+    {
         var device = GetHMD();
-        if(device != null) {
+
+        if(device != null) 
+        {
             return device.name;
         }
 
         return string.Empty;
     }
 
-    public Vector3 GetHMDLocalPosition() {
+    public Vector3 GetHMDLocalPosition() 
+    {
         Vector3 localPosition;
 
         GetHMD().TryGetFeatureValue(CommonUsages.devicePosition, out localPosition);
@@ -1354,7 +1178,8 @@ public class InputBridge : MonoBehaviour {
         return localPosition;
     }
 
-    public Quaternion GetHMDLocalRotation() {
+    public Quaternion GetHMDLocalRotation() 
+    {
         Quaternion localRotation;
 
         GetHMD().TryGetFeatureValue(CommonUsages.deviceRotation, out localRotation);
@@ -1362,7 +1187,8 @@ public class InputBridge : MonoBehaviour {
         return localRotation;
     }
 
-    public InputDevice GetLeftController() {
+    public InputDevice GetLeftController() 
+    {
         InputDevices.GetDevices(devices);
 
         var leftHandedControllers = new List<InputDevice>();
@@ -1371,7 +1197,8 @@ public class InputBridge : MonoBehaviour {
         return leftHandedControllers.FirstOrDefault();
     }
 
-    public InputDevice GetRightController() {
+    public InputDevice GetRightController() 
+    {
         InputDevices.GetDevices(devices);
 
         var rightHandedControllers = new List<InputDevice>();

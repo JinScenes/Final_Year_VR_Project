@@ -226,7 +226,7 @@ public class VehicleController : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
         float colVelocity = collision.relativeVelocity.magnitude;
         if(colVelocity > 0.1f) {
-            VRUtils.Instance.PlaySpatialClipAt(CollisionSound, collision.GetContact(0).point, 1f);
+            XRManager.Instance.PlaySpatialClipAt(CollisionSound, collision.GetContact(0).point, 1f);
         }
     }
 

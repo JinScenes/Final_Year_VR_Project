@@ -80,7 +80,7 @@ public class HingeHelper : GrabbableEvents {
         }
 
         if(SnapSound) {
-            VRUtils.Instance.PlaySpatialClipAt(SnapSound, transform.position, 1f, 1f, RandomizePitch);
+            XRManager.Instance.PlaySpatialClipAt(SnapSound, transform.position, 1f, 1f, RandomizePitch);
         }
 
         if(grab.BeingHeld && SnapHaptics > 0) {

@@ -41,7 +41,7 @@ public class ProjectileLauncher : MonoBehaviour {
 
             launched.GetComponentInChildren<Rigidbody>().AddForce(MuzzleTransform.forward * projectileForce, ForceMode.VelocityChange);
 
-            VRUtils.Instance.PlaySpatialClipAt(LaunchSound, launched.transform.position, 1f);
+            XRManager.Instance.PlaySpatialClipAt(LaunchSound, launched.transform.position, 1f);
 
             if(LaunchParticles) {
                 LaunchParticles.Play();

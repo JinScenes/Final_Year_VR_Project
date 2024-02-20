@@ -94,7 +94,7 @@ public class VRKeyboard : MonoBehaviour {
 
     public virtual void PlayClickSound() {
         if(KeyPressSound != null) {
-            VRUtils.Instance.PlaySpatialClipAt(KeyPressSound, transform.position, 1f, 0.5f);
+            XRManager.Instance.PlaySpatialClipAt(KeyPressSound, transform.position, 1f, 0.5f);
         }
     }
 

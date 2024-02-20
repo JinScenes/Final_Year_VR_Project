@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArmSwingLocomotion : MonoBehaviour
 {
 
-    // Use this to move the character
-    [Tooltip("This is used to move the character. Will be disabled on Start")]
     public CharacterController characterController;
-
-    [Tooltip("Speed = Hand Controller Speed * SpeedModifier")]
-    public float SpeedModifier = 5f;
-
-    [Tooltip("Direction to move player. Will default to this transform if none provided")]
     public Transform ForwardDirection;
 
-    [Tooltip("Minimum Velocity to allow movement. Increase this to avoid unwanted movement at slow speeds")]
+    public float SpeedModifier = 5f;
+
     public float MinInput = 0.1f;
 
     public bool MustBeHoldingLeftTrigger = true;
@@ -36,20 +28,17 @@ public class ArmSwingLocomotion : MonoBehaviour
 
     void Start()
     {
-        // Manually assign if not set in the inspector
         if (characterController == null)
         {
             characterController = GetComponentInChildren<CharacterController>();
         }
 
-        // Default to our own transform if none specified
         if (ForwardDirection == null)
         {
             ForwardDirection = transform;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateVelocities();
@@ -88,7 +77,6 @@ public class ArmSwingLocomotion : MonoBehaviour
     public virtual bool LeftInputReady()
     {
 
-        // Check for negatives since we default to true
         if (MustBeHoldingLeftGrip && InputBridge.Instance.LeftGrip < 0.1f)
         {
             return false;
@@ -99,14 +87,12 @@ public class ArmSwingLocomotion : MonoBehaviour
             return false;
         }
 
-        // Default to ready
         return true;
     }
 
     public virtual bool RightInputReady()
     {
 
-        // Check for negatives since we default to true
         if (MustBeHoldingRightGrip && InputBridge.Instance.RightGrip < 0.1f)
         {
             return false;
@@ -117,7 +103,6 @@ public class ArmSwingLocomotion : MonoBehaviour
             return false;
         }
 
-        // Default to ready
         return true;
     }
 }

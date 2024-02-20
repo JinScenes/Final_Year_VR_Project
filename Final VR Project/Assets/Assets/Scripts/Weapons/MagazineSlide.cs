@@ -148,7 +148,7 @@ public class MagazineSlide : MonoBehaviour {
 
         // Play Sound
         if(ClipAttachSound && Time.timeSinceLevelLoad > 0.1f) {
-            VRUtils.Instance.PlaySpatialClipAt(ClipAttachSound, transform.position, 1f);
+            XRManager.Instance.PlaySpatialClipAt(ClipAttachSound, transform.position, 1f);
         }
 
         // Move to desired location before locking in place
@@ -190,7 +190,7 @@ public class MagazineSlide : MonoBehaviour {
             return null;
         }
 
-        VRUtils.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
+        XRManager.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
             
         HeldMagazine.transform.parent = null;
 

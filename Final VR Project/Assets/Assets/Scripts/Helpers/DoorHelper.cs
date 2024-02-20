@@ -89,7 +89,7 @@ public class DoorHelper : MonoBehaviour {
         // Play Open Sound
         if (angle > 10) {
             if(!playedOpenSound) {
-                VRUtils.Instance.PlaySpatialClipAt(DoorOpenSound, transform.position, 1f, 1f);
+                XRManager.Instance.PlaySpatialClipAt(DoorOpenSound, transform.position, 1f, 1f);
                 playedOpenSound = true;
             }
         }
@@ -113,7 +113,7 @@ public class DoorHelper : MonoBehaviour {
 
         // Play Close Sound
         if (readyToPlayCloseSound && angle < 2) {
-            VRUtils.Instance.PlaySpatialClipAt(DoorCloseSound, transform.position, 1f, 1f);
+            XRManager.Instance.PlaySpatialClipAt(DoorCloseSound, transform.position, 1f, 1f);
             readyToPlayCloseSound = false;
         }
 

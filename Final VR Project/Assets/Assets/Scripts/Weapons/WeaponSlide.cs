@@ -139,7 +139,7 @@ public class WeaponSlide : MonoBehaviour {
 
         if (!LockedBack) {
             if (thisGrabbable.BeingHeld || parentGrabbable.BeingHeld) {
-                VRUtils.Instance.PlaySpatialClipAt(LockedBackSound, transform.position, 1f, 0.8f);
+                XRManager.Instance.PlaySpatialClipAt(LockedBackSound, transform.position, 1f, 0.8f);
             }
 
             LockedBack = true;
@@ -150,7 +150,7 @@ public class WeaponSlide : MonoBehaviour {
 
         if (LockedBack) {
             if (thisGrabbable.BeingHeld || parentGrabbable.BeingHeld) {
-                VRUtils.Instance.PlaySpatialClipAt(SlideReleaseSound, transform.position, 1f, 0.9f);
+                XRManager.Instance.PlaySpatialClipAt(SlideReleaseSound, transform.position, 1f, 0.9f);
             }
 
             LockedBack = false;

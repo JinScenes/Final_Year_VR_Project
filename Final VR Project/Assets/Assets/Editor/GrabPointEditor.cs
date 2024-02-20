@@ -188,7 +188,7 @@ public class GrabPointEditor : Editor {
 
 #if UNITY_EDITOR
         if (grabPoint != null) {
-            grabPoint.UpdatePreviews();
+            //grabPoint.UpdatePreviews();
         }
 #endif
         showingRightHand = true;
@@ -205,7 +205,7 @@ public class GrabPointEditor : Editor {
 
 #if UNITY_EDITOR
         if (grabPoint != null) {
-            grabPoint.UpdatePreviews();
+            //grabPoint.UpdatePreviews();
         }
 #endif
         showingLeftHand = true;

@@ -305,7 +305,7 @@ public class SnapZone : MonoBehaviour {
         if (SoundOnSnap) {
             // Only play the sound if not just starting the scene
             if (Time.timeSinceLevelLoad > 0.1f) {
-                VRUtils.Instance.PlaySpatialClipAt(SoundOnSnap, transform.position, 0.75f);
+                XRManager.Instance.PlaySpatialClipAt(SoundOnSnap, transform.position, 0.75f);
             }
         }
 
@@ -426,7 +426,7 @@ public class SnapZone : MonoBehaviour {
         if (HeldItem != null) {
             if (SoundOnUnsnap) {
                 if (Time.timeSinceLevelLoad > 0.1f) {
-                    VRUtils.Instance.PlaySpatialClipAt(SoundOnUnsnap, transform.position, 0.75f);
+                    XRManager.Instance.PlaySpatialClipAt(SoundOnUnsnap, transform.position, 0.75f);
                 }
             }
 

@@ -10,7 +10,7 @@ public class PlaySoundOnGrab : GrabbableEvents {
 
         // Play Sound
         if(SoundToPlay) {
-            VRUtils.Instance.PlaySpatialClipAt(SoundToPlay, transform.position, 1f, 1f);
+            XRManager.Instance.PlaySpatialClipAt(SoundToPlay, transform.position, 1f, 1f);
         }
 
         base.OnGrab(grabber);

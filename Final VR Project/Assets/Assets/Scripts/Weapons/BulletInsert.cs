@@ -40,7 +40,7 @@ public class BulletInsert : MonoBehaviour
 
                 // Play Sound
                 if(InsertSound) {
-                    VRUtils.Instance.PlaySpatialClipAt(InsertSound, transform.position, 1f, 0.5f);
+                    XRManager.Instance.PlaySpatialClipAt(InsertSound, transform.position, 1f, 0.5f);
                 }
             }
         }

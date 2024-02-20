@@ -1,77 +1,79 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-public class VRUtils : MonoBehaviour {
 
-    public static VRUtils Instance {
-        get {
-            if (_instance == null) {
-                _instance = FindObjectOfType<VRUtils>();
-                if (_instance == null) {
-                    _instance = new GameObject("VRUtils").AddComponent<VRUtils>();
+public class XRManager : MonoBehaviour 
+{
+    public static XRManager Instance 
+    {
+        get 
+        {
+            if (inst == null) 
+            {
+                inst = FindObjectOfType<XRManager>();
+                if (inst == null) 
+                {
+                    inst = new GameObject("XR Manager").AddComponent<XRManager>();
                 }
             }
-            return _instance;
+            return inst;
         }
     }
-    private static VRUtils _instance;
+    private static XRManager inst;
 
-    // Where to put our text messages
-    // public Color DebugTextColor = Color.white;
+    private Color LogTextColor = Color.cyan;
+    private Color WarnTextColor = Color.yellow;
+    private Color ErrTextColor = Color.red;
 
-    public Color LogTextColor = Color.cyan;
-    public Color WarnTextColor = Color.yellow;
-    public Color ErrTextColor = Color.red;
-
-    public Transform DebugTextHolder;
+    [SerializeField] Transform DebugTextHolder;
         
-    /// <summary>
-    /// Maximum number of Text lines before we start removing them
-    /// </summary>
     float MaxTextEntries = 10;
 
-    // Store so we can compare against future entries
     public string LastDebugMsg;
     int lastDebugMsgCount;
 
-
-    void Awake() {
-        if (_instance != null && _instance != this) {
+    void Awake() 
+    {
+        if (inst != null && inst != this) 
+        {
             Destroy(this);
             return;
         }
 
-        _instance = this;
+        inst = this;
     }                    
         
-    public void Log(string msg) {
-        Debug.Log(msg, gameObject);
-        VRDebugLog(msg, LogTextColor);
+    public void Log(string message) 
+    {
+        Debug.Log(message, gameObject);
+        XR_DebugLog(message, LogTextColor);
     }
 
-    public void Warn(string msg) {
-        Debug.LogWarning(msg, gameObject);
-        VRDebugLog(msg, WarnTextColor);
+    public void Warn(string message) 
+    {
+        Debug.LogWarning(message, gameObject);
+        XR_DebugLog(message, WarnTextColor);
     }
 
-    public void Error(string msg) {
-        Debug.LogError(msg, gameObject);
-        VRDebugLog(msg, ErrTextColor);
+    public void Error(string message) 
+    {
+        Debug.LogError(message, gameObject);
+        XR_DebugLog(message, ErrTextColor);
     }
 
-
-    public void VRDebugLog(string msg, Color logColor) {
-        // Add to Holder if available
-        if (DebugTextHolder != null) {
-            if (msg == LastDebugMsg) {
+    public void XR_DebugLog(string msg, Color logColor) 
+    {
+        if (DebugTextHolder != null) 
+        {
+            if (msg == LastDebugMsg) 
+            {
                 GameObject lastChild = DebugTextHolder.GetChild(DebugTextHolder.childCount - 1).gameObject;
                 Text lastChildLine = lastChild.GetComponent<Text>();
                 lastDebugMsgCount++;
 
                 lastChildLine.text = $"({lastDebugMsgCount}) {msg}";
             }
-            else {
+            else 
+            {
                 GameObject go = new GameObject();
                 go.transform.parent = DebugTextHolder;
                 go.transform.localPosition = Vector3.zero;
@@ -95,20 +97,22 @@ public class VRUtils : MonoBehaviour {
             }
 
             CullDebugPanel();
-
             LastDebugMsg = msg;
         }
     }
 
-    public void CullDebugPanel() {
-        for (int i = DebugTextHolder.childCount; i > MaxTextEntries; i--) {
+    public void CullDebugPanel() 
+    {
+        for (int i = DebugTextHolder.childCount; i > MaxTextEntries; i--) 
+        {
             Destroy(DebugTextHolder.GetChild(0).gameObject);
         }
     }
 
     public AudioSource PlaySpatialClipAt(AudioClip clip, Vector3 pos, float volume, float spatialBlend = 1f, float randomizePitch = 0) {
 
-        if(clip == null) {
+        if(clip == null) 
+        {
             return null;
         }
 
@@ -118,10 +122,6 @@ public class VRUtils : MonoBehaviour {
         AudioSource source = go.AddComponent<AudioSource>();
         source.clip = clip;
 
-        // Currently only Oculus Integration supports spatial audio
-#if OCULUS_INTEGRATION
-        source.spatialize = true;
-#endif
         source.pitch = getRandomizedPitch(randomizePitch);
         source.spatialBlend = spatialBlend;
         source.volume = volume;
