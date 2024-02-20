@@ -1,55 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DamageCollider : MonoBehaviour {
+public class DamageCollider : MonoBehaviour 
+{
+    [SerializeField] private Rigidbody ColliderRigidbody;
 
-    /// <summary>
-    /// How much damage to apply to the Damageable object
-    /// </summary>
-    public float Damage = 25f;
+    private float damage = 25f;
+    private float MinForce = 0.1f;
+    private float LastRelativeVelocity = 0;
+    private float LastDamageForce = 0;
+    private float CollisionDamage = 5;
 
-    /// <summary>
-    /// Used to determine velocity of this collider
-    /// </summary>
-    public Rigidbody ColliderRigidbody;
+    private bool TakeCollisionDamage = false;
 
-    /// <summary>
-    /// Minimum Amount of force necessary to do damage. Expressed as relativeVelocity.magnitude
-    /// </summary>
-    public float MinForce = 0.1f;
+    private Damageable thisDamageable;
 
-    /// <summary>
-    /// Our previous frame's last relative velocity value
-    /// </summary>
-    public float LastRelativeVelocity = 0;
-
-    // How much impulse force was applied last onCollision enter
-    public float LastDamageForce = 0;
-
-    /// <summary>
-    /// Should this take damage if this collider collides with something? For example, pushing a box off of a ledge and it hits the ground 
-    /// </summary>
-    public bool TakeCollisionDamage = false;
-
-    /// <summary>
-    /// How much damage to apply if colliding with something at speed
-    /// </summary>
-    public float CollisionDamage = 5;
-
-    Damageable thisDamageable;
-
-    private void Start() {
-        if (ColliderRigidbody == null) {
+    private void Start() 
+    {
+        if (ColliderRigidbody == null) 
+        {
             ColliderRigidbody = GetComponent<Rigidbody>();
         }
 
         thisDamageable = GetComponent<Damageable>();
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision) 
+    {
 
-        if(!this.isActiveAndEnabled) {
+        if(!this.isActiveAndEnabled) 
+        {
             return;
         }
 
@@ -60,15 +39,15 @@ public class DamageCollider : MonoBehaviour {
         LastDamageForce = collision.impulse.magnitude;
         LastRelativeVelocity = collision.relativeVelocity.magnitude;
 
-        if (LastDamageForce >= MinForce) {
-
-            // Can we damage what we hit?
-            Damageable d = collision.gameObject.GetComponent<Damageable>();
-            if (d) {
-                d.DealDamage(Damage, collision.GetContact(0).point, collision.GetContact(0).normal, true, gameObject, collision.gameObject);
+        if (LastDamageForce >= MinForce) 
+        {
+            Damageable damageable = collision.gameObject.GetComponent<Damageable>();
+            if (damageable) 
+            {
+                damageable.DealDamage(damage, collision.GetContact(0).point, collision.GetContact(0).normal, true, gameObject, collision.gameObject);
             }
-            // Otherwise, can we take damage ourselves from this collision?
-            else if (TakeCollisionDamage && thisDamageable != null) {
+            else if (TakeCollisionDamage && thisDamageable != null) 
+            {
                 thisDamageable.DealDamage(CollisionDamage, collision.GetContact(0).point, collision.GetContact(0).normal, true, gameObject, collision.gameObject);
             }
         }
