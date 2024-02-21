@@ -1,239 +1,160 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
-
+using UnityEngine;
 
 [RequireComponent(typeof(Grabbable))]
-public abstract class GrabbableEvents : MonoBehaviour {
-
+public abstract class GrabbableEvents : MonoBehaviour
+{
     protected Grabbable grab;
     protected Grabber thisGrabber;
 
     protected InputBridge input;
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
         grab = GetComponent<Grabbable>();
         input = InputBridge.Instance;
     }
 
-    /// <summary>
-    /// Item has been grabbed by a Grabber
-    /// </summary>
-    /// <param name="grabber"></param>
-    public virtual void OnGrab(Grabber grabber) {
+    public virtual void OnGrab(Grabber grabber)
+    {
         thisGrabber = grabber;
     }
-        
-    /// <summary>
-    /// Has been dropped from the Grabber
-    /// </summary>
-    public virtual void OnRelease() {
-           
+
+    public virtual void OnRelease()
+    {
+        // HAS BEEN DROPPED FROM THE GRABBER
     }
 
-    /// <summary>
-    /// Called if this is the closest grabbable but wasn't in the previous frame 
-    /// </summary>
-    /// <param name="touchingHand"></param>
-    public virtual void OnBecomesClosestGrabbable(ControllerHand touchingHand) {
-            
+    public virtual void OnBecomesClosestGrabbable(ControllerHand touchingHand)
+    {
+        // CALLED IF THIS IS THE CLOSEST GRABBABLE BUT WASN'T IN THE PREVIOUS FRAME
     }
 
-    /// <summary>
-    /// Called if this is the closest grabbable but wasn't in the previous frame 
-    /// </summary>
-    /// <param name="touchingGrabber"></param>
-    public virtual void OnBecomesClosestGrabbable(Grabber touchingGrabber) {
-
+    public virtual void OnBecomesClosestGrabbable(Grabber touchingGrabber)
+    {
+        // CALLED IF THIS IS THE CLOSEST GRABBABLE BUT WASN'T IN THE PREVIOUS FRAME
     }
 
-    /// <summary>
-    /// No longer closest grabbable. May need to disable highlight, ring, etc.
-    /// </summary>
-    /// <param name="touchingHand"></param>
-    public virtual void OnNoLongerClosestGrabbable(ControllerHand touchingHand) {
-            
+    public virtual void OnNoLongerClosestGrabbable(ControllerHand touchingHand)
+    {
+        // NO LONGER CLOSEST GRABBABLE. MAY NEED TO DISABLE HIGHLIGHT, RING AND ETC
     }
 
-    /// <summary>
-    /// No longer closest grabbable. May need to disable highlight, ring, etc.
-    /// </summary>
-    /// <param name="touchingGrabber"></param>
-    public virtual void OnNoLongerClosestGrabbable(Grabber touchingGrabber) {
-
+    public virtual void OnNoLongerClosestGrabbable(Grabber touchingGrabber)
+    {
+        // NO LONGER CLOSEST GRABBABLE. MAY NEED TO DISABLE HIGHLIGHT, RING AND ETC
     }
 
-    /// <summary>
-    /// Fires if this is the closest remote grabbable but wasn't in the previous frame
-    /// </summary>
-    /// <param name="touchingHand"></param>
-    public virtual void OnBecomesClosestRemoteGrabbable(ControllerHand touchingHand) {
-            
+    public virtual void OnBecomesClosestRemoteGrabbable(ControllerHand touchingHand)
+    {
+        // FIRES IF THIS IS THE CLOSEST REMOTE GRABBABLE BUT WASN'T IN THE PREVIOUS FRAME
     }
 
-    /// <summary>
-    /// Fires if this is the closest remote grabbable but wasn't in the previous frame
-    /// </summary>
-    /// <param name="theGrabber">The Grabber that this object is valid for</param>
-    public virtual void OnBecomesClosestRemoteGrabbable(Grabber theGrabber) {
-
+    public virtual void OnBecomesClosestRemoteGrabbable(Grabber theGrabber)
+    {
+        // FIRES IF THIS IS THE CLOSEEST REMOTE GRABBABLE BUT WASN'T IN THE PREVIOUS FRAME
     }
 
-    /// <summary>
-    /// Fires if this was the closest remote grabbable last frame, but not this frame
-    /// </summary>
-    /// <param name="touchingHand"></param>
-    public virtual void OnNoLongerClosestRemoteGrabbable(ControllerHand touchingHand) {
-            
+    public virtual void OnNoLongerClosestRemoteGrabbable(ControllerHand touchingHand)
+    {
+        // FIRES IF THIS WAS THE CLOSEST REMOTE GRABBABLE LAST FRAME, BUT NOT THIS FRAME
     }
 
-    /// <summary>
-    /// Fires if this was the closest remote grabbable last frame, but not this frame
-    /// </summary>
-    /// <param name="theGrabber">The Grabber this object used to be associated with</param>
-    public virtual void OnNoLongerClosestRemoteGrabbable(Grabber theGrabber) {
-
+    public virtual void OnNoLongerClosestRemoteGrabbable(Grabber theGrabber)
+    {
+        // FIRES IF THIS WAS THE CLOEST REMOTE GRABBABLE LAST FRAME, BUT NOT THIS FRAME
     }
 
-    /// <summary>
-    /// Amount of Grip (0-1). Only fired if object is being held.
-    /// </summary>
-    /// <param name="gripValue">0 - 1 Open / Closed</param>
-    public virtual void OnGrip(float gripValue) {
-            
+    public virtual void OnGrip(float gripValue)
+    {
+        //AMOUNT OF GRIP (0-1). ONLY FIRED IF OBJECT IS BEING HELD
     }
 
-    /// <summary>
-    /// Amount of Trigger being held down on the grabbed items controller. Only fired if object is being held.
-    /// </summary>
-    /// <param name="triggerValue">0 - 1 Open / Closed</param>
-    public virtual void OnTrigger(float triggerValue) {
-            
+    public virtual void OnTrigger(float triggerValue)
+    {
+        // AMOUNT OF TRIGGER BEING HELD DOWN ON THE GRABBED ITEMS CONTROLLER. ONLY FIRED OBECT IS BEING HELD.
     }
 
-    /// <summary>
-    /// Fires if trigger was pressed down on this controller this frame, but was not pressed last frame. Only fired if object is being held.
-    /// </summary>
-    public virtual void OnTriggerDown() {
-            
+    public virtual void OnTriggerDown()
+    {
+        // FIRES IF TRIGGER WAS PRESSED DOWN ON THIS CONTROLLER THIS FRAME, BUT WAS NOT PRESSED LAST FRAME. ONLY FIRED
+        // IF OBJECT IS BEING HELD
     }
 
-    /// <summary>
-    /// Fires if Trigger is not held down this frame
-    /// </summary>
-    public virtual void OnTriggerUp() {
-           
+    public virtual void OnTriggerUp()
+    {
+        //FIRES IF TRIGGER IS NOT HELD DOWN THIS FRAME
     }
 
-    /// <summary>
-    /// Button 1 is being held down this frame but not last
-    /// Oculus : Button 1 = "A" if held in Right controller."X" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton1() {
-            
+    public virtual void OnButton1()
+    {
+        // BUTTON 1 IS BEING HELD DOWN THIS FRAME BUT NOT LAST
+        // BUTTON 1 = 'A' IF HELD IN RIGHT CONTROLLER. 'X' IF HELD IN THE LEFT CONTROLLER
     }
 
-    /// <summary>
-    /// Button 1 Pressed down this frame
-    /// Oculus : Button 1 = "A" if held in Right controller."X" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton1Down() {
-
+    public virtual void OnButton1Down()
+    {
+        // BUTTON 1 PRESSED DOWN THIS FRAME
+        // BUTTON 1 = 'A' IF HELD IN THE RIGHT CONTROLLER. 'X' IF HELD IN THE LEFT CONTROLLER
     }
 
-    /// <summary>
-    /// Button 1 Released this frame
-    /// Oculus : Button 1 = "A" if held in Right controller."X" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton1Up() {
-            
+    public virtual void OnButton1Up()
+    {
+        // BUTTON 1 RELEASED THIS FRAME
+        // BUTTON 1 = 'A' IF HELD IN RIGHT CONTROLLER. 'X' IF HELD IN THE LEFT CONTROLLER
     }
 
 
-    /// <summary>
-    /// Button 2 is being held down this frame but not last
-    /// Oculus : Button 2 = "B" if held in Right controller."Y" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton2() {
-            
+    public virtual void OnButton2()
+    {
+        // BUTTON 2 IS BEING HELD DOWN THIS FRAME BUT NOT LAST
+        // BUTTON = 'B' IF HELD IN THE RIGHT CONTROLLER. 'Y' IF HELD IN THE LEFT CONTROLLER
     }
 
-    /// <summary>
-    /// Button 2 Pressed down this frame
-    /// Oculus : Button 2 = "B" if held in Right controller."Y" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton2Down() {
-           
+    public virtual void OnButton2Down()
+    {
+        //BUTTON 2 PRESSED DOWN THIS FRAME
+        //BUTTON 2 = 'B' IF HELD IN THE RIGHT CONTROLLER. 'Y' IF HELD IN THE LEFT CONTROLLER
     }
 
-    /// <summary>
-    /// Button 2 Released this frame
-    /// Oculus : Button 2 = "B" if held in Right controller."Y" if held in Left Controller
-    /// </summary>
-    public virtual void OnButton2Up() {
-
+    public virtual void OnButton2Up()
+    {
+        // BUTTON 2 RELEASED THIS FRAME
+        // BUTTON 2 = 'B' IF HELD IN THE RIGHT CONTROLLER. 'Y' IF HELD IN THE LEFT CONTROLLER
     }
 
-    /// <summary>
-    /// Grabbable has been successfully inserted into a SnapZone
-    /// </summary>
-    public virtual void OnSnapZoneEnter() {
-
+    public virtual void OnSnapZoneEnter()
+    {
+        //GRABBABLE HAS BEEN SUCCESSFULLY INSERTED INTO A SNAPZONE
     }
 
-    /// <summary>
-    /// Grabbable has been removed from a SnapZone
-    /// </summary>
-    public virtual void OnSnapZoneExit() {
-
+    public virtual void OnSnapZoneExit()
+    {
+        //GRABBABLE HAS BEEN REMOVED FROM A SNAPZONE
     }
 }
 
-/// <summary>
-/// A UnityEvent with a float as a parameter
-/// </summary>
 [System.Serializable]
 public class FloatEvent : UnityEvent<float> { }
 
-/// <summary>
-/// A UnityEvent with a 2 floats as parameters
-/// </summary>
 [System.Serializable]
 public class FloatFloatEvent : UnityEvent<float, float> { }
 
-/// <summary>
-/// A UnityEvent with a Grabber as the parameter
-/// </summary>
 [System.Serializable]
 public class GrabberEvent : UnityEvent<Grabber> { }
 
-/// <summary>
-/// A UnityEvent with a Grabbable as the parameter
-/// </summary>
 [System.Serializable]
 public class GrabbableEvent : UnityEvent<Grabbable> { }
 
-/// <summary>
-/// A UnityEvent with a RaycastHit as the parameter
-/// </summary>
 [System.Serializable]
 public class RaycastHitEvent : UnityEvent<RaycastHit> { }
 
-/// <summary>
-/// A UnityEvent with a Vector2 as a parameter
-/// </summary>
 [System.Serializable]
 public class Vector2Event : UnityEvent<Vector2> { }
 
-/// <summary>
-/// A UnityEvent with a Vector3 as a parameter
-/// </summary>
 [System.Serializable]
 public class Vector3Event : UnityEvent<Vector3> { }
 
-/// <summary>
-/// A UnityEvent with a Vector3 as a parameter
-/// </summary>
 [System.Serializable]
 public class PointerEventDataEvent : UnityEvent<UnityEngine.EventSystems.PointerEventData> { }

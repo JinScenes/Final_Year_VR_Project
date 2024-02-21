@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.Events;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SnapZone : MonoBehaviour {
 

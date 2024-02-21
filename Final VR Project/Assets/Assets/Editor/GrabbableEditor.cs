@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 [CustomEditor(typeof(Grabbable))]
 [CanEditMultipleObjects]
 public class GrabbableEditor : Editor {
 
-    /// <summary>
-    /// Set this to false if you don't want to use the custom editor :)
-    /// </summary>
     public bool UseCustomEditor = true;
 
     Grabbable grabbable;
@@ -116,7 +111,6 @@ public class GrabbableEditor : Editor {
 
         grabbable = (Grabbable)target;
 
-        // Don't use Custom Editor
         if (UseCustomEditor == false || grabbable.UseCustomInspector == false) {
             base.OnInspectorGUI();
             return;

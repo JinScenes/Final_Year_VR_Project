@@ -2,31 +2,24 @@
 
 public class ArmSwingLocomotion : MonoBehaviour
 {
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform ForwardDirection;
 
-    public CharacterController characterController;
-    public Transform ForwardDirection;
+    [SerializeField] private float SpeedModifier = 5f;
+    [SerializeField] private float MinInput = 0.1f;
 
-    public float SpeedModifier = 5f;
+    private bool MustBeHoldingLeftTrigger = true;
+    private bool MustBeHoldingRightTrigger = true;
 
-    public float MinInput = 0.1f;
+    private bool MustBeHoldingLeftGrip = false;
+    private bool MustBeHoldingRightGrip = false;
 
-    public bool MustBeHoldingLeftTrigger = true;
-    public bool MustBeHoldingRightTrigger = true;
+    public float VelocitySum { get { return leftVelocity + rightVelocity; } }
 
-    public bool MustBeHoldingLeftGrip = false;
-    public bool MustBeHoldingRightGrip = false;
+    private float leftVelocity;
+    private float rightVelocity;
 
-    public float VelocitySum
-    {
-        get
-        {
-            return leftVelocity + rightVelocity;
-        }
-    }
-    float leftVelocity;
-    float rightVelocity;
-
-    void Start()
+    private void Start()
     {
         if (characterController == null)
         {
@@ -39,7 +32,7 @@ public class ArmSwingLocomotion : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         UpdateVelocities();
         UpdateMovement();

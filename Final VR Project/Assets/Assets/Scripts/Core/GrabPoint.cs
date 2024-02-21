@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine;
 
 public class GrabPoint : MonoBehaviour
 {
@@ -30,24 +31,12 @@ public class GrabPoint : MonoBehaviour
     [Tooltip("Show a green arc in the Scene view representing MaxDegreeDifferenceAllowed")]
     public bool ShowAngleGizmo = true;
 
-    #region Editor
 #if UNITY_EDITOR
-    // Make sure animators update in the editor mode to show hand positions
-    // By using OnDrawGizmosSelected we only call this function if the object is selected in the editor
     void OnDrawGizmosSelected()
     {
         DrawEditorArc();
-
         UpdatePreviews();
-        //if (!Application.isPlaying) {
-        //    UpdatePreviews();
-        //}
     }
-
-    // Update preview transform in editor in play mode as well
-    //void Update() {
-    //    UpdatePreviews();
-    //}
 
     public void UpdatePreviews()
     {
@@ -57,13 +46,9 @@ public class GrabPoint : MonoBehaviour
         UpdateAutoPoserPreview();
     }
 
-    /// <summary>
-    /// Draw an arc in the editor representing MaxDegreeDifferenceAllowed
-    /// </summary>
     public void DrawEditorArc()
     {
 
-        // Draw arc representing the MaxDegreeDifferenceAllowed of the Grab Point
         if (ShowAngleGizmo && MaxDegreeDifferenceAllowed != 0 && MaxDegreeDifferenceAllowed != 360)
         {
             Vector3 from = Quaternion.AngleAxis(-0.5f * MaxDegreeDifferenceAllowed, transform.up) * (-transform.forward - Vector3.Dot(-transform.forward, transform.up) * transform.up);
@@ -83,19 +68,16 @@ public class GrabPoint : MonoBehaviour
 
         if (!offsetFound)
         {
-            // If there is a Hand in the scene, use that offset instead of our defaults
             if (GameObject.Find("LeftController/Grabber") != null)
             {
                 Grabber LeftGrabber = GameObject.Find("LeftController/Grabber").GetComponent<Grabber>();
                 previewModelOffsetLeft = Vector3.zero - LeftGrabber.transform.localPosition;
-                // offsetFound = true;
             }
 
             if (GameObject.Find("RightController/Grabber") != null)
             {
                 Grabber RightGrabber = GameObject.Find("RightController/Grabber").GetComponent<Grabber>();
                 previewModelOffsetRight = Vector3.zero - RightGrabber.transform.localPosition;
-                // offsetFound = true;
             }
         }
 
@@ -145,7 +127,7 @@ public class GrabPoint : MonoBehaviour
         {
             Transform leftHandPreview = transform.Find("LeftHandModelsEditorPreview");
             Transform rightHandPreview = transform.Find("RightHandModelsEditorPreview");
-            // Update in editor
+
             if (leftHandPreview)
             {
                 AutoPoser ap = leftHandPreview.GetComponentInChildren<AutoPoser>();
@@ -168,7 +150,7 @@ public class GrabPoint : MonoBehaviour
         {
             Transform leftHandPreview = transform.Find("LeftHandModelsEditorPreview");
             Transform rightHandPreview = transform.Find("RightHandModelsEditorPreview");
-            // Update in editor
+
             if (leftHandPreview)
             {
                 AutoPoser ap = leftHandPreview.GetComponentInChildren<AutoPoser>();
@@ -192,35 +174,24 @@ public class GrabPoint : MonoBehaviour
     public void UpdateChildAnimators()
     {
         var animators = transform.GetComponentsInChildren<Animator>(true);
-        for (int x = 0; x < animators.Length; x++)
+        for (int i = 0; i < animators.Length; i++)
         {
             if (handPoseType == HandPoseType.AnimatorID)
             {
-                animators[x].enabled = true;
-                if (animators[x].isActiveAndEnabled)
+                animators[i].enabled = true;
+                if (animators[i].isActiveAndEnabled)
                 {
-                    animators[x].Update(Time.deltaTime);
+                    animators[i].Update(Time.deltaTime);
                 }
-
-#if UNITY_EDITOR && (UNITY_2019 || UNITY_2020)
-                // Only set dirty if not in prefab mode
-                if (UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null) {
-                    UnityEditor.EditorUtility.SetDirty(animators[x].gameObject);
-                }
-#endif
             }
-            // Disable the animator in editor mode if using handpose
             else if (handPoseType == HandPoseType.HandPose && SelectedHandPose != null)
             {
-                animators[x].enabled = false;
+                animators[i].enabled = false;
             }
-            // Disable the animator in editor mode if using auto pose
             else if (handPoseType == HandPoseType.AutoPoseOnce || handPoseType == HandPoseType.AutoPoseContinuous)
             {
-                animators[x].enabled = false;
+                animators[i].enabled = false;
             }
         }
     }
-
-    #endregion
 }

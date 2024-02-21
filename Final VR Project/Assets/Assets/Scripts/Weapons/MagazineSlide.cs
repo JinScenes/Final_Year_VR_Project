@@ -1,36 +1,25 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MagazineSlide : MonoBehaviour {
 
-    /// <summary>
-    /// Clip transform name must contain this to be considered valid
-    /// </summary>
     [Tooltip("Clip transform name must contain this to be considered valid")]
     public string AcceptableMagazineName = "Clip";
 
-    /// <summary>
-    /// The weapon this magazine is attached to (optional)
-    /// </summary>RaycastWeapon
     public Grabbable AttachedWeapon;
+    public Grabbable HeldMagazine = null;
 
     public float ClipSnapDistance = 0.075f;
     public float ClipUnsnapDistance = 0.15f;
-
-    /// <summary>
-    ///  How much force to apply to the inserted magazine if it is forcefully ejected
-    /// </summary>
     public float EjectForce = 1f;
 
-    public Grabbable HeldMagazine = null;
     Collider HeldCollider = null;
 
     public float MagazineDistance = 0f;
 
     bool magazineInPlace = false;
-
-    // Lock in place for physics
     bool lockedInPlace = false;
 
     public AudioClip ClipAttachSound;

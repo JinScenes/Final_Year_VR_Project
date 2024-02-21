@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
+using System.Linq;
+using System;
 
-public class Bow : GrabbableEvents {
-
-
+public class Bow : GrabbableEvents 
+{
     [Header("Bow Settings")]
-
-    /// <summary>
-    /// How much force to apply to the arrow, multiplied by how far back the bow is pulled
-    /// </summary>
     [Tooltip("")]
     public float BowForce = 50f;
     [Tooltip("If True the BowModel Transform will align itself with the grabber holding the arrow")]

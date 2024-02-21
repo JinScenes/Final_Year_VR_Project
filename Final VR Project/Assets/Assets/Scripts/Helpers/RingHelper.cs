@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
+
 public class RingHelper : MonoBehaviour {
     [Tooltip("The Grabbable Object to Observe")]
     public Grabbable grabbable;

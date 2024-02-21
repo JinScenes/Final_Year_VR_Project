@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ControllerModelSelector : MonoBehaviour
 {
-    int disableIndex = 0;
+    private bool isQuitting = false;
+    private int disableIndex = 0;
 
-    bool isQuitting = false;
-
-    void OnEnable()
+    private void OnEnable()
     {
         InputBridge.OnControllerFound += UpdateControllerModel;
     }
@@ -16,7 +13,8 @@ public class ControllerModelSelector : MonoBehaviour
     public void UpdateControllerModel()
     {
         string controllerName = InputBridge.Instance.GetControllerName().ToLower();
-        if (controllerName.Contains("quest 2"))
+
+        if (controllerName.Contains("quest 2") || controllerName.Contains("quest 3"))
         {
             EnableChildController(0);
         }
@@ -38,7 +36,7 @@ public class ControllerModelSelector : MonoBehaviour
         disableIndex = childIndex;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (isQuitting)
         {
@@ -48,7 +46,7 @@ public class ControllerModelSelector : MonoBehaviour
         InputBridge.OnControllerFound -= UpdateControllerModel;
     }
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         isQuitting = true;
     }

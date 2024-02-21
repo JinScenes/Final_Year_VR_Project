@@ -1,29 +1,30 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 public class Button : MonoBehaviour
 {
     public float MinLocalY = 0.25f;
     public float MaxLocalY = 0.55f;
-    public float ClickTolerance = 0.01f;
 
-    public bool AllowPhysicsForces = true;
+    [SerializeField] private float ClickTolerance = 0.01f;
 
-    List<Grabber> grabbers = new List<Grabber>();
-    List<UITrigger> uiTriggers = new List<UITrigger>();
-    SpringJoint joint;
+    private bool AllowPhysicsForces = true;
 
-    public AudioClip ButtonClick;
-    public AudioClip ButtonClickUp;
+    private List<Grabber> grabbers = new List<Grabber>();
+    private List<UITrigger> uiTriggers = new List<UITrigger>();
+    private SpringJoint joint;
 
-    public UnityEvent onButtonDown;
-    public UnityEvent onButtonUp;
+    [SerializeField] private AudioClip ButtonClick;
+    [SerializeField] private AudioClip ButtonClickUp;
 
-    bool clickingDown = false;
+    [SerializeField] private UnityEvent onButtonDown;
+    [SerializeField] private UnityEvent onButtonUp;
 
-    AudioSource audioSource;
-    Rigidbody rigid;
+    private bool clickingDown = false;
+
+    private AudioSource audioSource;
+    private Rigidbody rigid;
 
     void Start()
     {
@@ -48,7 +49,6 @@ public class Button : MonoBehaviour
 
     void Update()
     {
-
         buttonDownPosition = GetButtonDownPosition();
         buttonUpPosition = GetButtonUpPosition();
 
@@ -154,7 +154,7 @@ public class Button : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Grabber grab = other.GetComponent<Grabber>();
         if (grab != null)
@@ -185,7 +185,7 @@ public class Button : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         Grabber grab = other.GetComponent<Grabber>();
         if (grab != null)
@@ -206,7 +206,7 @@ public class Button : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
 

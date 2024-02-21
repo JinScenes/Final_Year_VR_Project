@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Collections;
 using UnityEngine.Events;
+using UnityEngine;
 
 public class Lever : MonoBehaviour {
 
