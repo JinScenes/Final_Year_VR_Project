@@ -21,8 +21,8 @@ public class PlayerRotation : MonoBehaviour
     [SerializeField] private RotationMechanic RotationType = RotationMechanic.Snap;
 
     [Header("Snap Turn Settings")]
+    public float SnapInputAmount = 0.75f;
     [SerializeField] private float SnapRotationAmount = 45f;
-    [SerializeField] private float SnapInputAmount = 0.75f;
 
     [Header("Smooth Turn Settings")]
     [SerializeField] private float SmoothTurnSpeed = 40f;

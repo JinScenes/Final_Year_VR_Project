@@ -7,7 +7,7 @@ public class PointerEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public float MaxDistance = 100f;
 
     [Header("Enable Events")]
-    [SerializeField] private bool Enabled = true;
+    public bool Enabled = true;
 
     [Header("Unity Events : ")]
     [SerializeField] private PointerEventDataEvent OnPointerClickEvent;

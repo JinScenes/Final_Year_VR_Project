@@ -1,80 +1,75 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
-public class Projectile : MonoBehaviour {
-
-    public GameObject HitFXPrefab;
-    private bool _checkRaycast;
+public class Projectile : MonoBehaviour
+{
     public float Damage = 25;
 
-    /// <summary>
-    /// Add force to rigidbody on impact
-    /// </summary>
-    public float AddRigidForce = 5;
+    [SerializeField] private GameObject HitFXPrefab;
+    [SerializeField] private Transform MuzzleOrigin;
+    [SerializeField] private LayerMask ValidLayers;
 
-    public LayerMask ValidLayers;
+    [SerializeField] private float MinForceHit = 0.02f;
+    [SerializeField] private float AddRigidForce = 5;
 
     [Tooltip("Amount of force to apply to a Rigidbody once damaged")]
     public bool IsLaserGuided = false;
 
-    public float MissileForce = 2f;
+    [SerializeField] private float MissileForce = 2f;
+    [SerializeField] private float TurningSpeed = 1f;
 
-    public float TurningSpeed = 1f;
-
-    public Transform MuzzleOrigin;
-
-    [Tooltip("Sticky Object")]
     public bool StickToObject = false;
 
-    /// <summary>
-    /// Minimum Z velocity required to register as an impact
-    /// </summary>
-    public float MinForceHit = 0.02f;
+    [SerializeField] private UnityEvent onDealtDamageEvent;
 
-    [Tooltip("Unity Event called when the projectile damages something")]
-    public UnityEvent onDealtDamageEvent;
-
+    private bool _checkRaycast;
 
     Rigidbody rb;
 
     Quaternion targetRotation;
 
-    void Start() {
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision)
+    {
         OnCollisionEvent(collision);
     }
 
-    private void Update() {
-        if(IsLaserGuided) {
-            // Rotate to same direction as muzzle
+    private void Update()
+    {
+        if (IsLaserGuided)
+        {
             transform.rotation = Quaternion.Slerp(transform.rotation, MuzzleOrigin.transform.rotation, Time.deltaTime * TurningSpeed);
         }
     }
 
 
-    private void FixedUpdate() {
-        if (IsLaserGuided) {
+    private void FixedUpdate()
+    {
+        if (IsLaserGuided)
+        {
             rb.AddForce(transform.forward * MissileForce, ForceMode.Force);
         }
     }
 
-    public virtual void OnCollisionEvent(Collision collision) {
-        // Ignore Triggers
-        if (collision.collider.isTrigger) {
+    public virtual void OnCollisionEvent(Collision collision)
+    {
+        if (collision.collider.isTrigger)
+        {
             return;
         }
 
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb && MinForceHit != 0) {
+        if (rb && MinForceHit != 0)
+        {
             float zVel = System.Math.Abs(transform.InverseTransformDirection(rb.velocity).z);
 
-            // Minimum Force not achieved
-            if (zVel < MinForceHit) {
+            if (zVel < MinForceHit)
+            {
                 return;
             }
         }
@@ -82,43 +77,46 @@ public class Projectile : MonoBehaviour {
         Vector3 hitPosition = collision.contacts[0].point;
         Vector3 normal = collision.contacts[0].normal;
         Quaternion hitNormal = Quaternion.FromToRotation(Vector3.forward, normal);
+        doHitEffects(hitPosition, hitNormal, collision.collider);
 
-        // FX - Particles, Decals, etc.
-        DoHitFX(hitPosition, hitNormal, collision.collider);
+        Damageable dmgable = collision.collider.GetComponent<Damageable>();
+        if (dmgable)
+        {
+            dmgable.DealDamage(Damage, hitPosition, normal, true, gameObject, collision.collider.gameObject);
 
-        // Damage if possible
-        Damageable d = collision.collider.GetComponent<Damageable>();
-        if (d) {
-            d.DealDamage(Damage, hitPosition, normal, true, gameObject, collision.collider.gameObject);
-
-            if (onDealtDamageEvent != null) {
+            if (onDealtDamageEvent != null)
+            {
                 onDealtDamageEvent.Invoke();
             }
         }
 
-        if (StickToObject) {
-            // tryStickToObject
+        if (StickToObject)
+        {
         }
-        else {
-            // Done with this projectile
+        else
+        {
             Destroy(this.gameObject);
         }
     }
 
-    public virtual void DoHitFX(Vector3 pos, Quaternion rot, Collider col) {
+    public virtual void doHitEffects(Vector3 pos, Quaternion rot, Collider col)
+    {
 
         // Create FX at impact point / rotation
-        if(HitFXPrefab) {
+        if (HitFXPrefab)
+        {
             GameObject impact = Instantiate(HitFXPrefab, pos, rot) as GameObject;
             BulletHole hole = impact.GetComponent<BulletHole>();
-            if (hole) {
+            if (hole)
+            {
                 hole.TryAttachTo(col);
             }
         }
 
         // push object if rigidbody
         Rigidbody hitRigid = col.attachedRigidbody;
-        if (hitRigid != null) {
+        if (hitRigid != null)
+        {
             hitRigid.AddForceAtPosition(transform.forward * AddRigidForce, pos, ForceMode.VelocityChange);
         }
     }
@@ -126,18 +124,21 @@ public class Projectile : MonoBehaviour {
     /// <summary>
     /// A projectile can be converted into a raycast if time reverts to full speed (or more)
     /// </summary>
-    public virtual void MarkAsRaycastBullet() {
+    public virtual void MarkAsRaycastBullet()
+    {
         _checkRaycast = true;
         StartCoroutine(CheckForRaycast());
     }
-        
-    public virtual void DoRayCastProjectile() {
+
+    public virtual void DoRayCastProjectile()
+    {
 
         // Raycast to hit
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 25f, ValidLayers, QueryTriggerInteraction.Ignore)) {
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 25f, ValidLayers, QueryTriggerInteraction.Ignore))
+        {
             Quaternion decalRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-            DoHitFX(hit.point, decalRotation, hit.collider);
+            doHitEffects(hit.point, decalRotation, hit.collider);
         }
 
         _checkRaycast = false;
@@ -146,10 +147,13 @@ public class Projectile : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    IEnumerator CheckForRaycast() {
-        while(this.gameObject.activeSelf && _checkRaycast) {
+    IEnumerator CheckForRaycast()
+    {
+        while (this.gameObject.activeSelf && _checkRaycast)
+        {
             // Switch to raycast
-            if (Time.timeScale >= 1) {
+            if (Time.timeScale >= 1)
+            {
                 DoRayCastProjectile();
             }
 
@@ -157,14 +161,17 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    public void MarkAsLaserGuided(Transform startingOrigin) {
+    public void MarkAsLaserGuided(Transform startingOrigin)
+    {
 
-        if(rb == null) {
+        if (rb == null)
+        {
             rb = GetComponent<Rigidbody>();
         }
 
         // Velocity will be controlled in FixedUpdate
-        if(rb != null) {
+        if (rb != null)
+        {
             rb.velocity = Vector3.zero;
         }
 

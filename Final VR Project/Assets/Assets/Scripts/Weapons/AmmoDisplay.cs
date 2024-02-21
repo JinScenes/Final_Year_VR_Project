@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class AmmoDisplay : MonoBehaviour {
+public class AmmoDisplay : MonoBehaviour
+{
+    [SerializeField] private RaycastWeapon Weapon;
+    [SerializeField] private Text AmmoLabel;
 
-    public RaycastWeapon Weapon;
-    public Text AmmoLabel;
-
-    void OnGUI() {
+    private void OnGUI()
+    {
         string loadedShot = Weapon.BulletInChamber ? "1" : "0";
         AmmoLabel.text = loadedShot + " / " + Weapon.GetBulletCount();
     }

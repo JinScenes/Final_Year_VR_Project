@@ -12006,13 +12006,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
-  CanDropItem: 1
   CanSwapItem: 1
+  CanDropItem: 1
   CanRemoveItem: 1
-  ScaleItem: 1
   DisableColliders: 1
-  DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
+  ScaleItem: 1
+  DuplicateItemOnGrab: 0
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
@@ -14918,8 +14918,8 @@ MonoBehaviour:
   RotateAction: {fileID: -6493913391331992944, guid: e39f4b35a6db18348b41eb0262520e69,
     type: 3}
   RotationType: 0
-  SnapRotationAmount: 45
   SnapInputAmount: 0.75
+  SnapRotationAmount: 45
   SmoothTurnSpeed: 40
   SmoothTurnMinInput: 0.1
 --- !u!114 &8449739408642836996
@@ -20562,6 +20562,7 @@ GameObject:
   - component: {fileID: 8320362179581940914}
   - component: {fileID: 8320362179581940927}
   - component: {fileID: 3824197133061918087}
+  - component: {fileID: 9060693034684895529}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -20737,6 +20738,232 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActionAssets: []
+--- !u!114 &9060693034684895529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2683195716791022644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caff514de9b15ad48ab85dcff5508221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UpdateTrackingType: 0
+  m_EnableInputTracking: 1
+  m_EnableInputActions: 1
+  m_ModelPrefab: {fileID: 0}
+  m_ModelParent: {fileID: 0}
+  m_Model: {fileID: 0}
+  m_AnimateModel: 0
+  m_ModelSelectTransition: 
+  m_ModelDeSelectTransition: 
+  m_PositionAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Position
+      m_Type: 0
+      m_ExpectedControlType: Vector3
+      m_Id: 315f8b54-fae6-4b55-a5d8-065e00112590
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotationAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Rotation
+      m_Type: 0
+      m_ExpectedControlType: Quaternion
+      m_Id: 7015dbdf-2a25-4cd9-a8a4-941edecb04dc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_IsTrackedAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Is Tracked
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 9e7c64ee-16c1-44d7-b91d-cb40bbc153ea
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 1
+    m_Reference: {fileID: 0}
+  m_TrackingStateAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Tracking State
+      m_Type: 0
+      m_ExpectedControlType: Integer
+      m_Id: 37e3d928-a87d-4a7e-91a4-b056e5e4e472
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_SelectAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Select
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: f0743790-c34a-4906-93f3-546f11b440b8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_SelectActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Select Value
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: 2f57cb6e-1efa-4d11-ab63-0e726362a5c4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ActivateAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Activate
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 00652673-d063-40f5-8dd5-f1475ddc4cc1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ActivateActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Activate Value
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: 521b7f78-f447-4593-9fd8-efd8b983db75
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_UIPressAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: UI Press
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 5d5a198b-c5e6-43c1-bafc-38e4c23c7a06
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_UIPressActionValue:
+    m_UseReference: 0
+    m_Action:
+      m_Name: UI Press Value
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: 5317dcff-1c8a-4627-adfd-ab2ad9795a59
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_UIScrollAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: UI Scroll
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 651e666b-4af1-44f7-9073-b96a8153a35d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_HapticDeviceAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Haptic Device
+      m_Type: 2
+      m_ExpectedControlType: 
+      m_Id: a899d603-bd1e-4f00-8f09-2ba50cbdba7b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotateAnchorAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Rotate Anchor
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: d8196f12-91a1-4cf3-9399-fc70ad19243b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_DirectionalAnchorRotationAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Directional Anchor Rotation
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 592e01d1-c67d-4645-853b-be208dbb7cfe
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_TranslateAnchorAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Translate Anchor
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: d73b2224-01e8-4015-ab3e-005f12b06bf8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ScaleToggleAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Scale Toggle
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: f9bae400-58a1-4707-ab51-c9f7c22b6847
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ScaleDeltaAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Scale Delta
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 2df94bbe-7a72-47f4-8eb2-f6930baacbed
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ButtonPressPoint: 0.5
 --- !u!1 &2683968869914333420
 GameObject:
   m_ObjectHideFlags: 0
@@ -29810,14 +30037,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllerSide: 0
-  AutoUpdateUITransforms: 1
   cursor: {fileID: 2255670627275077591, guid: cda3e347c37ecf24e89b8cd380c7f9f2, type: 3}
+  AutoUpdateUITransforms: 1
   HidePointerIfNoObjectsFound: 1
   FixedPointerLength: 0.5
-  CursorScaling: 1
   CursorMinScale: 0.6
   CursorMaxScale: 6
   LineDistanceModifier: 0.8
+  CursorScaling: 1
   lineRenderer: {fileID: 5674136981558723233}
 --- !u!1 &3966781999270109201
 GameObject:
@@ -29969,14 +30196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllerSide: 1
-  AutoUpdateUITransforms: 1
   cursor: {fileID: 2255670627275077591, guid: cda3e347c37ecf24e89b8cd380c7f9f2, type: 3}
+  AutoUpdateUITransforms: 1
   HidePointerIfNoObjectsFound: 1
   FixedPointerLength: 0.5
-  CursorScaling: 1
   CursorMinScale: 0.6
   CursorMaxScale: 6
   LineDistanceModifier: 0.8
+  CursorScaling: 1
   lineRenderer: {fileID: 3966781999270109203}
 --- !u!1 &3979879508987661480
 GameObject:
@@ -32534,13 +32761,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
-  CanDropItem: 1
   CanSwapItem: 1
+  CanDropItem: 1
   CanRemoveItem: 1
-  ScaleItem: 1
   DisableColliders: 1
-  DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
+  ScaleItem: 1
+  DuplicateItemOnGrab: 0
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames:
@@ -40989,13 +41216,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
-  CanDropItem: 1
   CanSwapItem: 1
+  CanDropItem: 1
   CanRemoveItem: 1
-  ScaleItem: 1
   DisableColliders: 1
-  DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
+  ScaleItem: 1
+  DuplicateItemOnGrab: 0
   LastSnapTime: 0
   OnlyAllowNames:
   - Hat
@@ -41244,6 +41471,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1281
   ParentGrabber: {fileID: 6969157712627478175}
+  _lastColliderHit: {fileID: 0}
   ShowGizmos: 1
 --- !u!136 &5629437627721643658
 CapsuleCollider:
@@ -46227,13 +46455,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
-  CanDropItem: 1
   CanSwapItem: 1
+  CanDropItem: 1
   CanRemoveItem: 1
-  ScaleItem: 1
   DisableColliders: 1
-  DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
+  ScaleItem: 1
+  DuplicateItemOnGrab: 0
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames:
@@ -59252,13 +59480,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
-  CanDropItem: 1
   CanSwapItem: 1
+  CanDropItem: 1
   CanRemoveItem: 1
-  ScaleItem: 1
   DisableColliders: 1
-  DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
+  ScaleItem: 1
+  DuplicateItemOnGrab: 0
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
@@ -60252,7 +60480,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8320362178939264584}
   - component: {fileID: 8320362178939264585}
-  - component: {fileID: 5052651750438434225}
   m_Layer: 0
   m_Name: RightController
   m_TagString: Untagged
@@ -60293,39 +60520,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97e54343fcd4e4b81f6e22d317008a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandAnchor: {fileID: 2680559463926737338}
-  ResetHandAnchorPosition: 1
   HandAnimator: {fileID: 0}
+  IdlePoseType: 0
+  HandAnchor: {fileID: 2680559463926737338}
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
-  IdlePoseType: 0
+  grabber: {fileID: 0}
+  PoseId: 0
   UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
-  grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
-  PoseId: 0
   PreviousHeldObject: {fileID: 0}
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
---- !u!114 &5052651750438434225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320362178939264587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724cf5ac358dfa945bd295f49cb7d755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ControllerHand: 1
-  thisControllerModel: 
-  OffsetPosition: {x: 0, y: 0, z: 0}
-  OffsetRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &8320362180652782122
 GameObject:
   m_ObjectHideFlags: 0
@@ -60336,7 +60546,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8320362180652782123}
   - component: {fileID: 8320362180652782120}
-  - component: {fileID: 5052651750714899314}
   m_Layer: 0
   m_Name: LeftController
   m_TagString: Untagged
@@ -60378,39 +60587,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97e54343fcd4e4b81f6e22d317008a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandAnchor: {fileID: 2680276330383280116}
-  ResetHandAnchorPosition: 1
   HandAnimator: {fileID: 0}
+  IdlePoseType: 0
+  HandAnchor: {fileID: 2680276330383280116}
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
-  IdlePoseType: 0
+  grabber: {fileID: 0}
+  PoseId: 0
   UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
-  grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
-  PoseId: 0
   PreviousHeldObject: {fileID: 0}
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
---- !u!114 &5052651750714899314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320362180652782122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724cf5ac358dfa945bd295f49cb7d755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ControllerHand: 0
-  thisControllerModel: 
-  OffsetPosition: {x: 0, y: 0, z: 0}
-  OffsetRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &8323024420742344247
 GameObject:
   m_ObjectHideFlags: 0
@@ -62435,6 +62627,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1057
   ParentGrabber: {fileID: 8516297022294291280}
+  _lastColliderHit: {fileID: 0}
   ShowGizmos: 1
 --- !u!136 &8516297022990852517
 CapsuleCollider:

@@ -10,8 +10,8 @@ public class SnapZone : MonoBehaviour
     [SerializeField] private Grabbable StartingItem;
 
     [Header("Options")]
+    public bool CanSwapItem = true;
     [SerializeField] private bool CanDropItem = true;
-    [SerializeField] private bool CanSwapItem = true;
     [SerializeField] private bool CanRemoveItem = true;
     [SerializeField] private bool DisableColliders = true;
 
@@ -45,7 +45,7 @@ public class SnapZone : MonoBehaviour
     Grabbable trackedItem;
     SnapZoneOffset offset;
 
-    private float _scaleTo;
+    private float scaleTo;
     private bool heldItemWasKinematic;
 
     [HideInInspector] public Grabbable ClosestGrabbable;
@@ -53,7 +53,7 @@ public class SnapZone : MonoBehaviour
     private void Start()
     {
         gZone = GetComponent<GrabbablesInTrigger>();
-        _scaleTo = ScaleItem;
+        scaleTo = ScaleItem;
 
         if (StartingItem != null)
         {
@@ -90,7 +90,7 @@ public class SnapZone : MonoBehaviour
             }
             else
             {
-                HeldItem.transform.localScale = Vector3.Lerp(HeldItem.transform.localScale, HeldItem.OriginalScale * _scaleTo, Time.deltaTime * 30f);
+                HeldItem.transform.localScale = Vector3.Lerp(HeldItem.transform.localScale, HeldItem.OriginalScale * scaleTo, Time.deltaTime * 30f);
 
                 if (HeldItem.enabled || (disabledColliders != null && disabledColliders.Count > 0 && disabledColliders[0] != null && disabledColliders[0].enabled))
                 {
@@ -221,11 +221,11 @@ public class SnapZone : MonoBehaviour
 
         if (grab.GetComponent<SnapZoneScale>())
         {
-            _scaleTo = grab.GetComponent<SnapZoneScale>().Scale;
+            scaleTo = grab.GetComponent<SnapZoneScale>().Scale;
         }
         else
         {
-            _scaleTo = ScaleItem;
+            scaleTo = ScaleItem;
         }
 
         SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();

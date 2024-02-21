@@ -13,7 +13,7 @@ public class GrabbablesInTrigger : MonoBehaviour
     [SerializeField] private Dictionary<Collider, Grabbable> ValidGrabbables;
 
     [Header("Events")]
-    [SerializeField] private bool FireGrabbableEvents = true;
+    public bool FireGrabbableEvents = true;
 
     [Header("Collision Checks")]
     public LayerMask RemoteCollisionLayers = 1;

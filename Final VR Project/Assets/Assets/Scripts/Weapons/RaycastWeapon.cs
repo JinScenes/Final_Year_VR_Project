@@ -19,37 +19,36 @@ public enum ReloadType
 
 public class RaycastWeapon : GrabbableEvents
 {
-    public float MaxRange = 25f;
-    public float Damage = 25f;
+    [SerializeField] private float MaxRange = 25f;
+    [SerializeField] private float Damage = 25f;
 
     [Header("Select Fire")]
-    public FiringType FiringMethod = FiringType.Semi;
-    public ReloadType ReloadMethod = ReloadType.InfiniteAmmo;
+    [SerializeField] private FiringType FiringMethod = FiringType.Semi;
+    [SerializeField] private ReloadType ReloadMethod = ReloadType.InfiniteAmmo;
 
-    public float FiringRate = 0.2f;
-    float lastShotTime;
-    public float BulletImpactForce = 1000f;
-    public float InternalAmmo = 0;
     public float MaxInternalAmmo = 10;
-    public bool AutoChamberRounds = true;
-    public bool MustChamberRounds = false;
-    public bool AlwaysFireProjectile = false;
-    public bool FireProjectileInSlowMo = true;
+    [SerializeField] private float FiringRate = 0.2f;
+    [SerializeField] private float BulletImpactForce = 1000f;
+    [SerializeField] private float InternalAmmo = 0;
+    [SerializeField] private bool AutoChamberRounds = true;
+    [SerializeField] private bool MustChamberRounds = false;
+    [SerializeField] private bool AlwaysFireProjectile = false;
+    [SerializeField] private bool FireProjectileInSlowMo = true;
 
-    public float SlowMoRateOfFire = 0.3f;
-    public float ShotForce = 10f;
-    public float BulletCasingForce = 3f;
+    [SerializeField] private float SlowMoRateOfFire = 0.3f;
+    [SerializeField] private float ShotForce = 10f;
+    [SerializeField] private float BulletCasingForce = 3f;
 
-    public bool LaserGuided = false;
+    [SerializeField] private bool LaserGuided = false;
 
-    public Transform LaserPoint;
-    public Vector3 RecoilForce = Vector3.zero;
+    [SerializeField] private Transform LaserPoint;
+    [SerializeField] private Vector3 RecoilForce = Vector3.zero;
 
-    public float RecoilDuration = 0.3f;
+    [SerializeField] private float RecoilDuration = 0.3f;
 
-    Rigidbody weaponRigid;
+    private Rigidbody weaponRigid;
 
-    public LayerMask ValidLayers;
+    [SerializeField] private LayerMask ValidLayers;
 
     [SerializeField] private Transform MuzzlePointTransform;
     [SerializeField] private Transform EjectPointTransform;
@@ -69,25 +68,25 @@ public class RaycastWeapon : GrabbableEvents
     [SerializeField] private AudioClip GunShotSound;
 
     [Range(0.0f, 1f)]
-    public float GunShotVolume = 0.75f;
-    public float slideSpeed = 1;
+    [SerializeField] private float GunShotVolume = 0.75f;
+    [SerializeField] private float slideSpeed = 1;
 
-    public AudioClip EmptySound;
+    [SerializeField] private AudioClip EmptySound;
 
     [Range(0.0f, 1f)]
-    public float EmptySoundVolume = 1f;
-    public float SlideDistance = -0.028f;
+    [SerializeField] private float EmptySoundVolume = 1f;
+    [SerializeField] private float SlideDistance = -0.028f;
 
-    public bool ForceSlideBackOnLastShot = true;
+    [SerializeField] private bool ForceSlideBackOnLastShot = true;
+    [SerializeField] private bool EmptyBulletInChamber = false;
 
-    float minSlideDistance = 0.001f;
+    private float minSlideDistance = 0.001f;
 
-    public List<GrabbedControllerBinding> EjectInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
-    public List<GrabbedControllerBinding> ReleaseSlideInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button1Down };
-    public List<GrabbedControllerBinding> ReloadInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
+    [SerializeField] private List<GrabbedControllerBinding> EjectInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
+    [SerializeField] private List<GrabbedControllerBinding> ReleaseSlideInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button1Down };
+    [SerializeField] private List<GrabbedControllerBinding> ReloadInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
 
     public bool BulletInChamber = false;
-    public bool EmptyBulletInChamber = false;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onShootEvent;
@@ -96,6 +95,8 @@ public class RaycastWeapon : GrabbableEvents
     [SerializeField] private UnityEvent onWeaponChargedEvent;
     [SerializeField] private FloatEvent onDealtDamageEvent;
     [SerializeField] private RaycastHitEvent onRaycastHitEvent;
+
+    private float lastShotTime;
 
     protected WeaponSlide ws;
 
@@ -118,7 +119,6 @@ public class RaycastWeapon : GrabbableEvents
 
     public override void OnTrigger(float triggerValue)
     {
-
         triggerValue = Mathf.Clamp01(triggerValue);
 
         if (TriggerTransform)
@@ -142,7 +142,6 @@ public class RaycastWeapon : GrabbableEvents
         checkSlideInput();
         checkEjectInput();
         CheckReloadInput();
-
         updateChamberedBullet();
 
         base.OnTrigger(triggerValue);
@@ -262,12 +261,10 @@ public class RaycastWeapon : GrabbableEvents
                 proj.MarkAsLaserGuided(MuzzlePointTransform);
             }
 
-            // Make sure we clean up this projectile
             Destroy(projectile, 20);
         }
         else
         {
-            // Raycast to hit
             RaycastHit hit;
             if (Physics.Raycast(MuzzlePointTransform.position, MuzzlePointTransform.forward, out hit, MaxRange, ValidLayers, QueryTriggerInteraction.Ignore))
             {
@@ -275,13 +272,9 @@ public class RaycastWeapon : GrabbableEvents
             }
         }
 
-        // Apply recoil
         ApplyRecoil();
-
-        // We just fired this bullet
         BulletInChamber = false;
 
-        // Try to load a new bullet into chamber         
         if (AutoChamberRounds)
         {
             chamberRound();
@@ -291,10 +284,8 @@ public class RaycastWeapon : GrabbableEvents
             EmptyBulletInChamber = true;
         }
 
-        // Unable to chamber bullet, force slide back
         if (!BulletInChamber)
         {
-            // Do we need to force back the receiver?
             slideForcedBack = ForceSlideBackOnLastShot;
 
             if (slideForcedBack && ws != null)
@@ -303,16 +294,13 @@ public class RaycastWeapon : GrabbableEvents
             }
         }
 
-        // Call Shoot Event
         if (onShootEvent != null)
         {
             onShootEvent.Invoke();
         }
 
-        // Store our last shot time to be used for rate of fire
         lastShotTime = Time.time;
 
-        // Stop previous routine
         if (shotRoutine != null)
         {
             MuzzleFlashObject.SetActive(false);
@@ -331,34 +319,25 @@ public class RaycastWeapon : GrabbableEvents
         }
     }
 
-    // Apply recoil by requesting sprinyness and apply a local force to the muzzle point
     public virtual void ApplyRecoil()
     {
         if (weaponRigid != null && RecoilForce != Vector3.zero)
         {
-
-            // Make weapon springy for X seconds
             grab.RequestSpringTime(RecoilDuration);
-
-            // Apply the Recoil Force
             weaponRigid.AddForceAtPosition(MuzzlePointTransform.TransformDirection(RecoilForce), MuzzlePointTransform.position, ForceMode.VelocityChange);
         }
     }
 
-    // Hit something without Raycast. Apply damage, apply FX, etc.
     public virtual void OnRaycastHit(RaycastHit hit)
     {
-
         ApplyParticleFX(hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), hit.collider);
 
-        // push object if rigidbody
         Rigidbody hitRigid = hit.collider.attachedRigidbody;
         if (hitRigid != null)
         {
             hitRigid.AddForceAtPosition(BulletImpactForce * MuzzlePointTransform.forward, hit.point);
         }
 
-        // Damage if possible
         Damageable d = hit.collider.GetComponent<Damageable>();
         if (d)
         {
@@ -370,7 +349,6 @@ public class RaycastWeapon : GrabbableEvents
             }
         }
 
-        // Call event
         if (onRaycastHitEvent != null)
         {
             onRaycastHitEvent.Invoke(hit);
@@ -383,7 +361,6 @@ public class RaycastWeapon : GrabbableEvents
         {
             GameObject impact = Instantiate(HitFXPrefab, position, rotation) as GameObject;
 
-            // Attach bullet hole to object if possible
             BulletHole hole = impact.GetComponent<BulletHole>();
             if (hole)
             {
@@ -392,13 +369,9 @@ public class RaycastWeapon : GrabbableEvents
         }
     }
 
-    /// <summary>
-    /// Something attached ammo to us
-    /// </summary>
     public virtual void OnAttachedAmmo()
     {
 
-        // May have ammo loaded
         updateChamberedBullet();
 
         if (onAttachedAmmoEvent != null)
@@ -407,10 +380,8 @@ public class RaycastWeapon : GrabbableEvents
         }
     }
 
-    // Ammo was detached from the weapon
     public virtual void OnDetachedAmmo()
     {
-        // May have ammo loaded / unloaded
         updateChamberedBullet();
 
         if (onDetachedAmmoEvent != null)
@@ -434,14 +405,11 @@ public class RaycastWeapon : GrabbableEvents
             return GetComponentsInChildren<Bullet>(false).Length;
         }
 
-        // Default to bullet count
         return GetComponentsInChildren<Bullet>(false).Length;
     }
 
     public virtual void RemoveBullet()
     {
-
-        // Don't remove bullet here
         if (ReloadMethod == ReloadType.InfiniteAmmo)
         {
             return;
@@ -454,14 +422,12 @@ public class RaycastWeapon : GrabbableEvents
         else if (ReloadMethod == ReloadType.ManualClip)
         {
             Bullet firstB = GetComponentInChildren<Bullet>(false);
-            // Deactivate gameobject as this bullet has been consumed
             if (firstB != null)
             {
                 Destroy(firstB.gameObject);
             }
         }
 
-        // Whenever we remove a bullet is a good time to check the chamber
         updateChamberedBullet();
     }
 
@@ -486,13 +452,10 @@ public class RaycastWeapon : GrabbableEvents
 
         if (currentBulletCount > 0)
         {
-            // Remove the first bullet we find in the clip                
             RemoveBullet();
 
-            // That bullet is now in chamber
             BulletInChamber = true;
         }
-        // Unable to chamber a bullet
         else
         {
             BulletInChamber = false;
@@ -501,8 +464,7 @@ public class RaycastWeapon : GrabbableEvents
 
     protected IEnumerator shotRoutine;
 
-    // Randomly scale / rotate to make them seem different
-    void randomizeMuzzleFlashScaleRotation()
+    private void randomizeMuzzleFlashScaleRotation()
     {
         MuzzleFlashObject.transform.localScale = Vector3.one * Random.Range(0.75f, 1.5f);
         MuzzleFlashObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 90f));
@@ -510,8 +472,6 @@ public class RaycastWeapon : GrabbableEvents
 
     public virtual void OnWeaponCharged(bool allowCasingEject)
     {
-
-        // Already bullet in chamber, eject it
         if (BulletInChamber && allowCasingEject)
         {
             ejectCasing();
@@ -524,7 +484,6 @@ public class RaycastWeapon : GrabbableEvents
 
         chamberRound();
 
-        // Slide is no longer forced back if weapon was just charged
         slideForcedBack = false;
 
         if (onWeaponChargedEvent != null)
@@ -543,8 +502,7 @@ public class RaycastWeapon : GrabbableEvents
             rb.AddRelativeForce(Vector3.right * BulletCasingForce, ForceMode.VelocityChange);
         }
 
-        // Clean up shells
-        GameObject.Destroy(shell, 5);
+        Destroy(shell, 5);
     }
 
     protected virtual IEnumerator doMuzzleFlash()
@@ -558,11 +516,9 @@ public class RaycastWeapon : GrabbableEvents
         MuzzleFlashObject.SetActive(false);
     }
 
-    // Animate the slide back, eject casing, pull slide back
     protected virtual IEnumerator animateSlideAndEject()
     {
 
-        // Start Muzzle Flash
         MuzzleFlashObject.SetActive(true);
 
         int frames = 0;
@@ -585,7 +541,6 @@ public class RaycastWeapon : GrabbableEvents
 
                 frames++;
 
-                // Go ahead and update muzzleflash in sync with slide
                 if (frames < 2)
                 {
                     randomizeMuzzleFlashScaleRotation();
@@ -609,7 +564,6 @@ public class RaycastWeapon : GrabbableEvents
             slideEndReached = true;
         }
 
-        // Set Slide Position
         if (SlideTransform)
         {
             SlideTransform.localPosition = slideDestination;
@@ -618,16 +572,13 @@ public class RaycastWeapon : GrabbableEvents
         yield return new WaitForEndOfFrame();
         MuzzleFlashObject.SetActive(false);
 
-        // Eject Shell
         ejectCasing();
 
-        // Pause for shell to eject before returning slide
         yield return new WaitForEndOfFrame();
 
 
         if (!slideForcedBack && SlideTransform != null)
         {
-            // Slide back to original position
             frames = 0;
             bool slideBeginningReached = false;
             while (!slideBeginningReached)

@@ -1,24 +1,21 @@
 ﻿using UnityEngine.XR.Interaction.Toolkit;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
 public class AmmoDispenser : MonoBehaviour
 {
+    [SerializeField] private Grabber LeftGrabber;
+    [SerializeField] private Grabber RightGrabber;
 
-    public Grabber LeftGrabber;
-    public Grabber RightGrabber;
+    [SerializeField] private GameObject AmmoDispenserObject;
+    [SerializeField] private GameObject PistolClip;
+    [SerializeField] private GameObject ShotgunShell;
+    [SerializeField] private GameObject RifleClip;
 
-    public GameObject AmmoDispenserObject;
-    public GameObject PistolClip;
-    public GameObject ShotgunShell;
-    public GameObject RifleClip;
+    [SerializeField] private int CurrentPistolClips = 5;
+    [SerializeField] private int CurrentRifleClips = 5;
+    [SerializeField] private int CurrentShotgunShells = 30;
 
-    public int CurrentPistolClips = 5;
-    public int CurrentRifleClips = 5;
-    public int CurrentShotgunShells = 30;
-
-    void Update()
+    private void Update()
     {
         bool weaponEquipped = false;
 
@@ -27,23 +24,21 @@ public class AmmoDispenser : MonoBehaviour
             weaponEquipped = true;
         }
 
-        // Only show if we have something equipped
         if (AmmoDispenserObject.activeSelf != weaponEquipped)
         {
             AmmoDispenserObject.SetActive(weaponEquipped);
         }
     }
 
-    bool grabberHasWeapon(Grabber g)
+    private bool grabberHasWeapon(Grabber grabbable)
     {
 
-        if (g == null || g.HeldGrabbable == null)
+        if (grabbable == null || grabbable.HeldGrabbable == null)
         {
             return false;
         }
 
-        // Holding shotgun, pistol, or rifle
-        string grabName = g.HeldGrabbable.transform.name;
+        string grabName = grabbable.HeldGrabbable.transform.name;
         if (grabName.Contains("Shotgun") || grabName.Contains("Pistol") || grabName.Contains("Rifle"))
         {
             return true;
@@ -96,14 +91,12 @@ public class AmmoDispenser : MonoBehaviour
 
     public void GrabAmmo(Grabber grabber)
     {
-
         GameObject ammoClip = GetAmmo();
         if (ammoClip != null)
         {
             GameObject ammo = Instantiate(ammoClip, grabber.transform.position, grabber.transform.rotation) as GameObject;
-            Grabbable g = ammo.GetComponent<Grabbable>();
+            Grabbable grabbable = ammo.GetComponent<Grabbable>();
 
-            // Disable rings for performance
             GrabbableRingHelper grh = ammo.GetComponentInChildren<GrabbableRingHelper>();
             if (grh)
             {
@@ -112,12 +105,11 @@ public class AmmoDispenser : MonoBehaviour
                 Destroy(r.gameObject);
             }
 
-            // Offset to hand
             ammo.transform.parent = grabber.transform;
-            ammo.transform.localPosition = -g.GrabPositionOffset;
+            ammo.transform.localPosition = -grabbable.GrabPositionOffset;
             ammo.transform.parent = null;
 
-            grabber.GrabGrabbable(g);
+            grabber.GrabGrabbable(grabbable);
         }
     }
 
