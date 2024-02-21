@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Flashlight : GrabbableEvents {
+public class Flashlight : GrabbableEvents
+{
+    [SerializeField] private Light SpotLight;
+    [SerializeField] private Transform LightSwitch;
 
-    public Light SpotLight;
-    public Transform LightSwitch;
+    private Vector3 originalSwitchPosition;
 
-    Vector3 originalSwitchPosition;
-
-    // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         originalSwitchPosition = LightSwitch.transform.localPosition;
     }
 
-    public override void OnTrigger(float triggerValue) {
+    public override void OnTrigger(float triggerValue)
+    {
 
         SpotLight.enabled = triggerValue > 0.2f;
 
@@ -23,7 +22,8 @@ public class Flashlight : GrabbableEvents {
         base.OnTrigger(triggerValue);
     }
 
-    public override void OnTriggerUp() {
+    public override void OnTriggerUp()
+    {
 
         SpotLight.enabled = false;
 

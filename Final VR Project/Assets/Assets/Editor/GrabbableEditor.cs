@@ -5,7 +5,8 @@ using UnityEditor;
 
 [CustomEditor(typeof(Grabbable))]
 [CanEditMultipleObjects]
-public class GrabbableEditor : Editor {
+public class GrabbableEditor : Editor
+{
 
     public bool UseCustomEditor = true;
 
@@ -30,7 +31,7 @@ public class GrabbableEditor : Editor {
     SerializedProperty CanBeSnappedToSnapZone;
     SerializedProperty ForceDisableKinematicOnDrop;
     SerializedProperty InstantMovement;
-    SerializedProperty MakeChildCollidersGrabbable;        
+    SerializedProperty MakeChildCollidersGrabbable;
     SerializedProperty CustomHandPose;
     SerializedProperty handPoseType;
     SerializedProperty SelectedHandPose;
@@ -58,7 +59,8 @@ public class GrabbableEditor : Editor {
     SerializedProperty GrabPoints;
     SerializedProperty collisions;
 
-    void OnEnable() {
+    void OnEnable()
+    {
         grabButton = serializedObject.FindProperty("GrabButton");
         grabType = serializedObject.FindProperty("Grabtype");
         grabPhysics = serializedObject.FindProperty("GrabPhysics");
@@ -107,20 +109,23 @@ public class GrabbableEditor : Editor {
         collisions = serializedObject.FindProperty("collisions");
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
 
         grabbable = (Grabbable)target;
 
-        if (UseCustomEditor == false || grabbable.UseCustomInspector == false) {
+        if (UseCustomEditor == false || grabbable.UseCustomInspector == false)
+        {
             base.OnInspectorGUI();
             return;
         }
 
-        // Add warning if scale is non uniform
-        if (Mathf.Abs(grabbable.transform.localScale.x - grabbable.transform.localScale.y) > 0.001f) {
+        if (Mathf.Abs(grabbable.transform.localScale.x - grabbable.transform.localScale.y) > 0.001f)
+        {
             EditorGUILayout.HelpBox("WARNING! Transform scale is non-uniform. It is recommended to keep object's transform scale to 1, 1, 1. \nIf you need to scale your object, scale the graphics as a child object and then resize your colliders to fit. \n\nVRIF can attempt to fix your Transform scale for you by clicking the 'Fix Transform Scale' button below. This will set this object's scale to 1,1,1 and then move your MeshRenderer to a child object with the original scale.", MessageType.Warning);
 
-            if (GUILayout.Button("Fix Transform Scale")) {
+            if (GUILayout.Button("Fix Transform Scale"))
+            {
                 FixScaling();
             }
         }
@@ -130,7 +135,8 @@ public class GrabbableEditor : Editor {
         EditorGUILayout.PropertyField(grabMechanic);
 
         EditorGUILayout.PropertyField(grabPhysics);
-        if (grabbable.GrabPhysics == GrabPhysics.PhysicsJoint) {
+        if (grabbable.GrabPhysics == GrabPhysics.PhysicsJoint)
+        {
             EditorGUILayout.PropertyField(CollisionSpring);
             EditorGUILayout.PropertyField(CollisionSlerp);
             EditorGUILayout.PropertyField(CollisionLinearMotionX);
@@ -141,11 +147,13 @@ public class GrabbableEditor : Editor {
             EditorGUILayout.PropertyField(CollisionAngularMotionZ);
         }
 
-        if (grabbable.GrabPhysics == GrabPhysics.PhysicsJoint || grabbable.GrabPhysics == GrabPhysics.FixedJoint) {
+        if (grabbable.GrabPhysics == GrabPhysics.PhysicsJoint || grabbable.GrabPhysics == GrabPhysics.FixedJoint)
+        {
             EditorGUILayout.PropertyField(ApplyCorrectiveForce);
         }
 
-        if (grabbable.GrabPhysics == GrabPhysics.Velocity) {
+        if (grabbable.GrabPhysics == GrabPhysics.Velocity)
+        {
             EditorGUILayout.PropertyField(MoveVelocityForce);
             EditorGUILayout.PropertyField(MoveAngularVelocityForce);
         }
@@ -155,12 +163,13 @@ public class GrabbableEditor : Editor {
         EditorGUILayout.PropertyField(remoteGrabbable);
         EditorGUILayout.PropertyField(remoteGrabMechanic);
 
-        if(grabbable.RemoteGrabMechanic == RemoteGrabMovement.Linear) {
+        if (grabbable.RemoteGrabMechanic == RemoteGrabMovement.Linear)
+        {
             EditorGUILayout.PropertyField(grabSpeed);
 
         }
-        else if (grabbable.RemoteGrabMechanic == RemoteGrabMovement.Flick) {
-            //EditorGUILayout.PropertyField(flick);
+        else if (grabbable.RemoteGrabMechanic == RemoteGrabMovement.Flick)
+        {
         }
 
         EditorGUILayout.PropertyField(remoteGrabDistance);
@@ -179,32 +188,38 @@ public class GrabbableEditor : Editor {
 
         EditorGUILayout.PropertyField(handPoseType);
 
-        if(grabbable.handPoseType == HandPoseType.HandPose) {
+        if (grabbable.handPoseType == HandPoseType.HandPose)
+        {
             EditorGUILayout.PropertyField(SelectedHandPose);
         }
-        else if (grabbable.handPoseType == HandPoseType.AnimatorID) {
+        else if (grabbable.handPoseType == HandPoseType.AnimatorID)
+        {
             EditorGUILayout.PropertyField(CustomHandPose);
         }
-            
+
         EditorGUILayout.PropertyField(SecondaryGrabBehavior);
 
         // Two-Handed Settings
-        if(grabbable.SecondaryGrabBehavior == OtherGrabBehavior.DualGrab) {
+        if (grabbable.SecondaryGrabBehavior == OtherGrabBehavior.DualGrab)
+        {
 
             EditorGUILayout.PropertyField(TwoHandedPosition);
-            if(grabbable.TwoHandedPosition == TwoHandedPositionType.Lerp) {
+            if (grabbable.TwoHandedPosition == TwoHandedPositionType.Lerp)
+            {
                 EditorGUILayout.PropertyField(TwoHandedPostionLerpAmount);
             }
 
             EditorGUILayout.PropertyField(TwoHandedRotation);
-            if (grabbable.TwoHandedRotation == TwoHandedRotationType.Lerp || grabbable.TwoHandedRotation == TwoHandedRotationType.Slerp) {
+            if (grabbable.TwoHandedRotation == TwoHandedRotationType.Lerp || grabbable.TwoHandedRotation == TwoHandedRotationType.Slerp)
+            {
                 EditorGUILayout.PropertyField(TwoHandedRotationLerpAmount);
             }
-            else if (grabbable.TwoHandedRotation == TwoHandedRotationType.LookAtSecondary) {
+            else if (grabbable.TwoHandedRotation == TwoHandedRotationType.LookAtSecondary)
+            {
                 EditorGUILayout.PropertyField(TwoHandedLookVector);
                 EditorGUILayout.PropertyField(SecondHandLookSpeed);
             }
-                                    
+
             EditorGUILayout.PropertyField(TwoHandedDropBehavior);
             EditorGUILayout.PropertyField(SecondaryGrabbable);
         }
@@ -213,25 +228,29 @@ public class GrabbableEditor : Editor {
 
         EditorGUILayout.PropertyField(GrabPoints);
 
-        // Grab Point Button
-        if(GUILayout.Button("Auto Populate Grab Points")) {
+        if (GUILayout.Button("Auto Populate Grab Points"))
+        {
             AutoPopulateGrabPoints();
         }
 
-        // Only show Debug Fields when playing in editor
-        if (Application.isPlaying) {
+        if (Application.isPlaying)
+        {
             EditorGUILayout.PropertyField(collisions);
         }
-            
+
         serializedObject.ApplyModifiedProperties();
     }
 
-    public void AutoPopulateGrabPoints() {
-        if(grabbable) {
+    public void AutoPopulateGrabPoints()
+    {
+        if (grabbable)
+        {
             var newPoints = new List<Transform>();
 
-            foreach(var gp in grabbable.GetComponentsInChildren<GrabPoint>()) {
-                if(gp != null && gp.gameObject.activeInHierarchy) {
+            foreach (var gp in grabbable.GetComponentsInChildren<GrabPoint>())
+            {
+                if (gp != null && gp.gameObject.activeInHierarchy)
+                {
                     newPoints.Add(gp.transform);
                 }
             }
@@ -240,14 +259,17 @@ public class GrabbableEditor : Editor {
         }
     }
 
-    public void FixScaling() {
-        if(grabbable != null) {
+    public void FixScaling()
+    {
+        if (grabbable != null)
+        {
             grabbable.gameObject.AddComponent<FixNonUniformScale>();
         }
     }
 
     [MenuItem("GameObject/VRIF/Grabbable", false, 10)]
-    private static void AddGrabbable(MenuCommand menuCommand) {
+    private static void AddGrabbable(MenuCommand menuCommand)
+    {
         // Create and add a new Grabbable Object in the Scene
         GameObject grab = Instantiate(Resources.Load("DefaultGrabbableItem", typeof(GameObject))) as GameObject;
         grab.name = "Grabbable Object";
@@ -259,7 +281,8 @@ public class GrabbableEditor : Editor {
     }
 
     [MenuItem("GameObject/VRIF/EventSystem", false, 20)]
-    private static void AddEventSystem(MenuCommand menuCommand) {
+    private static void AddEventSystem(MenuCommand menuCommand)
+    {
         // Create and add a new Grabbable Object in the Scene
         GameObject eventSystem = Instantiate(Resources.Load("DefaultEventSystem", typeof(GameObject))) as GameObject;
         eventSystem.name = "EventSystem";

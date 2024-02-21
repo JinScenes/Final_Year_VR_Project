@@ -1,73 +1,75 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class CalibratePlayerHeight : MonoBehaviour {
-
-    [Tooltip("Desired height of the player in meters. The player's presence in vr will be adjusted based on their physical height. 1.65 meters = 5.41 feet")]
-    public float DesiredPlayerHeight = 1.65f;
-
-    [Tooltip("Adjust the CharacterControllerYOffset property of this playerController. If not specified one will be found using GetComponentInChildren()")]
-    public PlayerController PlayerController;
-
-    [Header("Startup")]
-    [Tooltip("If true, the player's virtual height will be adjusted to match DesiredPlayerHeight on Start()")]
-    public bool CalibrateOnStart = true;
+public class CalibratePlayerHeight : MonoBehaviour
+{
+    [SerializeField] private float DesiredPlayerHeight = 1.65f;
+    [SerializeField] private PlayerController PlayerController;
 
     [Header("Input :")]
-    [Tooltip("If specified, pressing this button / action will activate the calibration")]
-    public InputAction CalibrateHeightAction;
+    [SerializeField] private InputAction CalibrateHeightAction;
 
     private float _initialOffset = 0;
 
-    void Start() {
+    private bool CalibrateOnStart = true;
 
-        if(CalibrateHeightAction != null) {
+    private void Start()
+    {
+        if (CalibrateHeightAction != null)
+        {
             CalibrateHeightAction.Enable();
             CalibrateHeightAction.performed += context => { CalibrateHeight(); };
         }
 
-        if(PlayerController == null) {
+        if (PlayerController == null)
+        {
             PlayerController = GetComponentInChildren<PlayerController>();
         }
 
-        if(CalibrateOnStart) {
+        if (CalibrateOnStart)
+        {
             StartCoroutine(setupInitialOffset());
         }
     }
 
-    public void CalibrateHeight() {
+    public void CalibrateHeight()
+    {
         CalibrateHeight(DesiredPlayerHeight);
     }
-        
-    public void CalibrateHeight(float calibrateHeight) {
 
+    public void CalibrateHeight(float calibrateHeight)
+    {
         float physicalHeight = GetCurrentPlayerHeight();
 
         PlayerController.CharacterControllerYOffset = calibrateHeight - physicalHeight;
     }
 
-    public void ResetPlayerHeight() {
+    public void ResetPlayerHeight()
+    {
         PlayerController.CharacterControllerYOffset = _initialOffset;
     }
 
-    public float GetCurrentPlayerHeight() {
-        if(PlayerController != null) {
+    public float GetCurrentPlayerHeight()
+    {
+        if (PlayerController != null)
+        {
             return PlayerController.CameraHeight;
         }
 
         return 0;
     }
 
-    public virtual void SetInitialOffset() {
-        if (PlayerController) {
+    public virtual void SetInitialOffset()
+    {
+        if (PlayerController)
+        {
             _initialOffset = PlayerController.CharacterControllerYOffset;
         }
     }
 
-    IEnumerator setupInitialOffset() {
-        // Give slight delay before calibrating height
+    private IEnumerator setupInitialOffset()
+    {
         yield return new WaitForSeconds(0.1f);
 
         SetInitialOffset();

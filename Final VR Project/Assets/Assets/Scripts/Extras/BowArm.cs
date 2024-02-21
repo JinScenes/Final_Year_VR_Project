@@ -1,48 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BowArm : MonoBehaviour {
+public class BowArm : MonoBehaviour
+{
 
-    public Bow BowItem;
+    [SerializeField] private Bow BowItem;
 
-    /// <summary>
-    /// When to modify the rotation : 0-1;
-    /// </summary>
-    public float BowPercentStart = 50f;
-    public float RotateDegrees = 10f; // How much past the initial rotation we should rotate
+    [SerializeField] private float BowPercentStart = 50f;
+    [SerializeField] private float RotateDegrees = 10f;
+    [SerializeField] private float Speed = 50f;
 
-    public float Speed = 50f;
+    [SerializeField] private bool RotateX = true;
+    [SerializeField] private bool RotateZ = false;
 
-    private Quaternion _startRotation;
-    private Quaternion _endRotation;
+    private Quaternion startRot;
+    private Quaternion endRot;
 
-    public bool RotateX = true;
-    public bool RotateZ = false;
+    private void Start()
+    {
+        startRot = Quaternion.Euler(transform.localEulerAngles);
 
-    void Start() {
-        _startRotation = Quaternion.Euler(transform.localEulerAngles);
-
-        if(RotateX) {
-            _endRotation = Quaternion.Euler(new Vector3(_startRotation.x + RotateDegrees, transform.localEulerAngles.y, transform.localEulerAngles.z));
+        if (RotateX)
+        {
+            endRot = Quaternion.Euler(new Vector3(startRot.x + RotateDegrees, transform.localEulerAngles.y, transform.localEulerAngles.z));
         }
 
-        if (RotateZ) {
-            _endRotation = Quaternion.Euler(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z + RotateDegrees));
+        if (RotateZ)
+        {
+            endRot = Quaternion.Euler(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z + RotateDegrees));
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-
-        if (BowItem.DrawPercent >= BowPercentStart) {
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, _endRotation, Speed * Time.deltaTime);
+    private void Update()
+    {
+        if (BowItem.DrawPercent >= BowPercentStart)
+        {
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, endRot, Speed * Time.deltaTime);
         }
-        else if(BowItem.DrawPercent < BowPercentStart && BowItem.DrawPercent > 5) {
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, _startRotation, Speed * Time.deltaTime);
+        else if (BowItem.DrawPercent < BowPercentStart && BowItem.DrawPercent > 5)
+        {
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, startRot, Speed * Time.deltaTime);
         }
-        else {
-            transform.localRotation = _startRotation;
+        else
+        {
+            transform.localRotation = startRot;
         }
     }
 }

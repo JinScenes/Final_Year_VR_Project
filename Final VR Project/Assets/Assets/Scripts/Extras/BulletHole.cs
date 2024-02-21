@@ -1,57 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BulletHole : MonoBehaviour {
-    public Transform BulletHoleDecal;
+public class BulletHole : MonoBehaviour
+{
+    [SerializeField] private Transform BulletHoleDecal;
 
-    public float MaxScale = 1f;
-    public float MinScale = 0.75f;
+    [SerializeField] private float MaxScale = 1f;
+    [SerializeField] private float MinScale = 0.75f;
+    [SerializeField] private float DestroyTime = 10f;
 
-    public bool RandomYRotation = true;
+    private bool RandomYRotation = true;
 
-    public float DestroyTime = 10f;
-
-    // Start is called before the first frame update
-    void Start() {
+    private void Start()
+    {
         transform.localScale = Vector3.one * Random.Range(0.75f, 1.5f);
 
-        if (BulletHoleDecal != null && RandomYRotation) {
+        if (BulletHoleDecal != null && RandomYRotation)
+        {
             Vector3 currentRotation = BulletHoleDecal.transform.localEulerAngles;
             BulletHoleDecal.transform.localEulerAngles = new Vector3(currentRotation.x, currentRotation.y, Random.Range(0, 90f));
         }
 
-        // Make sure audio follows timestep pitch
         AudioSource audio = GetComponent<AudioSource>();
         audio.pitch = Time.timeScale;
 
         Invoke("DestroySelf", DestroyTime);
     }
 
-    public void TryAttachTo(Collider col) {
-        if (transformIsEqualScale(col.transform)) {
+    public void TryAttachTo(Collider col)
+    {
+        if (transformIsEqualScale(col.transform))
+        {
             BulletHoleDecal.parent = col.transform;
-            GameObject.Destroy(BulletHoleDecal.gameObject, DestroyTime);
+            Destroy(BulletHoleDecal.gameObject, DestroyTime);
         }
-        // No need to parent if static collider
-        else if (col.gameObject.isStatic) {
-            GameObject.Destroy(BulletHoleDecal.gameObject, DestroyTime);
+        else if (col.gameObject.isStatic)
+        {
+            Destroy(BulletHoleDecal.gameObject, DestroyTime);
         }
-        // Malformed collider (non-equal proportions)
-        // Just destroy the decal quickly
-        else {
-            // BulletHoleDecal.parent = col.transform;
-            GameObject.Destroy(BulletHoleDecal.gameObject, 0.1f);
+        else
+        {
+            Destroy(BulletHoleDecal.gameObject, 0.1f);
         }
     }
 
-    // Are all scales equal? Ex : 1, 1, 1
-    bool transformIsEqualScale(Transform theTransform) {
+    private bool transformIsEqualScale(Transform theTransform)
+    {
         return theTransform.localScale.x == theTransform.localScale.y && theTransform.localScale.x == theTransform.localScale.z;
     }
 
-    void DestroySelf() {
+    private void DestroySelf()
+    {
         transform.parent = null;
-        GameObject.Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }
