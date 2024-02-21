@@ -69,24 +69,6 @@ public class WeaponSlide : MonoBehaviour {
         }
     }
 
-    public virtual void OnEnable() {
-        // Lock the slide in place when teleporting or snap turning
-        PlayerTeleport.OnBeforeTeleport += LockSlidePosition;
-        PlayerTeleport.OnAfterTeleport += UnlockSlidePosition;
-
-        //PlayerRotation.OnBeforeRotate += LockSlidePosition;
-        //PlayerRotation.OnAfterRotate += UnlockSlidePosition;
-    }
-
-    public virtual void OnDisable() {
-        PlayerTeleport.OnBeforeTeleport -= LockSlidePosition;
-        PlayerTeleport.OnAfterTeleport -= UnlockSlidePosition;
-
-        //PlayerRotation.OnBeforeRotate += LockSlidePosition;
-        //PlayerRotation.OnAfterRotate += UnlockSlidePosition;
-    }        
-
-    // Update is called once per frame
     void Update() {
 
         // If our slide is currently locked just set it and return early

@@ -349,10 +349,6 @@ public class HandPhysics : MonoBehaviour {
             DisableRemoteGrabber.enabled = false;
         }
 
-        // Move events
-        PlayerTeleport.OnBeforeTeleport += LockLocalPosition;
-        PlayerTeleport.OnAfterTeleport += UnlockLocalPosition;
-
         PlayerRotation.OnBeforeRotate += LockLocalPosition;
         PlayerRotation.OnAfterRotate += UnlockLocalPosition;
 
@@ -391,10 +387,6 @@ public class HandPhysics : MonoBehaviour {
         if (DisableRemoteGrabber) {
             DisableRemoteGrabber.enabled = true;
         }
-
-        // Move events
-        PlayerTeleport.OnBeforeTeleport -= LockLocalPosition;
-        PlayerTeleport.OnAfterTeleport -= UnlockLocalPosition;
 
         PlayerRotation.OnBeforeRotate -= LockLocalPosition;
         PlayerRotation.OnAfterRotate -= UnlockLocalPosition;

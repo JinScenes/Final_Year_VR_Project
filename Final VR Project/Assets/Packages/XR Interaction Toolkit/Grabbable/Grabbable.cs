@@ -2446,9 +2446,6 @@ namespace UnityEngine.XR.Interaction.Toolkit
                 return;
             }
 
-            PlayerTeleport.OnBeforeTeleport += LockGrabbableWithRotation;
-            PlayerTeleport.OnAfterTeleport += UnlockGrabbable;
-
             PlayerRotation.OnBeforeRotate += LockGrabbableWithRotation;
             PlayerRotation.OnAfterRotate += UnlockGrabbable;
 
@@ -2476,9 +2473,6 @@ namespace UnityEngine.XR.Interaction.Toolkit
         {
             if (subscribedToEvents)
             {
-                PlayerTeleport.OnBeforeTeleport -= LockGrabbableWithRotation;
-                PlayerTeleport.OnAfterTeleport -= UnlockGrabbable;
-
                 PlayerRotation.OnBeforeRotate -= LockGrabbableWithRotation;
                 PlayerRotation.OnAfterRotate -= UnlockGrabbable;
 

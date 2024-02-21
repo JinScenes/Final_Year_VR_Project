@@ -1,46 +1,37 @@
 ﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEditor;
 using System;
 
 public class SteeringWheel : GrabbableEvents
 {
     [Header("Rotation Limits")]
-    [Tooltip("Maximum Z value in Local Euler Angles. Can be < -360. Ex : -450")]
-    public float MinAngle = -360f;
-
-    [Tooltip("Maximum Z value in Local Euler Angles. Can be > 360. Ex : 450")]
-    public float MaxAngle = 360f;
+    [SerializeField] private float MinAngle = -360f;
+    [SerializeField] private float MaxAngle = 360f;
 
     [Header("Rotation Object")]
-    [Tooltip("The Transform to rotate on its Z axis.")]
-    public Transform RotatorObject;
+    [SerializeField] private Transform RotatorObject;
 
     [Header("Rotation Speed")]
-    [Tooltip("How fast to move the wheel towards the target angle. 0 = Instant.")]
-    public float RotationSpeed = 0f;
+    [SerializeField] private float RotationSpeed = 0f;
 
     [Header("Two-Handed Option")]
-    [Tooltip("IF true both hands will effect the rotation of the steering wheel while grabbed with both hands. Set to false if you only want one hand to control the rotation.")]
-    public bool AllowTwoHanded = true;
+    [SerializeField] private bool AllowTwoHanded = true;
 
     [Header("Return to Center")]
-    public bool ReturnToCenter = false;
-    public float ReturnToCenterSpeed = 45;
+    [SerializeField] private bool ReturnToCenter = false;
+    [SerializeField] private float ReturnToCenterSpeed = 45;
 
     [Header("Debug Options")]
-    public Text DebugText;
+    [SerializeField] private Text DebugText;
 
     [Header("Events")]
-    [Tooltip("Called if the SteeringWheel changes angle. Returns the current angle in degrees, clamped between MinAngle / MaxAngle")]
-    public FloatEvent onAngleChange;
-
-    [Tooltip("Called every frame. Returns the current current rotation between -1, 1")]
-    public FloatEvent onValueChange;
+    [SerializeField] private FloatEvent onAngleChange;
+    [SerializeField] private FloatEvent onValueChange;
 
     [Header("Editor Option")]
-    [Tooltip("If true will show an angle helper in editor mode (Gizmos must be enabled)")]
-    public bool ShowEditorGizmos = true;
+    [SerializeField] private bool ShowEditorGizmos = true;
 
     public float Angle
     {
@@ -129,52 +120,42 @@ public class SteeringWheel : GrabbableEvents
 
         float angleAdjustment = 0f;
 
-        // Add first Grabber
         if (PrimaryGrabber)
         {
             rotatePosition = transform.InverseTransformPoint(PrimaryGrabber.transform.position);
             rotatePosition = new Vector3(rotatePosition.x, rotatePosition.y, 0);
 
-            // Add in the angles to turn
             angleAdjustment += GetRelativeAngle(rotatePosition, previousPrimaryPosition);
 
             previousPrimaryPosition = rotatePosition;
         }
 
-        // Add second Grabber
         if (AllowTwoHanded && SecondaryGrabber != null)
         {
             rotatePosition = transform.InverseTransformPoint(SecondaryGrabber.transform.position);
             rotatePosition = new Vector3(rotatePosition.x, rotatePosition.y, 0);
 
-            // Add in the angles to turn
             angleAdjustment += GetRelativeAngle(rotatePosition, previousSecondaryPosition);
 
             previousSecondaryPosition = rotatePosition;
         }
 
-        // Divide by two if being held by two hands
         if (PrimaryGrabber != null && SecondaryGrabber != null)
         {
             angleAdjustment *= 0.5f;
         }
 
-        // Apply the angle adjustment
         targetAngle -= angleAdjustment;
 
-        // Update Smooth Angle
-        // Instant Rotation
         if (RotationSpeed == 0)
         {
             smoothedAngle = targetAngle;
         }
-        // Apply smoothing based on RotationSpeed
         else
         {
             smoothedAngle = Mathf.Lerp(smoothedAngle, targetAngle, Time.deltaTime * RotationSpeed);
         }
 
-        // Scrub the final results
         if (MinAngle != 0 && MaxAngle != 0)
         {
             targetAngle = Mathf.Clamp(targetAngle, MinAngle, MaxAngle);
@@ -203,7 +184,6 @@ public class SteeringWheel : GrabbableEvents
     {
         if (DebugText)
         {
-            // Invert the values for display. Inverted values are easier to read (i.e 5 = clockwise rotation of 5 degrees). 
             DebugText.text = String.Format("{0}\n{1}", (int)AngleInverted, (ScaleValueInverted).ToString("F2"));
         }
     }
@@ -221,20 +201,16 @@ public class SteeringWheel : GrabbableEvents
 
     public override void OnGrab(Grabber grabber)
     {
-        // Primary or secondary that grabbed us?
         if (grabber == SecondaryGrabber)
         {
             previousSecondaryPosition = transform.InverseTransformPoint(SecondaryGrabber.transform.position);
 
-            // Discard the Z value
             previousSecondaryPosition = new Vector3(previousSecondaryPosition.x, previousSecondaryPosition.y, 0);
         }
-        // Primary
         else
         {
             previousPrimaryPosition = transform.InverseTransformPoint(PrimaryGrabber.transform.position);
 
-            // Discard the Z value
             previousPrimaryPosition = new Vector3(previousPrimaryPosition.x, previousPrimaryPosition.y, 0);
         }
     }
@@ -253,7 +229,6 @@ public class SteeringWheel : GrabbableEvents
             smoothedAngle += Time.deltaTime * ReturnToCenterSpeed;
         }
 
-        // Overshot
         if (wasUnderZero && smoothedAngle > 0)
         {
             smoothedAngle = 0;
@@ -263,13 +238,11 @@ public class SteeringWheel : GrabbableEvents
             smoothedAngle = 0;
         }
 
-        // Snap if very close
         if (smoothedAngle < 0.02f && smoothedAngle > -0.02f)
         {
             smoothedAngle = 0;
         }
 
-        // Set the target angle to our newly calculated angle
         targetAngle = smoothedAngle;
     }
 
@@ -312,9 +285,6 @@ public class SteeringWheel : GrabbableEvents
         previousTargetAngle = angle;
     }
 
-    /// <param name="value">Current value to compute against</param>
-    /// <param name="min">Minimum value of range used for conversion. </param>
-    /// <param name="max">Maximum value of range used for conversion. Must be greater then min</param>
     public virtual float GetScaledValue(float value, float min, float max)
     {
         float range = (max - min) / 2f;
@@ -334,35 +304,29 @@ public class SteeringWheel : GrabbableEvents
             float lineLength = 0.1f;
             float arcLength = 0.1f;
 
-            //This is the color of the lines
-            UnityEditor.Handles.color = Color.cyan;
+            Handles.color = Color.cyan;
 
-            // Min / Max positions in World space
             Vector3 minPosition = origin + Quaternion.AngleAxis(MinAngle, transform.forward) * transform.up * lineLength;
             Vector3 maxPosition = origin + Quaternion.AngleAxis(MaxAngle, transform.forward) * transform.up * lineLength;
 
-            //Draw the min / max angle lines
-            UnityEditor.Handles.DrawLine(origin, minPosition);
-            UnityEditor.Handles.DrawLine(origin, maxPosition);
+            Handles.DrawLine(origin, minPosition);
+            Handles.DrawLine(origin, maxPosition);
 
-            // Draw starting position line
             Debug.DrawLine(transform.position, origin + Quaternion.AngleAxis(0, transform.up) * transform.up * lineLength, Color.magenta);
 
-            // Fix for exactly 180
             if (rotationDifference == 180)
             {
                 minPosition = origin + Quaternion.AngleAxis(MinAngle + 0.01f, transform.up) * transform.up * lineLength;
             }
 
-            // Draw the arc
             Vector3 cross = Vector3.Cross(minPosition - origin, maxPosition - origin);
             if (rotationDifference > 180)
             {
                 cross = Vector3.Cross(maxPosition - origin, minPosition - origin);
             }
 
-            UnityEditor.Handles.color = new Color(0, 255, 255, 0.1f);
-            UnityEditor.Handles.DrawSolidArc(origin, cross, minPosition - origin, rotationDifference, arcLength);
+            Handles.color = new Color(0, 255, 255, 0.1f);
+            Handles.DrawSolidArc(origin, cross, minPosition - origin, rotationDifference, arcLength);
         }
     }
 }

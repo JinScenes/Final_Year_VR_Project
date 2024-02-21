@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrackedDevice : MonoBehaviour
 {
-    public TrackableDevice Device = TrackableDevice.HMD;
+    [SerializeField] private TrackableDevice Device = TrackableDevice.HMD;
 
     protected InputDevice deviceToTrack;
 

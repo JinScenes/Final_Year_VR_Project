@@ -16,13 +16,11 @@ public class LocomotionManager : MonoBehaviour
     private bool LoadLocomotionFromPrefs = false;
 
     private PlayerController player;
-    private PlayerTeleport teleport;
     private SmoothLocomotion smoothLocomotion;
 
     private void Start()
     {
         player = GetComponentInChildren<PlayerController>();
-        teleport = GetComponentInChildren<PlayerTeleport>();
 
         if (LoadLocomotionFromPrefs)
         {
@@ -86,11 +84,6 @@ public class LocomotionManager : MonoBehaviour
         ChangeLocomotion(SelectedLocomotion == LocomotionType.SmoothLocomotion ? LocomotionType.Teleport : LocomotionType.SmoothLocomotion, LoadLocomotionFromPrefs);
     }
 
-    public void UpdateTeleportStatus()
-    {
-        teleport.enabled = SelectedLocomotion == LocomotionType.Teleport;
-    }
-
     public void ChangeLocomotion(LocomotionType locomotionType, bool save)
     {
         ChangeLocomotionType(locomotionType);
@@ -99,8 +92,6 @@ public class LocomotionManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("LocomotionSelection", locomotionType == LocomotionType.Teleport ? 0 : 1);
         }
-
-        UpdateTeleportStatus();
     }
 
     public void ChangeLocomotionType(LocomotionType loc)
@@ -112,39 +103,10 @@ public class LocomotionManager : MonoBehaviour
         {
             smoothLocomotion = GetComponentInChildren<SmoothLocomotion>();
         }
-
-        if (teleport == null)
-        {
-            teleport = GetComponentInChildren<PlayerTeleport>();
-        }
-
-        toggleTeleport(selectedLocomotion == LocomotionType.Teleport);
-        toggleSmoothLocomotion(selectedLocomotion == LocomotionType.SmoothLocomotion);
-    }
-
-    private void toggleTeleport(bool enabled)
-    {
-        if (enabled)
-        {
-            teleport.EnableTeleportation();
-        }
-        else
-        {
-            teleport.DisableTeleportation();
-        }
-    }
-
-    private void toggleSmoothLocomotion(bool enabled)
-    {
-        if (smoothLocomotion)
-        {
-            smoothLocomotion.enabled = enabled;
-        }
     }
 
     public void ToggleLocomotionType()
     {
-        // Toggle based on last value
         if (selectedLocomotion == LocomotionType.SmoothLocomotion)
         {
             ChangeLocomotionType(LocomotionType.Teleport);

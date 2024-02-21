@@ -177,7 +177,6 @@ namespace Unity.XR.CoreUtils
 
         PlayerController player;
         SmoothLocomotion smoothLocomotion;
-        PlayerTeleport playerTeleport;
         bool didFirstActivate = false;
 
         Grabber grabberLeft;
@@ -226,11 +225,6 @@ namespace Unity.XR.CoreUtils
                     smoothLocomotion.CheckControllerReferences();
                 }
 
-                playerTeleport = player.GetComponentInChildren<PlayerTeleport>(true);
-                if (playerTeleport)
-                {
-                    priorStraightSetting = playerTeleport.ForceStraightArrow;
-                }
 
                 if (smoothLocomotion == null)
                 {
@@ -412,11 +406,6 @@ namespace Unity.XR.CoreUtils
                 }
             }
 
-            if (ForceStraightTeleportRotation && playerTeleport != null && playerTeleport.ForceStraightArrow == false)
-            {
-                playerTeleport.ForceStraightArrow = true;
-            }
-
             if (smoothLocomotion != null && smoothLocomotion.enabled == false)
             {
                 smoothLocomotion.CheckControllerReferences();
@@ -488,11 +477,6 @@ namespace Unity.XR.CoreUtils
             if (player)
             {
                 player.ElevateCameraHeight = originalPlayerYOffset;
-            }
-
-            if (ForceStraightTeleportRotation && playerTeleport)
-            {
-                playerTeleport.ForceStraightArrow = priorStraightSetting;
             }
 
             didFirstActivate = false;
