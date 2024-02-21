@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
+using UnityEngine;
+using System;
+
 public class SteeringWheel : GrabbableEvents
 {
-
     [Header("Rotation Limits")]
     [Tooltip("Maximum Z value in Local Euler Angles. Can be < -360. Ex : -450")]
     public float MinAngle = -360f;

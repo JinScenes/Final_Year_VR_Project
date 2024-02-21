@@ -104,7 +104,7 @@ public class PlayerTeleport : MonoBehaviour
     CharacterController controller;
     PlayerController playerController;
     Rigidbody playerRigid;
-    InputBridge input;
+    XRInput input;
     Transform cameraRig;
     ScreenFader fader;
 
@@ -151,7 +151,7 @@ public class PlayerTeleport : MonoBehaviour
     bool setVariables = false;
     void setupVariables()
     {
-        input = InputBridge.Instance;
+        input = XRInput.Instance;
         playerController = GetComponent<PlayerController>();
         playerRigid = GetComponent<Rigidbody>();
         controller = GetComponentInChildren<CharacterController>();

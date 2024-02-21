@@ -73,7 +73,7 @@ public class HandController : MonoBehaviour {
     public int PoseId;
 
     ControllerOffsetHelper offset;
-    InputBridge input;
+    XRInput input;
     Rigidbody rigid;
     Transform offsetTransform;
 
@@ -125,7 +125,7 @@ public class HandController : MonoBehaviour {
         // Try getting child animator
         SetHandAnimator();
 
-        input = InputBridge.Instance;
+        input = XRInput.Instance;
     }
 
     public void Update() {
@@ -310,7 +310,7 @@ public class HandController : MonoBehaviour {
 
         // Point Amount can vary depending on if touching or our input source
         PointAmount = 1 - _triggerValue; // Range between 0 and 1. 1 == Finger all the way out
-        PointAmount *= InputBridge.Instance.InputSource == XRInputSource.SteamVR ? 0.25F : 0.5F; // Reduce the amount our finger points out if Oculus or XRInput
+        PointAmount *= XRInput.Instance.InputSource == XRInputSource.SteamVR ? 0.25F : 0.5F; // Reduce the amount our finger points out if Oculus or XRInput
 
         // If not near the trigger, point finger all the way out
         if (input.SupportsIndexTouch && _indexIsNear == false && PointAmount != 0) {
@@ -459,7 +459,7 @@ public class HandController : MonoBehaviour {
         poseBlender.UpdatePose = true;
 
         // Check for Valve Index Knuckles finger tracking
-        if (UseIndexFingerTracking && InputBridge.Instance.IsValveIndexController) {
+        if (UseIndexFingerTracking && XRInput.Instance.IsValveIndexController) {
             UpdateIndexFingerBlending();
             return;
         }

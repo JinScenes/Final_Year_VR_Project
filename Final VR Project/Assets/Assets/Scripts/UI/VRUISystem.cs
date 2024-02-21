@@ -1,21 +1,16 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class VRUISystem : BaseInputModule {
 
     [Header("XR Controller Options : ")]
     [Tooltip("This setting determines if LeftPointerTransform or RightPointerTransform will be used as a forward vector for World Space UI events")]
     public ControllerHand SelectedHand = ControllerHand.Right;
-
-#if XRIT_INTEGRATION
-    [Header("XR Interaction Toolkit Options : ")]
-    public bool UseXRInteractionToolkitUISystem = true;
-
-#endif
 
     [Tooltip("A transform on the left controller to use when raycasting for world space UI events")]
     public Transform LeftPointerTransform;
@@ -160,7 +155,7 @@ public class VRUISystem : BaseInputModule {
 
         // Handle scroll
         if (RightThumbstickScroll) {
-            EventData.scrollDelta = InputBridge.Instance.RightThumbstickAxis;
+            EventData.scrollDelta = XRInput.Instance.RightThumbstickAxis;
             if (!Mathf.Approximately(EventData.scrollDelta.sqrMagnitude, 0)) {
                 ExecuteEvents.Execute(ExecuteEvents.GetEventHandler<IScrollHandler>(EventData.pointerCurrentRaycast.gameObject), EventData, ExecuteEvents.scrollHandler);
             }
@@ -199,7 +194,7 @@ public class VRUISystem : BaseInputModule {
 
         // Check for bound controller button
         for (int x = 0; x < ControllerInput.Count; x++) {
-            if (InputBridge.Instance.GetControllerBindingValue(ControllerInput[x])) {
+            if (XRInput.Instance.GetControllerBindingValue(ControllerInput[x])) {
                 return true;
             }
         }

@@ -7,6 +7,7 @@ using System;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Unity.XR.CoreUtils 
 {
@@ -244,7 +245,7 @@ namespace Unity.XR.CoreUtils
 
         public void OnBeforeRender()
         {
-            HMDIsActive = InputBridge.Instance.HMDActive;
+            HMDIsActive = XRInput.Instance.HMDActive;
 
             if (EmulatorEnabled && !HMDIsActive)
             {
@@ -261,7 +262,7 @@ namespace Unity.XR.CoreUtils
 
         void Update()
         {
-            HMDIsActive = InputBridge.Instance.HMDActive;
+            HMDIsActive = XRInput.Instance.HMDActive;
 
             if (EmulatorEnabled && !HMDIsActive)
             {
@@ -350,44 +351,44 @@ namespace Unity.XR.CoreUtils
 
             if (LeftTriggerAction != null)
             {
-                prevVal = InputBridge.Instance.LeftTrigger;
-                InputBridge.Instance.LeftTrigger = LeftTriggerAction.action.ReadValue<float>();
-                InputBridge.Instance.LeftTriggerDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftTrigger >= InputBridge.Instance.DownThreshold;
-                InputBridge.Instance.LeftTriggerUp = prevVal > InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftTrigger < InputBridge.Instance.DownThreshold;
+                prevVal = XRInput.Instance.LeftTrigger;
+                XRInput.Instance.LeftTrigger = LeftTriggerAction.action.ReadValue<float>();
+                XRInput.Instance.LeftTriggerDown = prevVal < XRInput.Instance.DownThreshold && XRInput.Instance.LeftTrigger >= XRInput.Instance.DownThreshold;
+                XRInput.Instance.LeftTriggerUp = prevVal > XRInput.Instance.DownThreshold && XRInput.Instance.LeftTrigger < XRInput.Instance.DownThreshold;
             }
 
             if (LeftGripAction != null)
             {
-                prevVal = InputBridge.Instance.LeftGrip;
-                InputBridge.Instance.LeftGrip = LeftGripAction.action.ReadValue<float>();
-                InputBridge.Instance.LeftGripDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftGrip >= InputBridge.Instance.DownThreshold;
+                prevVal = XRInput.Instance.LeftGrip;
+                XRInput.Instance.LeftGrip = LeftGripAction.action.ReadValue<float>();
+                XRInput.Instance.LeftGripDown = prevVal < XRInput.Instance.DownThreshold && XRInput.Instance.LeftGrip >= XRInput.Instance.DownThreshold;
             }
 
             if (LeftThumbNearAction != null)
             {
-                InputBridge.Instance.LeftThumbNear = LeftThumbNearAction.action.ReadValue<float>() == 1;
+                XRInput.Instance.LeftThumbNear = LeftThumbNearAction.action.ReadValue<float>() == 1;
             }
 
             if (RightTriggerAction != null)
             {
                 float rightTriggerVal = RightTriggerAction.action.ReadValue<float>();
 
-                prevVal = InputBridge.Instance.RightTrigger;
-                InputBridge.Instance.RightTrigger = RightTriggerAction.action.ReadValue<float>();
-                InputBridge.Instance.RightTriggerDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.RightTrigger >= InputBridge.Instance.DownThreshold;
-                InputBridge.Instance.RightTriggerUp = prevVal > InputBridge.Instance.DownThreshold && InputBridge.Instance.RightTrigger < InputBridge.Instance.DownThreshold;
+                prevVal = XRInput.Instance.RightTrigger;
+                XRInput.Instance.RightTrigger = RightTriggerAction.action.ReadValue<float>();
+                XRInput.Instance.RightTriggerDown = prevVal < XRInput.Instance.DownThreshold && XRInput.Instance.RightTrigger >= XRInput.Instance.DownThreshold;
+                XRInput.Instance.RightTriggerUp = prevVal > XRInput.Instance.DownThreshold && XRInput.Instance.RightTrigger < XRInput.Instance.DownThreshold;
             }
 
             if (RightGripAction != null)
             {
-                prevVal = InputBridge.Instance.RightGrip;
-                InputBridge.Instance.RightGrip = RightGripAction.action.ReadValue<float>();
-                InputBridge.Instance.RightGripDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.RightGrip >= InputBridge.Instance.DownThreshold;
+                prevVal = XRInput.Instance.RightGrip;
+                XRInput.Instance.RightGrip = RightGripAction.action.ReadValue<float>();
+                XRInput.Instance.RightGripDown = prevVal < XRInput.Instance.DownThreshold && XRInput.Instance.RightGrip >= XRInput.Instance.DownThreshold;
             }
 
             if (RightThumbNearAction)
             {
-                InputBridge.Instance.RightThumbNear = RightThumbNearAction.action.ReadValue<float>() == 1;
+                XRInput.Instance.RightThumbNear = RightThumbNearAction.action.ReadValue<float>() == 1;
             }
         }
 
@@ -513,7 +514,7 @@ namespace Unity.XR.CoreUtils
                 }
             }
 
-            InputBridge.OnInputsUpdated += UpdateInputs;
+            XRInput.OnInputsUpdated += UpdateInputs;
             Application.onBeforeRender += OnBeforeRender;
         }
 
@@ -543,7 +544,7 @@ namespace Unity.XR.CoreUtils
 
             ResetAll();
 
-            InputBridge.OnInputsUpdated -= UpdateInputs;
+            XRInput.OnInputsUpdated -= UpdateInputs;
         }
 
         bool isQuitting = false;

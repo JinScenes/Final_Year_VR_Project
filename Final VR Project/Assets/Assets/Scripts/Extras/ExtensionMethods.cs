@@ -1,15 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 
-public static class ExtensionMethods {
-
-    /// <summary>
-    /// Returns true if given key is held down. Calls  "InputBridge.Instance.GetControllerBindingValue(binding)"
-    /// </summary>
-    /// <param name="binding"></param>
-    public static bool GetDown(this ControllerBinding binding) {
-        return InputBridge.Instance.GetControllerBindingValue(binding);
+public static class ExtensionMethods
+{
+    public static bool GetDown(this ControllerBinding binding)
+    {
+        return XRInput.Instance.GetControllerBindingValue(binding);
     }
 }
 

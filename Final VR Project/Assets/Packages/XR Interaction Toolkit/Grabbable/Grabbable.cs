@@ -483,7 +483,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         private bool _canBeMoved;
 
         protected Transform originalParent;
-        protected InputBridge input;
+        protected XRInput input;
         protected ConfigurableJoint connectedJoint;
         protected Vector3 previousPosition;
         protected float lastItemTeleportTime;
@@ -533,7 +533,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         {
             col = GetComponent<Collider>();
             rb = GetComponent<Rigidbody>();
-            input = InputBridge.Instance;
+            input = XRInput.Instance;
 
             events = GetComponents<GrabbableEvents>().ToList();
             collisions = new List<Collider>();
@@ -972,7 +972,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
             {
                 if (!initiatedFlick)
                 {
-                    if (InputBridge.Instance.GetControllerAngularVelocity(flyingTo.HandSide).magnitude >= flickStartVelocity)
+                    if (XRInput.Instance.GetControllerAngularVelocity(flyingTo.HandSide).magnitude >= flickStartVelocity)
                     {
                         if (Time.time - lastFlickTime >= 0.1f)
                         {

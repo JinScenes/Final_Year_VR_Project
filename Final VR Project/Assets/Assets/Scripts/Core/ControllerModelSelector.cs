@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine;
 
 public class ControllerModelSelector : MonoBehaviour
 {
@@ -7,12 +8,12 @@ public class ControllerModelSelector : MonoBehaviour
 
     private void OnEnable()
     {
-        InputBridge.OnControllerFound += UpdateControllerModel;
+        XRInput.OnControllerFound += UpdateControllerModel;
     }
 
     public void UpdateControllerModel()
     {
-        string controllerName = InputBridge.Instance.GetControllerName().ToLower();
+        string controllerName = XRInput.Instance.GetControllerName().ToLower();
 
         if (controllerName.Contains("quest 2") || controllerName.Contains("quest 3"))
         {
@@ -43,7 +44,7 @@ public class ControllerModelSelector : MonoBehaviour
             return;
         }
 
-        InputBridge.OnControllerFound -= UpdateControllerModel;
+        XRInput.OnControllerFound -= UpdateControllerModel;
     }
 
     private void OnApplicationQuit()

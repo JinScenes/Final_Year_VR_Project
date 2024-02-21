@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +11,10 @@ public class PlayerScaler : MonoBehaviour {
 
     // Scale using Right Thumbstick axis
     void Update() {
-        if (InputBridge.Instance.RightThumbstickAxis.y < -0.5f || Input.GetKey(KeyCode.H)) {
+        if (XRInput.Instance.RightThumbstickAxis.y < -0.5f || Input.GetKey(KeyCode.H)) {
             Scale -= Time.deltaTime * 1;
         }
-        else if (InputBridge.Instance.RightThumbstickAxis.y > 0.5f || Input.GetKey(KeyCode.J)) {
+        else if (XRInput.Instance.RightThumbstickAxis.y > 0.5f || Input.GetKey(KeyCode.J)) {
             Scale += Time.deltaTime * 1;
         }
 

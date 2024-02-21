@@ -119,11 +119,11 @@ public class MagazineSlide : MonoBehaviour {
 
         Grabber nearestGrabber = grabClipArea.GetOpenGrabber();
         if (grabClipArea != null && nearestGrabber != null) {
-            if (nearestGrabber.HandSide == ControllerHand.Left && InputBridge.Instance.LeftGripDown) {
+            if (nearestGrabber.HandSide == ControllerHand.Left && XRInput.Instance.LeftGripDown) {
                 // grab clip
                 OnGrabClipArea(nearestGrabber);
             }
-            else if (nearestGrabber.HandSide == ControllerHand.Right && InputBridge.Instance.RightGripDown) {
+            else if (nearestGrabber.HandSide == ControllerHand.Right && XRInput.Instance.RightGripDown) {
                 OnGrabClipArea(nearestGrabber);
             }
         }

@@ -8,12 +8,12 @@ public abstract class GrabbableEvents : MonoBehaviour
     protected Grabbable grab;
     protected Grabber thisGrabber;
 
-    protected InputBridge input;
+    protected XRInput input;
 
     protected virtual void Awake()
     {
         grab = GetComponent<Grabbable>();
-        input = InputBridge.Instance;
+        input = XRInput.Instance;
     }
 
     public virtual void OnGrab(Grabber grabber)

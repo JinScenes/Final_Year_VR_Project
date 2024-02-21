@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
+using System;
 
 public enum MovementVector {
     HMD,
@@ -242,7 +242,7 @@ public class SmoothLocomotion : MonoBehaviour {
         // Check raw input bindings
         if(inputAxis != null) {
             for (int i = 0; i < inputAxis.Count; i++) {
-                Vector3 axisVal = InputBridge.Instance.GetInputAxisValue(inputAxis[i]);
+                Vector3 axisVal = XRInput.Instance.GetInputAxisValue(inputAxis[i]);
 
                 // Always take this value if our last entry was 0. 
                 if (lastAxisValue == Vector3.zero) {
@@ -446,7 +446,7 @@ public class SmoothLocomotion : MonoBehaviour {
 
         // Check for bound controller button
         for (int x = 0; x < JumpInput.Count; x++) {
-            if (InputBridge.Instance.GetControllerBindingValue(JumpInput[x])) {
+            if (XRInput.Instance.GetControllerBindingValue(JumpInput[x])) {
                 return true;
             }
         }
@@ -463,7 +463,7 @@ public class SmoothLocomotion : MonoBehaviour {
 
         // Check for bound controller button
         for (int x = 0; x < SprintInput.Count; x++) {
-            if (InputBridge.Instance.GetControllerBindingValue(SprintInput[x])) {
+            if (XRInput.Instance.GetControllerBindingValue(SprintInput[x])) {
                 return true;
             }
         }

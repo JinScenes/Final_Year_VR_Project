@@ -50,7 +50,7 @@ public class Grabber : MonoBehaviour
 
     GrabbablesInTrigger grabsInTrigger;
     Rigidbody rb;
-    InputBridge input;
+    XRInput input;
     ConfigurableJoint joint;
 
     [Header("Grabber Events")]
@@ -74,7 +74,7 @@ public class Grabber : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         grabsInTrigger = GetComponent<GrabbablesInTrigger>();
         joint = GetComponent<ConfigurableJoint>();
-        input = InputBridge.Instance;
+        input = XRInput.Instance;
 
         if (joint == null)
         {

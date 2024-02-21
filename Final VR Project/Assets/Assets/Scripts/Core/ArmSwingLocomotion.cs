@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine;
 
 public class ArmSwingLocomotion : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class ArmSwingLocomotion : MonoBehaviour
     {
         if (LeftInputReady())
         {
-            leftVelocity = InputBridge.Instance.GetControllerVelocity(ControllerHand.Left).magnitude;
+            leftVelocity = XRInput.Instance.GetControllerVelocity(ControllerHand.Left).magnitude;
         }
         else
         {
@@ -59,7 +60,7 @@ public class ArmSwingLocomotion : MonoBehaviour
 
         if (RightInputReady())
         {
-            rightVelocity = InputBridge.Instance.GetControllerVelocity(ControllerHand.Right).magnitude;
+            rightVelocity = XRInput.Instance.GetControllerVelocity(ControllerHand.Right).magnitude;
         }
         else
         {
@@ -70,12 +71,12 @@ public class ArmSwingLocomotion : MonoBehaviour
     public virtual bool LeftInputReady()
     {
 
-        if (MustBeHoldingLeftGrip && InputBridge.Instance.LeftGrip < 0.1f)
+        if (MustBeHoldingLeftGrip && XRInput.Instance.LeftGrip < 0.1f)
         {
             return false;
         }
 
-        if (MustBeHoldingLeftTrigger && InputBridge.Instance.LeftTrigger < 0.1f)
+        if (MustBeHoldingLeftTrigger && XRInput.Instance.LeftTrigger < 0.1f)
         {
             return false;
         }
@@ -86,12 +87,12 @@ public class ArmSwingLocomotion : MonoBehaviour
     public virtual bool RightInputReady()
     {
 
-        if (MustBeHoldingRightGrip && InputBridge.Instance.RightGrip < 0.1f)
+        if (MustBeHoldingRightGrip && XRInput.Instance.RightGrip < 0.1f)
         {
             return false;
         }
 
-        if (MustBeHoldingRightTrigger && InputBridge.Instance.RightTrigger < 0.1f)
+        if (MustBeHoldingRightTrigger && XRInput.Instance.RightTrigger < 0.1f)
         {
             return false;
         }

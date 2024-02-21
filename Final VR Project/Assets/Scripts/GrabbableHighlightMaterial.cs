@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GrabbableHighlightMaterial : GrabbableEvents

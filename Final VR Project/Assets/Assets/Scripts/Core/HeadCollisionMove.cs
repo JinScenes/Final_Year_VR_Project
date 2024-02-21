@@ -1,53 +1,46 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+public class HeadCollisionMove : MonoBehaviour
+{
+    [SerializeField] private GameObject cameraRig;
+    [SerializeField] private Transform centerEyeAnchor;
 
-public class HeadCollisionMove : MonoBehaviour {
+    [SerializeField] private string worldTag = "World";
 
-    [Tooltip("Enable collision? Set to false if you don't want to enable this")]
-    public bool CollisionEnabled = true;
+    [SerializeField] private bool CollisionEnabled = true;
+    [SerializeField] private bool OnlyCollideAgainstWorld = true;
 
-    [Tooltip("Only collide against the specified World Tag?")]
-    public bool OnlyCollideAgainstWorld = true;
+    private void OnCollisionStay(Collision collision)
+    {
 
-    [SerializeField]
-    private string worldTag = "World";
-
-    [SerializeField]
-    private GameObject cameraRig;
-
-    [SerializeField]
-    private Transform centerEyeAnchor;
-
-    void Start() {
-            
-    }
-
-    void OnCollisionStay(Collision collision) {
-
-        // Component may not be enabled
-        if (!CollisionEnabled) {
+        if (!CollisionEnabled)
+        {
             return;
         }
 
-        // Additionally check for world collision
-        if (OnlyCollideAgainstWorld && !collision.collider.CompareTag(worldTag)) {
+        if (OnlyCollideAgainstWorld && !collision.collider.CompareTag(worldTag))
+        {
             return;
         }
 
         StartCoroutine(PushBackPlayer());
     }
 
-    void OnCollisionExit(Collision collision) {
-        if (OnlyCollideAgainstWorld && !collision.collider.CompareTag(worldTag)) {
+    private void OnCollisionExit(Collision collision)
+    {
+        if (OnlyCollideAgainstWorld && !collision.collider.CompareTag(worldTag))
+        {
             return;
         }
 
         StopCoroutine(PushBackPlayer());
     }
 
-    IEnumerator PushBackPlayer() {
-        if (!CollisionEnabled) {
+    private IEnumerator PushBackPlayer()
+    {
+        if (!CollisionEnabled)
+        {
             yield break;
         }
 

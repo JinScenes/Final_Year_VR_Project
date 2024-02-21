@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(InputBridge))]
+[CustomEditor(typeof(XRInput))]
 public class InputBridgeEditor : Editor 
 {
 
-    InputBridge inputBridge;
+    XRInput inputBridge;
 
     SerializedProperty inputSource;
     SerializedProperty actionSet;
@@ -28,7 +27,7 @@ public class InputBridgeEditor : Editor
 
     public override void OnInspectorGUI() {
 
-        inputBridge = (InputBridge)target;
+        inputBridge = (XRInput)target;
 
         setupRichText();
 

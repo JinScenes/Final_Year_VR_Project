@@ -1,4 +1,6 @@
-﻿public class GrabbableHighlight : GrabbableEvents
+﻿using UnityEngine.XR.Interaction.Toolkit;
+
+public class GrabbableHighlight : GrabbableEvents
 {
     public bool HighlightOnGrabbable = true;
     public bool HighlightOnRemoteGrabbable = true;

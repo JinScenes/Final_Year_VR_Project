@@ -137,7 +137,7 @@ public class VehicleController : MonoBehaviour {
     public virtual void GetTorqueInputFromTriggers() {
         // Right Trigger Accelerate, Left Trigger Brake
         if(isHoldingSteering) {
-            SetMotorTorqueInput(InputBridge.Instance.RightTrigger - InputBridge.Instance.LeftTrigger);
+            SetMotorTorqueInput(XRInput.Instance.RightTrigger - XRInput.Instance.LeftTrigger);
         }
         // Nothing Holding the steering wheel. Set torque to 0
         else if(wasHoldingSteering && !isHoldingSteering) {

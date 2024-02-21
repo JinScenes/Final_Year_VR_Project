@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-#if XRIT_INTEGRATION
-using UnityEngine.XR.Interaction.Toolkit;
-#endif
+using UnityEngine;
 
 public class UIPointer : MonoBehaviour {
 

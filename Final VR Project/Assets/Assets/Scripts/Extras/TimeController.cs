@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -78,7 +78,7 @@ public class TimeController : MonoBehaviour {
     /// <returns></returns>
     public virtual bool SlowTimeInputDown() {
         // Check default Y Key
-        if ((YKeySlowsTime && InputBridge.Instance.YButton)) {
+        if ((YKeySlowsTime && XRInput.Instance.YButton)) {
             return true;
         }
             
@@ -105,7 +105,7 @@ public class TimeController : MonoBehaviour {
 
             // Haptics
             if(SpeedupTimeClip) {
-                InputBridge.Instance.VibrateController(0.1f, 0.2f, SpeedupTimeClip.length, ControllerHand.Left);
+                XRInput.Instance.VibrateController(0.1f, 0.2f, SpeedupTimeClip.length, ControllerHand.Left);
             }
 
             Time.timeScale = SlowTimeScale;
@@ -132,7 +132,7 @@ public class TimeController : MonoBehaviour {
         audioSource.clip = SpeedupTimeClip;
         audioSource.Play();
 
-        InputBridge.Instance.VibrateController(0.1f, 0.2f, SpeedupTimeClip.length, ControllerHand.Left);
+        XRInput.Instance.VibrateController(0.1f, 0.2f, SpeedupTimeClip.length, ControllerHand.Left);
 
         // Wait for a split second before resuming time again
         yield return new WaitForSeconds(0.35f);

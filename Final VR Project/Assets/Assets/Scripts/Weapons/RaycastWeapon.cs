@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Collections;
 using UnityEngine.Events;
+using UnityEngine;
 
 public enum FiringType
 {
@@ -151,7 +152,7 @@ public class RaycastWeapon : GrabbableEvents
     {
         for (int x = 0; x < ReleaseSlideInput.Count; x++)
         {
-            if (InputBridge.Instance.GetGrabbedControllerBinding(ReleaseSlideInput[x], thisGrabber.HandSide))
+            if (XRInput.Instance.GetGrabbedControllerBinding(ReleaseSlideInput[x], thisGrabber.HandSide))
             {
                 UnlockSlide();
                 break;
@@ -163,7 +164,7 @@ public class RaycastWeapon : GrabbableEvents
     {
         for (int x = 0; x < EjectInput.Count; x++)
         {
-            if (InputBridge.Instance.GetGrabbedControllerBinding(EjectInput[x], thisGrabber.HandSide))
+            if (XRInput.Instance.GetGrabbedControllerBinding(EjectInput[x], thisGrabber.HandSide))
             {
                 EjectMagazine();
                 break;
@@ -177,7 +178,7 @@ public class RaycastWeapon : GrabbableEvents
         {
             for (int x = 0; x < ReloadInput.Count; x++)
             {
-                if (InputBridge.Instance.GetGrabbedControllerBinding(EjectInput[x], thisGrabber.HandSide))
+                if (XRInput.Instance.GetGrabbedControllerBinding(EjectInput[x], thisGrabber.HandSide))
                 {
                     Reload();
                     break;

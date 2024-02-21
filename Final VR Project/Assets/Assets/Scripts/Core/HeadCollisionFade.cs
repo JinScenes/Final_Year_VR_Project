@@ -1,32 +1,30 @@
 ﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
 public class HeadCollisionFade : MonoBehaviour
 {
+    [SerializeField] private Transform DistanceTransform;
+    
+    [SerializeField] private float FadeDistance = 0.1f;
+    [SerializeField] private float FadeOutDistance = 0.045f;
+    [SerializeField] private float MinFade = 0.5f;
+    [SerializeField] private float MaxFade = 0.95f;
+    [SerializeField] private float FadeSpeed = 1f;
 
-    ScreenFader fader;
+    [SerializeField] private bool CheckOnlyIfHMDActive = false;
 
-    public float FadeDistance = 0.1f;
-    public float FadeOutDistance = 0.045f;
-    public float MinFade = 0.5f;
-    public float MaxFade = 0.95f;
-    public float FadeSpeed = 1f;
+    bool IgnoreHeldGrabbables = true;
 
-    [Tooltip("Only fade the screen if the HMD is registering as Active")]
-    public bool CheckOnlyIfHMDActive = false;
-
-    public bool IgnoreHeldGrabbables = true;
-
-    public Transform DistanceTransform;
     public int cols = 0;
+    
     private float currentFade = 0;
     private float lastFade = 0;
 
+    private ScreenFader fader;
     public List<Collider> collisions;
 
-    void Start()
+    private void Start()
     {
         if (Camera.main)
         {
@@ -34,13 +32,11 @@ public class HeadCollisionFade : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-
         bool headColliding = false;
 
-        // Check for Head Collisions if hmd equipped
-        if (CheckOnlyIfHMDActive == false || InputBridge.Instance.HMDActive)
+        if (CheckOnlyIfHMDActive == false || XRInput.Instance.HMDActive)
         {
             for (int x = 0; x < collisions.Count; x++)
             {
@@ -63,7 +59,6 @@ public class HeadCollisionFade : MonoBehaviour
 
         if (fader)
         {
-            // Too far away, fade to black
             if (FadeDistance > FadeOutDistance)
             {
                 currentFade += Time.deltaTime * FadeSpeed;
@@ -78,7 +73,6 @@ public class HeadCollisionFade : MonoBehaviour
                     currentFade = MaxFade;
                 }
 
-                // Only update fade if value has changed
                 if (currentFade != lastFade)
                 {
                     fader.SetFadeLevel(currentFade);
@@ -86,7 +80,6 @@ public class HeadCollisionFade : MonoBehaviour
                 }
 
             }
-            // Fade back
             else
             {
                 currentFade -= Time.deltaTime * FadeSpeed;
@@ -96,7 +89,6 @@ public class HeadCollisionFade : MonoBehaviour
                     currentFade = 0;
                 }
 
-                // Only update fade if value has changed
                 if (currentFade != lastFade)
                 {
                     fader.SetFadeLevel(currentFade);
@@ -106,23 +98,20 @@ public class HeadCollisionFade : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
+    private void OnCollisionEnter(Collision col)
     {
         if (collisions == null)
         {
             collisions = new List<Collider>();
         }
 
-        // Ignore Grabbable Physics objects that are being held
         bool ignorePhysics = IgnoreHeldGrabbables && col.gameObject.GetComponent<Grabbable>() != null && col.gameObject.GetComponent<Grabbable>().BeingHeld;
 
-        // Also ignore physics if this object has a joint attached to it
         if (!ignorePhysics && col.collider.GetComponent<Joint>())
         {
             ignorePhysics = true;
         }
 
-        // Ignore the player's capsule collider
         if (!ignorePhysics && col.gameObject.GetComponent<CharacterController>() != null)
         {
             ignorePhysics = true;
@@ -141,7 +130,7 @@ public class HeadCollisionFade : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision col)
+    private void OnCollisionExit(Collision col)
     {
         if (collisions == null)
         {

@@ -1,117 +1,113 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class HingeHelper : GrabbableEvents {
-
+public class HingeHelper : GrabbableEvents
+{
     [Header("Snap Options")]
-    [Tooltip("If True the SnapGraphics tranfsorm will have its local Y rotation snapped to the nearest degrees specified in SnapDegrees")]
-    public bool SnapToDegrees = false;
+    [SerializeField] private Transform SnapGraphics;
+    [SerializeField] private AudioClip SnapSound;
 
-    [Tooltip("Snap the Y rotation to the nearest")]
-    public float SnapDegrees = 5f;
+    [SerializeField] private bool SnapToDegrees = false;
 
-    [Tooltip("The Transform of the object to be rotated if SnapToDegrees is true")]
-    public Transform SnapGraphics;
+    [SerializeField] private float SnapDegrees = 5f;
+    [SerializeField] private float RandomizePitch = 0.001f;
+    [SerializeField] private float SnapHaptics = 0.5f;
 
-    [Tooltip("Play this sound on snap")]
-    public AudioClip SnapSound;
-
-    [Tooltip("Randomize pitch of SnapSound by this amount")]
-    public float RandomizePitch = 0.001f;
-
-    [Tooltip("Add haptics amount (0-1) to controller if SnapToDegrees is True. Set this to 0 for no Haptics.")]
-    public float SnapHaptics = 0.5f;
-
-    [Header("Text Label (Optional)")]
-    public Text LabelToUpdate;
+    [SerializeField] private Text LabelToUpdate;
 
     [Header("Change Events")]
-    public FloatEvent onHingeChange;
-    public FloatEvent onHingeSnapChange;
+    [SerializeField] private FloatEvent onHingeChange;
+    [SerializeField] private FloatEvent onHingeSnapChange;
 
-    Rigidbody rigid;
+    private Rigidbody rb;
 
-    private float _lastDegrees = 0;
-    private float _lastSnapDegrees = 0;
+    private float lastDeg = 0;
+    private float lastSnapDeg = 0;
 
-    void Start() {
-        rigid = GetComponent<Rigidbody>();
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update() {
-
-        // Update degrees our transform is representing
+    private void Update()
+    {
         float degrees = getSmoothedValue(transform.localEulerAngles.y);
 
-        // Call event if necessary
-        if(degrees != _lastDegrees) {
+        if (degrees != lastDeg)
+        {
             OnHingeChange(degrees);
         }
 
-        _lastDegrees = degrees;
+        lastDeg = degrees;
 
-        // Check for snapping a graphics transform
         float nearestSnap = getSmoothedValue(Mathf.Round(degrees / SnapDegrees) * SnapDegrees);
 
-        // If snapping update graphics and call events
-        if (SnapToDegrees) {
+        if (SnapToDegrees)
+        {
 
-            // Check for snap event
-            if (nearestSnap != _lastSnapDegrees) {
+            if (nearestSnap != lastSnapDeg)
+            {
                 OnSnapChange(nearestSnap);
             }
-            _lastSnapDegrees = nearestSnap;
+
+            lastSnapDeg = nearestSnap;
         }
 
-        // Update label used for display or debugging
-        if (LabelToUpdate) {
+        if (LabelToUpdate)
+        {
             float val = getSmoothedValue(SnapToDegrees ? nearestSnap : degrees);
             LabelToUpdate.text = val.ToString("n0");
         }
     }
 
-    public void OnSnapChange(float yAngle) {
-
-        if(SnapGraphics) {
+    public void OnSnapChange(float yAngle)
+    {
+        if (SnapGraphics)
+        {
             SnapGraphics.localEulerAngles = new Vector3(SnapGraphics.localEulerAngles.x, yAngle, SnapGraphics.localEulerAngles.z);
         }
 
-        if(SnapSound) {
+        if (SnapSound)
+        {
             XRManager.Instance.PlaySpatialClipAt(SnapSound, transform.position, 1f, 1f, RandomizePitch);
         }
 
-        if(grab.BeingHeld && SnapHaptics > 0) {
-            InputBridge.Instance.VibrateController(0.5f, SnapHaptics, 0.01f, thisGrabber.HandSide);                    
+        if (grab.BeingHeld && SnapHaptics > 0)
+        {
+            XRInput.Instance.VibrateController(0.5f, SnapHaptics, 0.01f, thisGrabber.HandSide);
         }
 
-        // Call event
-        if (onHingeSnapChange != null) {
+        if (onHingeSnapChange != null)
+        {
             onHingeSnapChange.Invoke(yAngle);
         }
     }
 
-    public override void OnRelease() {
-        rigid.velocity = Vector3.zero;
-        rigid.angularVelocity = Vector3.zero;
+    public override void OnRelease()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         base.OnRelease();
     }
 
-    public void OnHingeChange(float hingeAmount) {
-        // Call event
-        if (onHingeChange != null) {
+    public void OnHingeChange(float hingeAmount)
+    {
+        if (onHingeChange != null)
+        {
             onHingeChange.Invoke(hingeAmount);
         }
     }
 
-    float getSmoothedValue(float val) {
-        if (val < 0) {
+    private float getSmoothedValue(float val)
+    {
+        if (val < 0)
+        {
             val = 360 - val;
         }
-        if (val == 360) {
+        if (val == 360)
+        {
             val = 0;
         }
 

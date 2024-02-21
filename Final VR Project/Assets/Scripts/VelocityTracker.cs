@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VelocityTracker : MonoBehaviour
@@ -80,7 +81,7 @@ public class VelocityTracker : MonoBehaviour
             return this.vel;
         }
 
-        Vector3 vel = InputBridge.Instance.GetControllerVelocity(controllerHand);
+        Vector3 vel = XRInput.Instance.GetControllerVelocity(controllerHand);
 
         if (vel == null || vel == Vector3.zero)
         {

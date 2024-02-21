@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HandModelSelector : MonoBehaviour
@@ -9,10 +10,7 @@ public class HandModelSelector : MonoBehaviour
     [SerializeField] private Transform RightHandGFXHolder;
     [SerializeField] private Transform LeftHandGFXHolder;
 
-    public int DefaultHandsModel = 1;
-    private int _selectedHandGFX = 0;
-
-    public bool LoadHandSelectionFromPrefs = false;
+    [SerializeField] private int DefaultHandsModel = 1;
 
     private UIPointer uiPoint;
 
@@ -21,6 +19,9 @@ public class HandModelSelector : MonoBehaviour
 
     private List<Transform> rightHandModels = default;
     private Transform activatedRightModel = default;
+
+    private int _selectedHandGFX = 0;
+    public bool LoadHandSelectionFromPrefs = false;
 
     private void Start()
     {
@@ -65,7 +66,6 @@ public class HandModelSelector : MonoBehaviour
     public void ChangeHandsModel(int childIndex, bool save = false)
     {
 
-        // Deactivate any previous models
         if (activatedLeftModel != null)
         {
             activatedLeftModel.gameObject.SetActive(false);

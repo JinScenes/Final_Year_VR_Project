@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class GrabbableUnityEvents : GrabbableEvents

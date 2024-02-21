@@ -1,4 +1,5 @@
-﻿using UnityEngine.XR;
+﻿using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR;
 using UnityEngine;
 
 public class TrackedDevice : MonoBehaviour
@@ -47,15 +48,15 @@ public class TrackedDevice : MonoBehaviour
 
             if (Device == TrackableDevice.HMD)
             {
-                deviceToTrack = InputBridge.Instance.GetHMD();
+                deviceToTrack = XRInput.Instance.GetHMD();
             }
             else if (Device == TrackableDevice.LeftController)
             {
-                deviceToTrack = InputBridge.Instance.GetLeftController();
+                deviceToTrack = XRInput.Instance.GetLeftController();
             }
             else if (Device == TrackableDevice.RightController)
             {
-                deviceToTrack = InputBridge.Instance.GetRightController();
+                deviceToTrack = XRInput.Instance.GetRightController();
             }
         }
     }
@@ -67,18 +68,18 @@ public class TrackedDevice : MonoBehaviour
         {
             if (Device == TrackableDevice.HMD)
             {
-                transform.localPosition = currentLocalPosition = InputBridge.Instance.GetHMDLocalPosition();
-                transform.localRotation = currentLocalRotation = InputBridge.Instance.GetHMDLocalRotation();
+                transform.localPosition = currentLocalPosition = XRInput.Instance.GetHMDLocalPosition();
+                transform.localRotation = currentLocalRotation = XRInput.Instance.GetHMDLocalRotation();
             }
             else if (Device == TrackableDevice.LeftController)
             {
-                transform.localPosition = currentLocalPosition = InputBridge.Instance.GetControllerLocalPosition(ControllerHand.Left);
-                transform.localRotation = currentLocalRotation = InputBridge.Instance.GetControllerLocalRotation(ControllerHand.Left);
+                transform.localPosition = currentLocalPosition = XRInput.Instance.GetControllerLocalPosition(ControllerHand.Left);
+                transform.localRotation = currentLocalRotation = XRInput.Instance.GetControllerLocalRotation(ControllerHand.Left);
             }
             else if (Device == TrackableDevice.RightController)
             {
-                transform.localPosition = currentLocalPosition = InputBridge.Instance.GetControllerLocalPosition(ControllerHand.Right);
-                transform.localRotation = currentLocalRotation = InputBridge.Instance.GetControllerLocalRotation(ControllerHand.Right);
+                transform.localPosition = currentLocalPosition = XRInput.Instance.GetControllerLocalPosition(ControllerHand.Right);
+                transform.localRotation = currentLocalRotation = XRInput.Instance.GetControllerLocalRotation(ControllerHand.Right);
             }
         }
     }

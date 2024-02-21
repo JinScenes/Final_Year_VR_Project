@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class ControllerOffsetHelper : MonoBehaviour {
 
@@ -36,7 +36,7 @@ public class ControllerOffsetHelper : MonoBehaviour {
 
         while(string.IsNullOrEmpty(thisControllerModel)) {
 
-            thisControllerModel = InputBridge.Instance.GetControllerName();
+            thisControllerModel = XRInput.Instance.GetControllerName();
 
             yield return new WaitForEndOfFrame();
         }
