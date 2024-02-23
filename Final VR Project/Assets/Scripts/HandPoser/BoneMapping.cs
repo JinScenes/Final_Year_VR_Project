@@ -9,10 +9,13 @@ public class BoneObject
 
 public class BoneMapping : MonoBehaviour
 {
-    [Range(0f, 1f), SerializeField] private float Weight = 1f;
-    [SerializeField] private BoneObject[] Fingers;
+    [Range(0f, 1f)]
+    public float Weight = 1f;
 
-    private bool ShowGizmos = true;
+    public BoneObject[] Fingers;
+
+    [Header("Debug")]
+    public bool ShowGizmos = true;
 
     private void Update()
     {
@@ -32,14 +35,14 @@ public class BoneMapping : MonoBehaviour
 
             for (int i = 0; i < finger.destinationBones.Length - 1; i++)
             {
-                Quaternion f = Quaternion.Inverse(finger.destinationBones[i].rotation) * finger.targetBones[i].rotation;
+                Quaternion _finger = Quaternion.Inverse(finger.destinationBones[i].rotation) * finger.targetBones[i].rotation;
 
                 if (Weight < 1f)
                 {
-                    f = Quaternion.Slerp(Quaternion.identity, f, Weight);
+                    _finger = Quaternion.Slerp(Quaternion.identity, _finger, Weight);
                 }
 
-                finger.destinationBones[i].rotation *= f;
+                finger.destinationBones[i].rotation *= _finger;
             }
         }
     }
@@ -78,6 +81,7 @@ public class BoneMapping : MonoBehaviour
 
             for (int i = 0; i < finger.destinationBones.Length; i++)
             {
+
                 if (finger.destinationBones[i] == null)
                 {
                     continue;

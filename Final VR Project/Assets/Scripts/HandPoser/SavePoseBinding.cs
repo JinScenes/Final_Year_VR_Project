@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class SavePoseBinding : MonoBehaviour
 {
-    [SerializeField] private InputAction SaveInput;
-    [SerializeField] private string SaveNamePrefix = "HandPose";
+    [Header("Save Input")]
+    public InputAction SaveInput;
 
+    [Header("Save name prefix")]
+    public string SaveNamePrefix = "HandPose";
+
+    [Header("Debug")]
     public bool ShowKeybindingToolTip = true;
 
     private HandPoser handPoser;
@@ -33,8 +37,7 @@ public class SavePoseBinding : MonoBehaviour
     {
         if (ShowKeybindingToolTip)
         {
-            GUI.Box(new Rect(20, 20, 480, 24), "Press '<b>" + SaveInput.bindings[0].path +
-                "</b>' to save the current hand pose");
+            GUI.Box(new Rect(20, 20, 480, 24), "Press '<b>" + SaveInput.bindings[0].path + "</b>' to save the current hand pose");
         }
     }
 }

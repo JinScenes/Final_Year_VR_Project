@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using UnityEngine.XR;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class XRTrackedPoseDriver : MonoBehaviour
 {
-
-    [SerializeField] private TrackableXRDevice Device = TrackableXRDevice.HMD;
+    public TrackableXRDevice Device = TrackableXRDevice.HMD;
 
     protected InputDevice deviceToTrack;
 
@@ -37,6 +36,7 @@ public class XRTrackedPoseDriver : MonoBehaviour
     protected virtual void Update()
     {
         RefreshDeviceStatus();
+
         UpdateDevice();
     }
 
@@ -95,6 +95,7 @@ public class XRTrackedPoseDriver : MonoBehaviour
     public Vector3 GetHMDLocalPosition()
     {
         Vector3 localPosition;
+
         GetHMD().TryGetFeatureValue(CommonUsages.devicePosition, out localPosition);
 
         return localPosition;

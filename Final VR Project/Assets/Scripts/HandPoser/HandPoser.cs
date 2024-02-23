@@ -1,33 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class HandPoser : MonoBehaviour
 {
-    public bool ShowGizmos = true;
-
     public string ResourcePath = "Assets/Resources";
-
     public string PoseName = "Default";
 
-    [Tooltip("The currently selected hand pose. Change this to automatically update the pose in Update")]
     public HandPose CurrentPose;
 
     [Header("Animation Properties")]
-    [Tooltip("The speed at which to lerp the bones when changing hand poses")]
     public float AnimationSpeed = 15f;
 
-    [Tooltip("If true the local rotation of each bone will be updated while changing hand poses. This should generally be true if you are adjusting a hand pose.")]
     public bool UpdateJointRotations = true;
-
-    [Tooltip("If true the local position of each bone will be updated while changing hand poses. Typically this will be false as joints only adjust their rotations.")]
     public bool UpdateJointPositions = false;
-
-    [Tooltip("If true the local position of the wrist will be updated. Useful if you need to move the entire hand.")]
     public bool UpdateWristPosition = true;
 
-    // Hand Pose Transform Definitions
     public HandPoseDefinition HandPoseJoints
     {
         get
@@ -44,12 +32,13 @@ public class HandPoser : MonoBehaviour
     public List<Transform> PinkyJoints;
     public List<Transform> OtherJoints;
 
-    HandPose previousPose;
-    bool doSingleAnimation;
-
+    private HandPose previousPose;
+    private bool doSingleAnimation;
 
     private float editorAnimationTime = 0f;
     private float maxEditorAnimationTime = 2f;
+
+    public bool ShowGizmos = true;
     public bool ContinuousUpdate = false;
 
     private void Start()
@@ -176,11 +165,11 @@ public class HandPoser : MonoBehaviour
             return joints;
         }
 
-        for (int i = 0; i < jointTransforms.Count; i++)
+        for (int x = 0; x < jointTransforms.Count; x++)
         {
-            if (jointTransforms[i] != null)
+            if (jointTransforms[x] != null)
             {
-                joints.Add(GetJointFromTransform(jointTransforms[i]));
+                joints.Add(GetJointFromTransform(jointTransforms[x]));
             }
         }
 
@@ -274,6 +263,7 @@ public class HandPoser : MonoBehaviour
         {
             if (i < toTransforms.Count)
             {
+
                 if (joints[i] == null || toTransforms[i] == null)
                 {
                     continue;
@@ -307,6 +297,7 @@ public class HandPoser : MonoBehaviour
 
     public virtual void SavePoseAsScriptablObject(string poseName)
     {
+
         string fileName = poseName + ".asset";
 
         var poseObject = GetHandPoseScriptableObject();
@@ -396,11 +387,11 @@ public class HandPoser : MonoBehaviour
     public virtual void ResetEditorHandles()
     {
         EditorHandle[] handles = GetComponentsInChildren<EditorHandle>();
-        for (int x = 0; x < handles.Length; x++)
+        for (int i = 0; i < handles.Length; i++)
         {
-            if (handles[x] != null && handles[x].gameObject != null)
+            if (handles[i] != null && handles[i].gameObject != null)
             {
-                GameObject.DestroyImmediate((handles[x]));
+                GameObject.DestroyImmediate((handles[i]));
             }
         }
     }

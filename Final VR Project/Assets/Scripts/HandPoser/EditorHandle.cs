@@ -9,12 +9,13 @@ public class EditorHandle : MonoBehaviour
 
     void OnEnable()
     {
-        this.gameObject.hideFlags = HideFlags.None;
-        this.gameObject.GetComponent<EditorHandle>().hideFlags = HideFlags.HideInInspector;
+        gameObject.hideFlags = HideFlags.None;
+        gameObject.GetComponent<EditorHandle>().hideFlags = HideFlags.HideInInspector;
     }
 
     void OnDrawGizmos()
     {
+
         var outlineColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, BaseColor.a - 0.025f);
         var innerColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, BaseColor.a);
         var sphereColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, 0.01f);

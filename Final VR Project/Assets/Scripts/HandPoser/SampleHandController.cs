@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.XR;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class SampleHandController : MonoBehaviour
 {
-    [SerializeField] private ControllerHandedness ControllerSide = ControllerHandedness.Right;
+    public ControllerHandedness ControllerSide = ControllerHandedness.Right;
 
-    [SerializeField] private PoseableObject HeldObject;
-
+    public PoseableObject HeldObject;
     protected bool wasHoldingObject = false;
 
     private Animator handAnimator;
@@ -230,7 +229,7 @@ public class SampleHandController : MonoBehaviour
             getFeatureUsage(controller, CommonUsages.primaryTouch) ||
             getFeatureUsage(controller, CommonUsages.secondaryTouch) ||
             getFeatureUsage(controller, CommonUsages.primary2DAxisTouch);
-        #pragma warning restore 0618
+            #pragma warning restore 0618
     }
 
     public virtual bool GetIndexIsNear()

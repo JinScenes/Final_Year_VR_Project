@@ -7,11 +7,12 @@ using UnityEngine;
 public class AutoPoser : MonoBehaviour
 {
     [Header("Auto Pose Settings")]
-    [SerializeField] private HandPose OpenHandPose;
-    [SerializeField] private HandPose ClosedHandPose;
+    public HandPose OpenHandPose;
+    public HandPose ClosedHandPose;
 
     [Header("Finger Tip Collision")]
-    [Range(0.0f, 0.02f)] public float FingerTipRadius = 0.00875f;
+    [Range(0.0f, 0.02f)]
+    public float FingerTipRadius = 0.00875f;
 
     public FingerTipCollider ThumbCollider;
     public FingerTipCollider IndexFingerCollider;
@@ -22,15 +23,14 @@ public class AutoPoser : MonoBehaviour
     [Header("Continuous Update")]
     public bool UpdateContinuously = false;
 
-    [SerializeField] private HandPose IdleHandPose;
-
-    [SerializeField] private LayerMask CollisionLayerMask = ~0;
+    public HandPose IdleHandPose;
+    public LayerMask CollisionLayerMask = ~0;
 
     [Header("Editor Gizmos")]
-    [SerializeField] private bool ShowGizmos = true;
+    public bool ShowGizmos = true;
 
-    [SerializeField] private GizmoDisplayType GizmoType = GizmoDisplayType.Wire;
-    [SerializeField] private Color GizmoColor = Color.white;
+    public GizmoDisplayType GizmoType = GizmoDisplayType.Wire;
+    public Color GizmoColor = Color.white;
 
     public HandPoser InspectedPose;
 
@@ -44,8 +44,7 @@ public class AutoPoser : MonoBehaviour
             return collisionPose;
         }
     }
-
-    private HandPoseDefinition collisionPose;
+    HandPoseDefinition collisionPose;
 
     public bool CollisionDetected
     {
@@ -55,14 +54,16 @@ public class AutoPoser : MonoBehaviour
         }
     }
 
+    #region private variables        
     private int _count = 0;
     private bool _thumbHit = false;
     private bool _indexHit = false;
     private bool _middleHit = false;
     private bool _ringHit = false;
     private bool _pinkyHit = false;
+    #endregion
 
-    private void Start()
+    void Start()
     {
         if (InspectedPose == null)
         {
@@ -70,7 +71,7 @@ public class AutoPoser : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         if (Application.isEditor && OpenHandPose == null && ClosedHandPose == null)
         {
@@ -83,6 +84,7 @@ public class AutoPoser : MonoBehaviour
     {
         if (UpdateContinuously)
         {
+
             bool useIdlePose = CollisionDetected == false && IdleHandPose != null && InspectedPose != null;
             if (useIdlePose)
             {
@@ -113,7 +115,6 @@ public class AutoPoser : MonoBehaviour
 
     private IEnumerator updateAutoPoseRoutine()
     {
-
         UpdateContinuously = true;
 
         yield return new WaitForSeconds(0.2f);
@@ -274,6 +275,7 @@ public class AutoPoser : MonoBehaviour
 
         for (int i = 0; i < fromLength; i++)
         {
+
             Transform thisJoint = fromJoints[i];
 
             if (i >= toLength)
@@ -306,6 +308,8 @@ public class AutoPoser : MonoBehaviour
 
     public virtual bool IsValidCollision(Collider col)
     {
+
+        // Ignore Triggers
         if (col == null || col.isTrigger)
         {
             return false;

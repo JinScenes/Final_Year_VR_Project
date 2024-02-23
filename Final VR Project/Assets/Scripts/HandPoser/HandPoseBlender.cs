@@ -15,16 +15,16 @@ public class HandPoseBlender : MonoBehaviour
     [Range(0, 1)] public float PinkyValue = 0f;
     [Range(0, 1)] public float GripValue = 0f;
 
-    private float lastGripValue;
+    private float _lastGripValue;
 
     protected HandPoser handPoser;
 
-    private void Start()
+    void Start()
     {
         handPoser = GetComponent<HandPoser>();
     }
 
-    private void Update()
+    void Update()
     {
         if (UpdatePose)
         {
@@ -72,7 +72,7 @@ public class HandPoseBlender : MonoBehaviour
         UpdateRing(amount);
         UpdatePinky(amount);
 
-        lastGripValue = amount;
+        _lastGripValue = amount;
     }
 
     public virtual void DoIdleBlendPose()
@@ -84,7 +84,7 @@ public class HandPoseBlender : MonoBehaviour
             UpdateThumb(ThumbValue);
             UpdateIndex(IndexValue);
 
-            if (GripValue != lastGripValue)
+            if (GripValue != _lastGripValue)
             {
                 UpdateGrip(GripValue);
             }

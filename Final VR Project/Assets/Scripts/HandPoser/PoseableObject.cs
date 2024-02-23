@@ -13,7 +13,6 @@ public class PoseableObject : MonoBehaviour
 
     [Header("Animator Properties")]
     public int HandPoseID;
-
     public enum PoseType
     {
         HandPose,
