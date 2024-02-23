@@ -1,83 +1,95 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneMapping : MonoBehaviour {
-        
-    [Range(0f, 1f)] 
-    public float Weight = 1f;
+[System.Serializable]
+public class BoneObject
+{
+    public Transform[] targetBones = new Transform[0];
+    public Transform[] destinationBones = new Transform[0];
+}
 
-    public BoneObject[] Fingers;
+public class BoneMapping : MonoBehaviour
+{
+    [Range(0f, 1f), SerializeField] private float Weight = 1f;
+    [SerializeField] private BoneObject[] Fingers;
 
-    [Header("Shown for Debug : ")]
-    public bool ShowGizmos = true;
+    private bool ShowGizmos = true;
 
-    void Update() {
-        if (Weight <= 0f) {
+    private void Update()
+    {
+        if (Weight <= 0f)
+        {
             return;
         }
-            
-        for (int x = 0; x < Fingers.Length; x++) {
+
+        for (int x = 0; x < Fingers.Length; x++)
+        {
             BoneObject finger = Fingers[x];
 
-            if (finger == null) {
+            if (finger == null)
+            {
                 continue;
             }
 
-            for (int i = 0; i < finger.destinationBones.Length - 1; i++) {
-                // Get the relative rotation from the current rotation to the target rotation
+            for (int i = 0; i < finger.destinationBones.Length - 1; i++)
+            {
                 Quaternion f = Quaternion.Inverse(finger.destinationBones[i].rotation) * finger.targetBones[i].rotation;
 
-                // Weight blending
-                if (Weight < 1f) {
+                if (Weight < 1f)
+                {
                     f = Quaternion.Slerp(Quaternion.identity, f, Weight);
                 }
 
-                // Append relative rotation
                 finger.destinationBones[i].rotation *= f;
             }
         }
     }
 
-    void OnDrawGizmos() {
-        if (!ShowGizmos || Fingers == null) {
+    private void OnDrawGizmos()
+    {
+        if (!ShowGizmos || Fingers == null)
+        {
             return;
         }
 
-        for (int x = 0; x < Fingers.Length; x++) {
+        for (int x = 0; x < Fingers.Length; x++)
+        {
             BoneObject finger = Fingers[x];
 
-            for (int i = 0; i < finger.targetBones.Length; i++) {
+            for (int i = 0; i < finger.targetBones.Length; i++)
+            {
 
-                if(finger.targetBones[i] == null) {
+                if (finger.targetBones[i] == null)
+                {
                     continue;
                 }
 
-                // Target Bones
                 Gizmos.color = Color.red;
                 Gizmos.DrawSphere(finger.targetBones[i].position, 0.003f);
 
-                if (i < finger.targetBones.Length - 1) {
-                    if(finger.targetBones[i] == null || finger.targetBones[i + 1] == null) {
+                if (i < finger.targetBones.Length - 1)
+                {
+                    if (finger.targetBones[i] == null || finger.targetBones[i + 1] == null)
+                    {
                         continue;
                     }
                     Gizmos.DrawLine(finger.targetBones[i].position, finger.targetBones[i + 1].position);
                 }
             }
 
-            for (int i = 0; i < finger.destinationBones.Length; i++) {
-
-                // Reference may have been removed from inspector
-                if (finger.destinationBones[i] == null) {
+            for (int i = 0; i < finger.destinationBones.Length; i++)
+            {
+                if (finger.destinationBones[i] == null)
+                {
                     continue;
                 }
 
-                // Avatar Bones
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawSphere(finger.destinationBones[i].position, 0.003f);
 
-                if (i < finger.destinationBones.Length - 1) {
-                    if (finger.destinationBones[i] == null || finger.destinationBones[i + 1] == null) {
+                if (i < finger.destinationBones.Length - 1)
+                {
+                    if (finger.destinationBones[i] == null || finger.destinationBones[i + 1] == null)
+                    {
                         continue;
                     }
                     Gizmos.DrawLine(finger.destinationBones[i].position, finger.destinationBones[i + 1].position);
@@ -85,10 +97,4 @@ public class BoneMapping : MonoBehaviour {
             }
         }
     }
-}
-
-[System.Serializable]
-public class BoneObject {
-    public Transform[] targetBones = new Transform[0];
-    public Transform[] destinationBones = new Transform[0];
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HandPoseBlender : MonoBehaviour 
+public class HandPoseBlender : MonoBehaviour
 {
     public HandPose Pose1;
     public HandPose Pose2;
@@ -17,51 +15,54 @@ public class HandPoseBlender : MonoBehaviour
     [Range(0, 1)] public float PinkyValue = 0f;
     [Range(0, 1)] public float GripValue = 0f;
 
-    private float _lastGripValue;
+    private float lastGripValue;
 
     protected HandPoser handPoser;
 
-    void Start() {
+    private void Start()
+    {
         handPoser = GetComponent<HandPoser>();
     }
 
-    void Update() {
-        if (UpdatePose) {
+    private void Update()
+    {
+        if (UpdatePose)
+        {
             UpdatePoseFromInputs();
         }
     }
 
-    public virtual void UpdatePoseFromInputs() 
+    public virtual void UpdatePoseFromInputs()
     {
         DoIdleBlendPose();
     }
 
-    public void UpdateThumb(float amount) 
+    public void UpdateThumb(float amount)
     {
         handPoser.UpdateJoints(Pose2.Joints.ThumbJoints, handPoser.ThumbJoints, amount);
     }
 
-    public void UpdateIndex(float amount) 
+    public void UpdateIndex(float amount)
     {
         handPoser.UpdateJoints(Pose2.Joints.IndexJoints, handPoser.IndexJoints, amount);
     }
 
-    public void UpdateMiddle(float amount) 
+    public void UpdateMiddle(float amount)
     {
         handPoser.UpdateJoints(Pose2.Joints.MiddleJoints, handPoser.MiddleJoints, MiddleValue);
     }
 
-    public void UpdateRing(float amount) 
+    public void UpdateRing(float amount)
     {
         handPoser.UpdateJoints(Pose2.Joints.RingJoints, handPoser.RingJoints, amount);
     }
 
-    public void UpdatePinky(float amount) 
+    public void UpdatePinky(float amount)
     {
         handPoser.UpdateJoints(Pose2.Joints.PinkyJoints, handPoser.PinkyJoints, amount);
     }
 
-    public void UpdateGrip(float amount) 
+    public void UpdateGrip(float amount)
     {
         MiddleValue = amount;
         RingValue = amount;
@@ -71,23 +72,23 @@ public class HandPoseBlender : MonoBehaviour
         UpdateRing(amount);
         UpdatePinky(amount);
 
-        _lastGripValue = amount;
+        lastGripValue = amount;
     }
 
-    public virtual void DoIdleBlendPose() 
+    public virtual void DoIdleBlendPose()
     {
-        if (Pose1) 
+        if (Pose1)
         {
             handPoser.UpdateHandPose(Pose1, false);
 
             UpdateThumb(ThumbValue);
             UpdateIndex(IndexValue);
 
-            if (GripValue != _lastGripValue) 
+            if (GripValue != lastGripValue)
             {
                 UpdateGrip(GripValue);
             }
-            else 
+            else
             {
                 UpdateMiddle(MiddleValue);
                 UpdateRing(RingValue);
