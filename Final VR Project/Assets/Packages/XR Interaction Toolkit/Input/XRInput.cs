@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace UnityEngine.XR.Interaction.Toolkit
+﻿namespace UnityEngine.XR.Interaction.Toolkit
 {
     using UnityEngine;
     using UnityEngine.XR;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     #region Enums
     public enum ControllerHand {

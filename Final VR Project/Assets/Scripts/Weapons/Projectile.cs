@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float MinForceHit = 0.02f;
     [SerializeField] private float AddRigidForce = 5;
 
-    [Tooltip("Amount of force to apply to a Rigidbody once damaged")]
     public bool IsLaserGuided = false;
 
     [SerializeField] private float MissileForce = 2f;
@@ -27,7 +26,7 @@ public class Projectile : MonoBehaviour
 
     Rigidbody rb;
 
-    Quaternion targetRotation;
+    private Quaternion targetRotation;
 
     void Start()
     {
@@ -101,8 +100,6 @@ public class Projectile : MonoBehaviour
 
     public virtual void doHitEffects(Vector3 pos, Quaternion rot, Collider col)
     {
-
-        // Create FX at impact point / rotation
         if (HitFXPrefab)
         {
             GameObject impact = Instantiate(HitFXPrefab, pos, rot) as GameObject;
@@ -113,7 +110,6 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        // push object if rigidbody
         Rigidbody hitRigid = col.attachedRigidbody;
         if (hitRigid != null)
         {
@@ -121,9 +117,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// A projectile can be converted into a raycast if time reverts to full speed (or more)
-    /// </summary>
     public virtual void MarkAsRaycastBullet()
     {
         _checkRaycast = true;
@@ -132,8 +125,6 @@ public class Projectile : MonoBehaviour
 
     public virtual void DoRayCastProjectile()
     {
-
-        // Raycast to hit
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 25f, ValidLayers, QueryTriggerInteraction.Ignore))
         {
@@ -142,8 +133,6 @@ public class Projectile : MonoBehaviour
         }
 
         _checkRaycast = false;
-
-        // Done with this projectile
         Destroy(this.gameObject);
     }
 
@@ -151,7 +140,6 @@ public class Projectile : MonoBehaviour
     {
         while (this.gameObject.activeSelf && _checkRaycast)
         {
-            // Switch to raycast
             if (Time.timeScale >= 1)
             {
                 DoRayCastProjectile();
@@ -169,7 +157,6 @@ public class Projectile : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
 
-        // Velocity will be controlled in FixedUpdate
         if (rb != null)
         {
             rb.velocity = Vector3.zero;
