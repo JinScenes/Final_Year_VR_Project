@@ -10,12 +10,12 @@ public class Bossinv : MonoBehaviour
     [SerializeField] int bossdraindamage;
     bool drain;
     float time;
-    
+    int i;
     void Awake()
     {
         no = false;
         Dmg = gameObject.GetComponent<Damageable>();
-        
+        StartCoroutine(clock())
     }
 
     
@@ -55,11 +55,10 @@ public class Bossinv : MonoBehaviour
     }
     IEnumerable clock()
     {
-        time = 0;
-        drain = false;
-        time += Time.deltaTime;
-        if (time >= 1)
-        {
+        
+         drain false
+        
+       yield return new WaitForSecondsRealtime(1f);
             drain = true;
         }
         return clock();
