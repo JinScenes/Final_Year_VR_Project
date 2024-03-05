@@ -61,6 +61,13 @@ public class Bossinv : MonoBehaviour
        yield return new WaitForSecondsRealtime(1f);
             drain = true;
         }
+        if (i >= 1000)
+        {
+            StartCoroutine(clock());
+            yield break;
+        }
+        i++;
+        yield return clock();
         return clock();
     }
   
