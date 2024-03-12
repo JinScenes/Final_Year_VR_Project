@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: 5301839007014295461}
   - component: {fileID: 5301839007014295458}
   - component: {fileID: 3392989536292862097}
+  - component: {fileID: 6887983965235850675}
   m_Layer: 10
   m_Name: BowNew
   m_TagString: Untagged
@@ -868,25 +869,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50e263386e3b804a8edea0d5554f63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BowModel: {fileID: 7716067504914776220}
   BowForce: 65
   AlignBowToArrow: 1
-  BowModel: {fileID: 7716067504914776220}
-  ArrowRest: {fileID: 5301839007097663501}
-  CanGrabArrowFromKnock: 1
-  ArrowPrefabName: Arrow2
+  PercentageUI: {fileID: 0}
   ArrowRestLeftHanded: {fileID: 2236771284482069339}
+  ArrowRest: {fileID: 5301839007097663501}
   ArrowKnock: {fileID: 5301839007819092986}
+  CanGrabArrowFromKnock: 1
   IgnoreXPosition: 1
   IgnoreYPosition: 0
   AllowNegativeZ: 0
   CanGrabArrow: 0
   ClosestGrabber: {fileID: 0}
   GrabbedArrow: {fileID: 0}
-  arrowGrabber: {fileID: 0}
   LastValidPosition: {x: 0, y: 0, z: 0}
   MaxStringDistance: 0.65
   StringDistance: 0
-  PercentageUI: {fileID: 0}
   BowUp: {x: 0, y: 0, z: 1}
   AlignBowSpeed: 20
 --- !u!65 &5301839007014295456
@@ -1061,6 +1060,88 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.14690828, z: 0.08765198}
   m_Center: {x: -6.2850215e-17, y: -0.020047687, z: 0.023825996}
+--- !u!114 &6887983965235850675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301839007014295482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directBinaural: 1
+  interpolation: 0
+  perspectiveCorrection: 0
+  distanceAttenuation: 0
+  distanceAttenuationInput: 0
+  distanceAttenuationValue: 1
+  airAbsorption: 1
+  airAbsorptionInput: 0
+  airAbsorptionLow: 1
+  airAbsorptionMid: 1
+  airAbsorptionHigh: 1
+  directivity: 0
+  directivityInput: 0
+  dipoleWeight: 0
+  dipolePower: 0
+  directivityValue: 1
+  occlusion: 1
+  occlusionInput: 0
+  occlusionType: 0
+  occlusionRadius: 1
+  occlusionSamples: 16
+  occlusionValue: 1
+  transmission: 0
+  transmissionType: 0
+  transmissionInput: 0
+  transmissionLow: 1
+  transmissionMid: 1
+  transmissionHigh: 1
+  maxTransmissionSurfaces: 1
+  directMixLevel: 1
+  reflections: 0
+  reflectionsType: 0
+  useDistanceCurveForReflections: 0
+  currentBakedSource: {fileID: 0}
+  reverbTimeLow: 0
+  reverbTimeMid: 0
+  reverbTimeHigh: 0
+  hybridReverbEQLow: 1
+  hybridReverbEQMid: 1
+  hybridReverbEQHigh: 1
+  hybridReverbDelay: 0
+  applyHRTFToReflections: 0
+  reflectionsMixLevel: 1
+  pathing: 0
+  pathingProbeBatch: {fileID: 0}
+  pathValidation: 1
+  findAlternatePaths: 1
+  pathingEQ:
+  - 1
+  - 1
+  - 1
+  pathingSH:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applyHRTFToPathing: 0
+  pathingMixLevel: 1
 --- !u!1 &5301839007097663498
 GameObject:
   m_ObjectHideFlags: 0
