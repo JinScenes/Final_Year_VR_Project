@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
 
     private Quaternion targetRotation;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -136,7 +136,7 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    IEnumerator CheckForRaycast()
+    private IEnumerator CheckForRaycast()
     {
         while (this.gameObject.activeSelf && _checkRaycast)
         {

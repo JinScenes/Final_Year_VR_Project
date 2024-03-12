@@ -4950,7 +4950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -4986,6 +4985,7 @@ MonoBehaviour:
   - {fileID: 4181927415454426832}
   - {fileID: 5453630927452559788}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &1793517967389345740
 MonoBehaviour:
@@ -14751,7 +14751,6 @@ GameObject:
   - component: {fileID: 3719865058671406943}
   - component: {fileID: 8449739408642836996}
   - component: {fileID: 8183438871837410239}
-  - component: {fileID: 5959677274440945754}
   - component: {fileID: 699835362}
   - component: {fileID: 1776643964}
   - component: {fileID: 4144118093911848930}
@@ -15032,24 +15031,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5959677274440945754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093207351254691191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6194a870e97cfe14081ff58549a6852a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ToggleHandsInput: 20
-  IKBody: {fileID: 6423676319734917729}
-  RightHandGFXHolder: {fileID: 8516297022724069044}
-  LeftHandGFXHolder: {fileID: 5629437628528558491}
-  DefaultHandsModel: 0
-  LoadHandSelectionFromPrefs: 0
 --- !u!114 &699835362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16733,7 +16714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -16769,6 +16749,7 @@ MonoBehaviour:
   - {fileID: 4273837650648819225}
   - {fileID: 2559476070191240107}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &8729627395465183814
 MonoBehaviour:
@@ -17702,7 +17683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -17738,6 +17718,7 @@ MonoBehaviour:
   - {fileID: 7670597483418625502}
   - {fileID: 5793965411062874577}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &6558947933731889744
 MonoBehaviour:
@@ -27012,7 +26993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -27048,6 +27028,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &1318133914325654302
 MonoBehaviour:
@@ -27581,7 +27562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -27624,6 +27604,7 @@ MonoBehaviour:
   - {fileID: 4096997679654700514}
   - {fileID: 8706646672933218281}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &5063726933140902012
 MonoBehaviour:
@@ -28119,7 +28100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -28155,6 +28135,7 @@ MonoBehaviour:
   - {fileID: 755622002594716828}
   - {fileID: 442287869061163613}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &6511215292134367673
 MonoBehaviour:
@@ -29372,7 +29353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -29408,6 +29388,7 @@ MonoBehaviour:
   - {fileID: 7207801342396425456}
   - {fileID: 5074921830810085981}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &8232219605736188298
 MonoBehaviour:
@@ -30770,7 +30751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -30806,6 +30786,7 @@ MonoBehaviour:
   - {fileID: 7194213983621274544}
   - {fileID: 8729244923864870861}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &5997888049952240158
 MonoBehaviour:
@@ -34762,7 +34743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -34798,6 +34778,7 @@ MonoBehaviour:
   - {fileID: 1163004195589673591}
   - {fileID: 1073136601539448140}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &8737117136148206052
 MonoBehaviour:
@@ -38890,7 +38871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -38926,6 +38906,7 @@ MonoBehaviour:
   - {fileID: 139717779232510038}
   - {fileID: 3880293200437941142}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &7733715433973508299
 MonoBehaviour:
@@ -42276,7 +42257,7 @@ Transform:
   m_GameObject: {fileID: 5713814142994353100}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.011, y: -0.1389, z: 0.2035}
+  m_LocalPosition: {x: -0.446, y: -0.1389, z: 0.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42302,8 +42283,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.17600302, y: 0.07, z: 0.1}
-  m_Center: {x: 0.004811734, y: 0, z: 0}
+  m_Size: {x: 0.17600302, y: 0.16861954, z: 0.19251819}
+  m_Center: {x: 0.0048117344, y: 0.04930976, z: -0.04625909}
 --- !u!114 &3835832639934565691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49944,7 +49925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -49980,6 +49960,7 @@ MonoBehaviour:
   - {fileID: 4459737021655190308}
   - {fileID: 1317669801495746418}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &1437557990139821727
 MonoBehaviour:
@@ -57130,7 +57111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78565d1a7df53dc43951ba503a0c8417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
   CurrentPose: {fileID: 0}
@@ -57166,6 +57146,7 @@ MonoBehaviour:
   - {fileID: 9038674645925296519}
   - {fileID: 1144441741272180489}
   OtherJoints: []
+  ShowGizmos: 1
   ContinuousUpdate: 0
 --- !u!114 &4779087300947821317
 MonoBehaviour:
