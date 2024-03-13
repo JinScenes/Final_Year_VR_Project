@@ -3,17 +3,22 @@ using UnityEngine;
 
 public class AmmoDispenser : MonoBehaviour
 {
+    [Header("Grabbers")]
     [SerializeField] private Grabber LeftGrabber;
     [SerializeField] private Grabber RightGrabber;
 
+    [Header("Clip Prefabs")]
     [SerializeField] private GameObject AmmoDispenserObject;
     [SerializeField] private GameObject PistolClip;
     [SerializeField] private GameObject ShotgunShell;
-    [SerializeField] private GameObject RifleClip;
+    [SerializeField] private GameObject SCARClip;
+    [SerializeField] private GameObject M4A4Clip;
 
-    [SerializeField] private int CurrentPistolClips = 5;
-    [SerializeField] private int CurrentRifleClips = 5;
-    [SerializeField] private int CurrentShotgunShells = 30;
+    [Header("Clip Amounts")]
+    public int CurrentPistolClips = 5;
+    public int CurrentSCARClips = 5;
+    public int CurrentM4A4Clips = 5;
+    public int CurrentShotgunShells = 30;
 
     private void Update()
     {
@@ -39,7 +44,7 @@ public class AmmoDispenser : MonoBehaviour
         }
 
         string grabName = grabbable.HeldGrabbable.transform.name;
-        if (grabName.Contains("Shotgun") || grabName.Contains("Pistol") || grabName.Contains("Rifle"))
+        if (grabName.Contains("Shotgun") || grabName.Contains("Pistol") || grabName.Contains("SCAR") || grabName.Contains("M4A4"))
         {
             return true;
         }
@@ -64,15 +69,26 @@ public class AmmoDispenser : MonoBehaviour
             return ShotgunShell;
         }
 
-        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Rifle") && CurrentRifleClips > 0)
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("SCAR") && CurrentSCARClips > 0)
         {
-            CurrentRifleClips--;
-            return RifleClip;
+            CurrentSCARClips--;
+            return SCARClip;
         }
-        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("Rifle") && CurrentRifleClips > 0)
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("SCAR") && CurrentSCARClips > 0)
         {
-            CurrentRifleClips--;
-            return RifleClip;
+            CurrentSCARClips--;
+            return SCARClip;
+        }
+
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("M4A4") && CurrentM4A4Clips > 0)
+        {
+            CurrentM4A4Clips--;
+            return M4A4Clip;
+        }
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("M4A4") && CurrentM4A4Clips > 0)
+        {
+            CurrentM4A4Clips--;
+            return M4A4Clip;
         }
 
         if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Pistol") && CurrentPistolClips > 0)
@@ -119,13 +135,17 @@ public class AmmoDispenser : MonoBehaviour
         {
             CurrentShotgunShells++;
         }
-        else if (AmmoName.Contains("Rifle"))
+        else if (AmmoName.Contains("SCAR"))
         {
-            CurrentRifleClips--;
+            CurrentSCARClips--;
         }
         else if (AmmoName.Contains("Pistol"))
         {
             CurrentPistolClips++;
+        }
+        else if (AmmoName.Contains("M4A4"))
+        {
+            CurrentM4A4Clips--;
         }
     }
 }

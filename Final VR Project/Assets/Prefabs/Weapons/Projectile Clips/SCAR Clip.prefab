@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 3393538753761876058}
   - component: {fileID: 3393538753761876057}
   m_Layer: 10
-  m_Name: RifleClip
+  m_Name: SCAR Clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

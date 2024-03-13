@@ -2534,7 +2534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc39384ecbf0a1f41881736893e14af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AcceptableMagazineName: RifleClip
+  AcceptableMagazineName: SCAR Clip
   AttachedWeapon: {fileID: 3594841392878154754}
   HeldMagazine: {fileID: 0}
   ClipSnapDistance: 0.04
@@ -2565,7 +2565,7 @@ GameObject:
   - component: {fileID: 3594841392878154761}
   - component: {fileID: 1628981071965224111}
   m_Layer: 10
-  m_Name: Rifle
+  m_Name: SCAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
