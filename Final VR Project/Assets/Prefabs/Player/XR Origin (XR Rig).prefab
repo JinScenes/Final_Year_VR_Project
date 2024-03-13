@@ -19216,7 +19216,7 @@ MonoBehaviour:
     type: 3}
   ShotgunShell: {fileID: 9048278835047995880, guid: 40171d90eb0131e4ba4e6b623bdb9884,
     type: 3}
-  SCARClip: {fileID: 3393538753761876036, guid: 0116c3965a703db4cb19d8b573a7531b,
+  SCARClip: {fileID: 2222796947576737291, guid: 0116c3965a703db4cb19d8b573a7531b,
     type: 3}
   M4A4Clip: {fileID: 5120252776290088528, guid: 5d2b3a8f6d622f443b437e80195c1d30,
     type: 3}
