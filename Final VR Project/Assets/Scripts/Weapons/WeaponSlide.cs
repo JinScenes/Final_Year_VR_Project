@@ -13,6 +13,10 @@ public class WeaponSlide : MonoBehaviour
     [SerializeField] private AudioClip SlideReleaseSound;
     [SerializeField] private AudioClip LockedBackSound;
 
+    [SerializeField] private Renderer slideRenderer;
+    [SerializeField] private Material flashMaterial;
+    private Material originalMaterial;
+
     public bool LockedBack = false;
 
     private RaycastWeapon parentWeapon;
@@ -25,6 +29,7 @@ public class WeaponSlide : MonoBehaviour
 
     private float initialMass;
 
+    private bool isFlashing = false;
     private bool lockSlidePosition;
 
     private void Start()
@@ -36,6 +41,7 @@ public class WeaponSlide : MonoBehaviour
         thisGrabbable = GetComponent<Grabbable>();
         rigid = GetComponent<Rigidbody>();
         initialMass = rigid.mass;
+        originalMaterial = slideRenderer.material;
 
         if (parentWeapon != null)
         {
@@ -83,6 +89,17 @@ public class WeaponSlide : MonoBehaviour
                 }
             }
         }
+
+        if ((LockedBack || !parentWeapon.BulletInChamber) && !isFlashing && parentWeapon.GetComponent<Grabbable>().BeingHeld)
+        {
+            StartCoroutine(FlashSlide());
+        }
+        else if (!LockedBack && (parentWeapon.BulletInChamber) && isFlashing && !parentWeapon.GetComponent<Grabbable>().BeingHeld)
+        {
+            StopCoroutine(FlashSlide());
+            slideRenderer.material.SetColor("_EmissionColor", Color.black);
+            isFlashing = false;
+        }
     }
 
     private void FixedUpdate()
@@ -108,6 +125,11 @@ public class WeaponSlide : MonoBehaviour
             }
 
             LockedBack = true;
+
+            if (!isFlashing && slideRenderer != null)
+            {
+                StartCoroutine(FlashSlide());
+            }
         }
     }
 
@@ -125,6 +147,12 @@ public class WeaponSlide : MonoBehaviour
             if (parentWeapon != null)
             {
                 parentWeapon.OnWeaponCharged(false);
+            }
+
+            if (isFlashing)
+            {
+                StopCoroutine(FlashSlide());
+                slideRenderer.material.SetColor("_EmissionColor", Color.black);
             }
         }
     }
@@ -179,7 +207,21 @@ public class WeaponSlide : MonoBehaviour
         lockSlidePosition = false;
     }
 
-    void playSoundInterval(float fromSeconds, float toSeconds, float volume)
+    private IEnumerator FlashSlide()
+    {
+        isFlashing = true;
+        while ((LockedBack || !parentWeapon.BulletInChamber) && parentWeapon.GetComponent<Grabbable>().BeingHeld)
+        {
+            slideRenderer.material = flashMaterial;
+            yield return new WaitForSeconds(0.5f);
+            slideRenderer.material = originalMaterial;
+            yield return new WaitForSeconds(0.5f);
+        }
+        isFlashing = false;
+        slideRenderer.material = originalMaterial;
+    }
+
+    private void playSoundInterval(float fromSeconds, float toSeconds, float volume)
     {
         if (audioSource)
         {

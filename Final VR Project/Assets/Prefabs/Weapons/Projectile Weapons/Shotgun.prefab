@@ -4228,10 +4228,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinLocalZ: 0.3435
   MaxLocalZ: 0.414
-  LockedBack: 0
+  slidingBack: 1
+  ZeroMassWhenNotHeld: 1
   SlideReleaseSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
   LockedBackSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  ZeroMassWhenNotHeld: 1
+  slideRenderer: {fileID: 1699639748695516141}
+  flashMaterial: {fileID: 2100000, guid: fc69318049f082042bb7eb4cecce83e9, type: 2}
+  LockedBack: 0
 --- !u!153 &1699639748979199957
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -6990,8 +6993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea191e1b1592ab4ab21fc2d668a9d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InArea: {fileID: 0}
   grabbersInArea: []
+  InArea: {fileID: 0}
 --- !u!1 &3959504860082694416
 GameObject:
   m_ObjectHideFlags: 0
@@ -7060,8 +7063,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 2846685263277749109}
-  AcceptBulletName: Shell
   InsertSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  AcceptBulletName: Shell
 --- !u!1 &5070713041199087399
 GameObject:
   m_ObjectHideFlags: 0
@@ -7568,10 +7571,10 @@ MonoBehaviour:
   Damage: 50
   FiringMethod: 0
   ReloadMethod: 1
+  MaxInternalAmmo: 8
   FiringRate: 0.05
   BulletImpactForce: 1000
   InternalAmmo: 0
-  MaxInternalAmmo: 8
   AutoChamberRounds: 0
   MustChamberRounds: 1
   AlwaysFireProjectile: 0
@@ -7586,10 +7589,10 @@ MonoBehaviour:
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1281
-  TriggerTransform: {fileID: 1699639747979966071}
-  SlideTransform: {fileID: 0}
   MuzzlePointTransform: {fileID: 5438212931875097829}
   EjectPointTransform: {fileID: 5438212932061700819}
+  TriggerTransform: {fileID: 1699639747979966071}
+  SlideTransform: {fileID: 0}
   ChamberedBullet: {fileID: 918158434460735609}
   MuzzleFlashObject: {fileID: 5070713041695384133}
   BulletCasingPrefab: {fileID: 1957835912866165125, guid: 8e6416e07b49a3b408f1e28f76181c7e,
@@ -7600,16 +7603,16 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 34b530c1e1e9915459e34ff783bd7434, type: 3}
   GunShotVolume: 0.75
+  slideSpeed: 1
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: 0
   ForceSlideBackOnLastShot: 0
-  slideSpeed: 1
+  EmptyBulletInChamber: 0
   EjectInput: 04000000
   ReleaseSlideInput: 02000000
   ReloadInput: 04000000
   BulletInChamber: 0
-  EmptyBulletInChamber: 0
   onShootEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -7935,8 +7938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 0}
-  AcceptBulletName: Bullet
   InsertSound: {fileID: 0}
+  AcceptBulletName: Bullet
 --- !u!1 &6533396370524429422
 GameObject:
   m_ObjectHideFlags: 0
@@ -8888,7 +8891,7 @@ PrefabInstance:
     - target: {fileID: 292154147353046210, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
       propertyPath: m_Name
-      value: BandolierSnapPoint
+      value: SnapPoint (Shell Holder)
       objectReference: {fileID: 0}
     - target: {fileID: 292154147353046212, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
@@ -9151,7 +9154,7 @@ PrefabInstance:
     - target: {fileID: 292154147353046210, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
       propertyPath: m_Name
-      value: BandolierSnapPoint
+      value: SnapPoint (Shell Holder)
       objectReference: {fileID: 0}
     - target: {fileID: 292154147353046212, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
@@ -9285,7 +9288,7 @@ PrefabInstance:
     - target: {fileID: 292154147353046210, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
       propertyPath: m_Name
-      value: BandolierSnapPoint
+      value: SnapPoint (Shell Holder)
       objectReference: {fileID: 0}
     - target: {fileID: 292154147353046212, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
@@ -9419,7 +9422,7 @@ PrefabInstance:
     - target: {fileID: 292154147353046210, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
       propertyPath: m_Name
-      value: BandolierSnapPoint
+      value: SnapPoint (Shell Holder)
       objectReference: {fileID: 0}
     - target: {fileID: 292154147353046212, guid: 62f4987b7e086ff43ab61a31ee443048,
         type: 3}
