@@ -11941,8 +11941,8 @@ MonoBehaviour:
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
-  SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
-  SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  SoundOnSnap: {fileID: 8300000, guid: fe943bf5daca4ab4a8dfab75bd1b9fcd, type: 3}
+  SoundOnUnsnap: {fileID: 8300000, guid: 0ce459b14ab7057408ca16f00d868746, type: 3}
   OnSnapEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -19220,9 +19220,12 @@ MonoBehaviour:
     type: 3}
   M4A4Clip: {fileID: 5120252776290088528, guid: 5d2b3a8f6d622f443b437e80195c1d30,
     type: 3}
+  AK74UClip: {fileID: 7383583547018761945, guid: cd6268bf8201f5547862051e4cb8493c,
+    type: 3}
   CurrentPistolClips: 5
   CurrentSCARClips: 5
   CurrentM4A4Clips: 5
+  CurrentAK74UClip: 5
   CurrentShotgunShells: 30
 --- !u!1 &2619929306304362989
 GameObject:
@@ -32610,8 +32613,8 @@ MonoBehaviour:
   - Grapple
   - Knife
   - Block
-  SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
-  SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  SoundOnSnap: {fileID: 8300000, guid: fe943bf5daca4ab4a8dfab75bd1b9fcd, type: 3}
+  SoundOnUnsnap: {fileID: 8300000, guid: 0ce459b14ab7057408ca16f00d868746, type: 3}
   OnSnapEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -41981,7 +41984,7 @@ Transform:
   m_GameObject: {fileID: 5713814142994353100}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.446, y: -0.1389, z: 0.154}
+  m_LocalPosition: {x: -0.365, y: -0.1389, z: 0.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42007,8 +42010,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.17600302, y: 0.16861954, z: 0.19251819}
-  m_Center: {x: 0.0048117344, y: 0.04930976, z: -0.04625909}
+  m_Size: {x: 0.09446177, y: 0.19084215, z: 0.165699}
+  m_Center: {x: -0.002952367, y: 0.029203534, z: -0.048886776}
 --- !u!114 &3835832639934565691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46175,8 +46178,8 @@ MonoBehaviour:
   - Grapple
   - Knife
   - Block
-  SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
-  SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  SoundOnSnap: {fileID: 8300000, guid: fe943bf5daca4ab4a8dfab75bd1b9fcd, type: 3}
+  SoundOnUnsnap: {fileID: 8300000, guid: 0ce459b14ab7057408ca16f00d868746, type: 3}
   OnSnapEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -53777,7 +53780,7 @@ Transform:
   m_GameObject: {fileID: 7397693485393750590}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5000002, y: -0.49999997, z: -0.49999985, w: 0.5000001}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.0251, z: -0.049}
   m_LocalScale: {x: 10.146005, y: 10.146002, z: 10.146002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -59278,8 +59281,8 @@ MonoBehaviour:
   LastSnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
-  SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
-  SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  SoundOnSnap: {fileID: 8300000, guid: fe943bf5daca4ab4a8dfab75bd1b9fcd, type: 3}
+  SoundOnUnsnap: {fileID: 8300000, guid: 0ce459b14ab7057408ca16f00d868746, type: 3}
   OnSnapEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -1761,8 +1761,8 @@ MonoBehaviour:
   ClipUnsnapDistance: 0.1
   EjectForce: 1.25
   MagazineDistance: 0
-  ClipAttachSound: {fileID: 8300000, guid: f6ba2c16c86180148906c2b6840404ae, type: 3}
-  ClipDetachSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  ClipAttachSound: {fileID: 8300000, guid: 622e1865b86960b4bb41a45bbae2c33a, type: 3}
+  ClipDetachSound: {fileID: 8300000, guid: 0a1345ba7d56d2c4eadaa38dcf532dc9, type: 3}
 --- !u!1 &3319413210243796770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2664,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a47420325cec16d4098463a7f0a1eabf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 17da4cdc1cdc66a448521cbfdd948c89, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2858,8 +2858,8 @@ MonoBehaviour:
   MaxLocalZ: 0
   slidingBack: 1
   ZeroMassWhenNotHeld: 1
-  SlideReleaseSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  LockedBackSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
+  SlideReleaseSound: {fileID: 8300000, guid: 6601278778ad35a458114be20d44965d, type: 3}
+  LockedBackSound: {fileID: 8300000, guid: 6601278778ad35a458114be20d44965d, type: 3}
   slideRenderer: {fileID: 5072950091134371927}
   flashMaterial: {fileID: 2100000, guid: fc69318049f082042bb7eb4cecce83e9, type: 2}
   LockedBack: 0
@@ -3590,7 +3590,7 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 3454612190511497970, guid: fa39ce2ce96bec94b82f2c8124ce3930,
     type: 3}
-  GunShotSound: {fileID: 8300000, guid: 727ff3abbdb797f45b714a1795efc4e2, type: 3}
+  GunShotSound: {fileID: 8300000, guid: 799e637f22b5d8d40bc57f1157393b9f, type: 3}
   GunShotVolume: 0.75
   slideSpeed: 1
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}

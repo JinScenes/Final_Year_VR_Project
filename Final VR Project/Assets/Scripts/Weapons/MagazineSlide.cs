@@ -22,6 +22,8 @@ public class MagazineSlide : MonoBehaviour
     private RaycastWeapon parentWeapon;
     private GrabberArea grabClipArea;
 
+    private float lastClipAttachSoundTime = 0f;
+    private float lastClipDetachSoundTime = 0f;
     private float lastEjectTime;
 
     private bool magazineInPlace = false;
@@ -130,9 +132,10 @@ public class MagazineSlide : MonoBehaviour
         var grabber = HeldMagazine.GetPrimaryGrabber();
         HeldMagazine.DropItem(grabber, false, false);
 
-        if (ClipAttachSound && Time.timeSinceLevelLoad > 0.1f)
+        if (ClipAttachSound && Time.timeSinceLevelLoad > .1f && Time.time - lastClipAttachSoundTime > 1f)
         {
             XRManager.Instance.PlaySpatialClipAt(ClipAttachSound, transform.position, 1f);
+            lastClipAttachSoundTime = Time.time;
         }
 
         moveMagazine(Vector3.zero);
@@ -166,7 +169,11 @@ public class MagazineSlide : MonoBehaviour
             return null;
         }
 
-        XRManager.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
+        if (ClipDetachSound && Time.time - lastClipDetachSoundTime > 1f)
+        {
+            XRManager.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
+            lastClipDetachSoundTime = Time.time;
+        }
 
         HeldMagazine.transform.parent = null;
 
