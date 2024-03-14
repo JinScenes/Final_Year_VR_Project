@@ -49,7 +49,7 @@ public class AmmoDispenser : MonoBehaviour
         string grabName = grabbable.HeldGrabbable.transform.name;
 
         if (grabName.Contains("Shotgun") || 
-            grabName.Contains("Pistol") || 
+            grabName.Contains("M1911") || 
             grabName.Contains("SCAR") || 
             grabName.Contains("M4A4") ||
             grabName.Contains("AK-74U"))
@@ -99,12 +99,12 @@ public class AmmoDispenser : MonoBehaviour
             return M4A4Clip;
         }
 
-        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Pistol") && CurrentPistolClips > 0)
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("M1911") && CurrentPistolClips > 0)
         {
             CurrentPistolClips--;
             return PistolClip;
         }
-        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("Pistol") && CurrentPistolClips > 0)
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("M1911") && CurrentPistolClips > 0)
         {
             CurrentPistolClips--;
             return PistolClip;
