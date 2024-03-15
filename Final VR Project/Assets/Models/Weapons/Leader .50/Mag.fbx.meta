@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 86ab983ae66466f40b6ebb8a7b7a81c5
+guid: 0ec2ff35b0b66224ba3271bace421344
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.018
+    second: {fileID: 2100000, guid: 224d9e1be97784a4a85f41e49a54ec3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.025
+    second: {fileID: 2100000, guid: da1ca0a7fc7a9a04994331d70a7501a2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

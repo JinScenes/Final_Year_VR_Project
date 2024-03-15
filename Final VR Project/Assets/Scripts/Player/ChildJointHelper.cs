@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class JointHelper : MonoBehaviour
+public class ChildJointHelper : MonoBehaviour
 {
+    [SerializeField] private GameObject targetChild;
+
     [SerializeField] private bool LockXPosition = false;
     [SerializeField] private bool LockYPosition = false;
     [SerializeField] private bool LockZPosition = false;
@@ -15,7 +17,7 @@ public class JointHelper : MonoBehaviour
     [SerializeField] private bool LockZRotation = false;
 
     private Vector3 initialPosition;
-    private Vector3 initialRotation;
+    private Vector3 childInitiallRotation;
     private Vector3 initialScale;
 
     private Vector3 currentPosition;
@@ -25,7 +27,7 @@ public class JointHelper : MonoBehaviour
     private void Start()
     {
         initialPosition = transform.localPosition;
-        initialRotation = transform.localEulerAngles;
+        childInitiallRotation = targetChild.transform.localEulerAngles;
         initialScale = transform.localScale;
     }
 
@@ -35,8 +37,8 @@ public class JointHelper : MonoBehaviour
         {
             currentPosition = transform.localPosition;
             transform.localPosition = new Vector3
-                (LockXPosition ? initialPosition.x : currentPosition.x,
-                LockYPosition ? initialPosition.y : currentPosition.y,
+                (LockXPosition ? initialPosition.x : currentPosition.x, 
+                LockYPosition ? initialPosition.y : currentPosition.y, 
                 LockZPosition ? initialPosition.z : currentPosition.z);
         }
 
@@ -44,18 +46,18 @@ public class JointHelper : MonoBehaviour
         {
             currentScale = transform.localScale;
             transform.localScale = new Vector3
-                (LockXScale ? initialScale.x : currentScale.x,
+                (LockXScale ? initialScale.x : currentScale.x, 
                 LockYScale ? initialScale.y : currentScale.y,
                 LockZScale ? initialScale.z : currentScale.z);
         }
 
         if (LockXRotation || LockYRotation || LockZRotation)
         {
-            currentRotation = transform.localEulerAngles;
-            transform.localEulerAngles = new Vector3
-                (LockXRotation ? initialRotation.x : currentRotation.x,
-                LockYRotation ? initialRotation.y : currentRotation.y,
-                LockZRotation ? initialRotation.z : currentRotation.z);
+            currentRotation = targetChild.transform.localEulerAngles;
+            targetChild.transform.localEulerAngles = new Vector3
+                (LockXRotation ? childInitiallRotation.x : currentRotation.x, 
+                LockYRotation ? childInitiallRotation.y : currentRotation.y, 
+                LockZRotation ? childInitiallRotation.z : currentRotation.z);
         }
     }
 
