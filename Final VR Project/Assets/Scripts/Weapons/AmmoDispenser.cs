@@ -52,7 +52,8 @@ public class AmmoDispenser : MonoBehaviour
             grabName.Contains("M1911") || 
             grabName.Contains("SCAR") || 
             grabName.Contains("M4A4") ||
-            grabName.Contains("AK-74U"))
+            grabName.Contains("AK-74U") ||
+            grabName.Contains("Leader .50"))
         {
             return true;
         }
@@ -121,6 +122,7 @@ public class AmmoDispenser : MonoBehaviour
             return AK74UClip;
         }
 
+        // REMINDER ADD SNIPER HERE
         return null;
     }
 
