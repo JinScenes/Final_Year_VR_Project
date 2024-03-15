@@ -1040,6 +1040,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SCAR
       objectReference: {fileID: 0}
+    - target: {fileID: 1937934508495612105, guid: c11d1066dc09d494d8acd9ca504d4de2,
+        type: 3}
+      propertyPath: LockedBackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ddab559aaad0dd4419c2c24a94e98c29, type: 3}
+    - target: {fileID: 1937934508495612105, guid: c11d1066dc09d494d8acd9ca504d4de2,
+        type: 3}
+      propertyPath: SlideReleaseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e27267faf69a56343bef8a8e06e10e53, type: 3}
     - target: {fileID: 8981615562201000412, guid: c11d1066dc09d494d8acd9ca504d4de2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1048,7 +1058,7 @@ PrefabInstance:
     - target: {fileID: 8981615562201000412, guid: c11d1066dc09d494d8acd9ca504d4de2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.056
+      value: 1.175
       objectReference: {fileID: 0}
     - target: {fileID: 8981615562201000412, guid: c11d1066dc09d494d8acd9ca504d4de2,
         type: 3}
@@ -2665,6 +2675,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3176450686887144334, guid: 4f90cf337329d9e49b86b2b194f17634,
+        type: 3}
+      propertyPath: MuzzleFlashObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6516082900670681101, guid: 4f90cf337329d9e49b86b2b194f17634,
         type: 3}
       propertyPath: m_LocalPosition.x

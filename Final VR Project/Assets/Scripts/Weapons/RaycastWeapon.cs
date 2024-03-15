@@ -19,6 +19,7 @@ public enum ReloadType
 
 public class RaycastWeapon : GrabbableEvents
 {
+    [Header("Damage")]
     [SerializeField] private float MaxRange = 25f;
     [SerializeField] private float Damage = 25f;
 
