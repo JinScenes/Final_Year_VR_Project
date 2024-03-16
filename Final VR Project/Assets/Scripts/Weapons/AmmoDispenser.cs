@@ -14,12 +14,14 @@ public class AmmoDispenser : MonoBehaviour
     [SerializeField] private GameObject SCARClip;
     [SerializeField] private GameObject M4A4Clip;
     [SerializeField] private GameObject AK74UClip;
+    [SerializeField] private GameObject SIGMCXClip;
 
     [Header("Clip Amounts")]
     public int CurrentPistolClips = 5;
     public int CurrentSCARClips = 5;
     public int CurrentM4A4Clips = 5;
     public int CurrentAK74UClip = 5;
+    public int CurrentSIGMCXClip = 5;
     public int CurrentShotgunShells = 30;
 
 
@@ -48,12 +50,13 @@ public class AmmoDispenser : MonoBehaviour
 
         string grabName = grabbable.HeldGrabbable.transform.name;
 
-        if (grabName.Contains("Shotgun") || 
-            grabName.Contains("M1911") || 
-            grabName.Contains("SCAR") || 
+        if (grabName.Contains("Shotgun") ||
+            grabName.Contains("M1911") ||
+            grabName.Contains("SCAR") ||
             grabName.Contains("M4A4") ||
             grabName.Contains("AK-74U") ||
-            grabName.Contains("Leader .50"))
+            grabName.Contains("Leader .50") ||
+            grabName.Contains("SIG MCX"))
         {
             return true;
         }
@@ -120,6 +123,17 @@ public class AmmoDispenser : MonoBehaviour
         {
             CurrentAK74UClip--;
             return AK74UClip;
+        }
+
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("SIG MCX") && CurrentSIGMCXClip > 0)
+        {
+            CurrentSIGMCXClip--;
+            return SIGMCXClip;
+        }
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("SIG MCX") && CurrentSIGMCXClip > 0)
+        {
+            CurrentSIGMCXClip--;
+            return SIGMCXClip;
         }
 
         // REMINDER ADD SNIPER HERE
