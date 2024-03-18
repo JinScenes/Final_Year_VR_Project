@@ -56,11 +56,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _CamSize: 0
-    - _Depth: 0.87
-    - _LensShadowDet: 5.7
+    - _Depth: 2
+    - _LensShadowDet: 4.21
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 0.01
+    - _Thickness: 0.0175
     m_Colors:
     - _CamVigSizeEdge: {r: 2.36, g: 0.69, b: 0, a: 0}
     - _CrossHairColour: {r: 1024, g: 0, b: 0, a: 1}

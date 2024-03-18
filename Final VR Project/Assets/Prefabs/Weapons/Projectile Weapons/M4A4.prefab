@@ -387,7 +387,7 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 3454612190511497970, guid: fa39ce2ce96bec94b82f2c8124ce3930,
     type: 3}
-  GunShotSound: {fileID: 8300000, guid: 0025bbbebcb49fc459a22d2895399206, type: 3}
+  GunShotSound: {fileID: 8300000, guid: 06f4e1e71f591094cb873c90373f68f9, type: 3}
   GunShotVolume: 1
   slideSpeed: 1
   EmptySound: {fileID: 8300000, guid: 3d33a5e81dd313f458aa5c3550f0df94, type: 3}

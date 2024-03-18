@@ -2624,7 +2624,7 @@ MonoBehaviour:
   TriggerTransform: {fileID: 0}
   SlideTransform: {fileID: 509510570128363465}
   ChamberedBullet: {fileID: 6402446609938622784}
-  MuzzleFlashObject: {fileID: 0}
+  MuzzleFlashObject: {fileID: 8118641593673674351}
   BulletCasingPrefab: {fileID: 1282233564399203881, guid: e6d6d8266008ffe438ce58f774e874fa,
     type: 3}
   ProjectilePrefab: {fileID: 1449094533667961452, guid: 4af46545725f628459794cfc7c0f7d54,
@@ -3389,6 +3389,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24bc114e4759e464eab5d9664127a034, type: 3}
+--- !u!1 &8118641593673674351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146992, guid: 24bc114e4759e464eab5d9664127a034,
+    type: 3}
+  m_PrefabInstance: {fileID: 8118641593673797727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8118641593673941583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 446992, guid: 24bc114e4759e464eab5d9664127a034,

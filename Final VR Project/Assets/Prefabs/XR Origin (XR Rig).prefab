@@ -19222,10 +19222,13 @@ MonoBehaviour:
     type: 3}
   AK74UClip: {fileID: 7383583547018761945, guid: cd6268bf8201f5547862051e4cb8493c,
     type: 3}
+  SIGMCXClip: {fileID: 2864006776449153556, guid: 28038ba60e3179c4da481cfb231d0905,
+    type: 3}
   CurrentPistolClips: 5
   CurrentSCARClips: 5
   CurrentM4A4Clips: 5
   CurrentAK74UClip: 5
+  CurrentSIGMCXClip: 5
   CurrentShotgunShells: 30
 --- !u!1 &2619929306304362989
 GameObject:

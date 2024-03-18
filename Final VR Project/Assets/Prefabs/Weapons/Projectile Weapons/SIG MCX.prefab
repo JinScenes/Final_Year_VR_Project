@@ -36,7 +36,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46984645058689052}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.00000008940696, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4129, y: 1.191, z: 7.2059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   GunShotSound: {fileID: 8300000, guid: 0025bbbebcb49fc459a22d2895399206, type: 3}
   GunShotVolume: 1
   slideSpeed: 1
-  EmptySound: {fileID: 8300000, guid: 3d33a5e81dd313f458aa5c3550f0df94, type: 3}
+  EmptySound: {fileID: 8300000, guid: d0b92833b2edea74e8af4581295372ad, type: 3}
   EmptySoundVolume: 1
   SlideDistance: -0.028
   ForceSlideBackOnLastShot: 0
@@ -1539,7 +1539,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dd8ff2db505b41440a04210b0933b311, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5789ca9638622964ab203c4be9335269, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1731,9 +1731,9 @@ MonoBehaviour:
   MaxLocalZ: 0
   slidingBack: 1
   ZeroMassWhenNotHeld: 1
-  SlideReleaseSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  LockedBackSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  slideRenderer: {fileID: 0}
+  SlideReleaseSound: {fileID: 8300000, guid: 5e498e872c98b0841b98bba044ead373, type: 3}
+  LockedBackSound: {fileID: 8300000, guid: 8273d95f869a18d4795ca3817b96f214, type: 3}
+  slideRenderer: {fileID: 5080872882380067596}
   flashMaterial: {fileID: 2100000, guid: fc69318049f082042bb7eb4cecce83e9, type: 2}
   LockedBack: 0
 --- !u!1 &1746644743461303492
@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 0ebbcec4dd8e2f040b163f10df7e8382, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.72156864}
+  m_Color: {r: 0, g: 1, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3874,8 +3874,8 @@ MonoBehaviour:
   ClipUnsnapDistance: 0.05
   EjectForce: 1
   MagazineDistance: 0
-  ClipAttachSound: {fileID: 8300000, guid: 55d8d7313d9c4c0468ca0650ae47d401, type: 3}
-  ClipDetachSound: {fileID: 8300000, guid: 070647d61f1afc3478a99a050a836c6d, type: 3}
+  ClipAttachSound: {fileID: 8300000, guid: 02537050fdc89424392f3adacc8f9c7d, type: 3}
+  ClipDetachSound: {fileID: 8300000, guid: d81a0b757a3c77b4eab1face9c90a378, type: 3}
 --- !u!1 &6976705488573193171
 GameObject:
   m_ObjectHideFlags: 0
