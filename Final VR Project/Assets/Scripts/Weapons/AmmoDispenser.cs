@@ -15,6 +15,7 @@ public class AmmoDispenser : MonoBehaviour
     [SerializeField] private GameObject M4A4Clip;
     [SerializeField] private GameObject AK74UClip;
     [SerializeField] private GameObject SIGMCXClip;
+    [SerializeField] private GameObject Leader_50Clip;
 
     [Header("Clip Amounts")]
     public int CurrentPistolClips = 5;
@@ -22,8 +23,8 @@ public class AmmoDispenser : MonoBehaviour
     public int CurrentM4A4Clips = 5;
     public int CurrentAK74UClip = 5;
     public int CurrentSIGMCXClip = 5;
+    public int CurrentLeader_50Clip = 5;
     public int CurrentShotgunShells = 30;
-
 
     private void Update()
     {
@@ -136,7 +137,17 @@ public class AmmoDispenser : MonoBehaviour
             return SIGMCXClip;
         }
 
-        // REMINDER ADD SNIPER HERE
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Leader .50") && CurrentLeader_50Clip > 0)
+        {
+            CurrentLeader_50Clip--;
+            return Leader_50Clip;
+        }
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("Leader .50") && CurrentLeader_50Clip > 0)
+        {
+            CurrentLeader_50Clip--;
+            return Leader_50Clip;
+        }
+
         return null;
     }
 

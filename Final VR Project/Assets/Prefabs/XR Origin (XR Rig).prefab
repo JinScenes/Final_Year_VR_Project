@@ -19224,11 +19224,14 @@ MonoBehaviour:
     type: 3}
   SIGMCXClip: {fileID: 2864006776449153556, guid: 28038ba60e3179c4da481cfb231d0905,
     type: 3}
+  Leader_50Clip: {fileID: 6415418504637783434, guid: 6d90f8425c04a8a4faf10f75b194a26b,
+    type: 3}
   CurrentPistolClips: 5
   CurrentSCARClips: 5
   CurrentM4A4Clips: 5
   CurrentAK74UClip: 5
   CurrentSIGMCXClip: 5
+  CurrentLeader_50Clip: 5
   CurrentShotgunShells: 30
 --- !u!1 &2619929306304362989
 GameObject:
