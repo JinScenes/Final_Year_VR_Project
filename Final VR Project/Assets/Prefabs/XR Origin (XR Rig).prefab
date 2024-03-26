@@ -19235,6 +19235,8 @@ MonoBehaviour:
   CurrentSIGMCXClip: 5
   CurrentLeader_50Clip: 5
   CurrentShotgunShells: 30
+  leftAmmoDispenserRenderer: {fileID: 4235556552043871408}
+  rightAmmoDispenserRenderer: {fileID: 4808748244934651188}
 --- !u!1 &2619929306304362989
 GameObject:
   m_ObjectHideFlags: 0
@@ -39504,7 +39506,7 @@ GameObject:
   - component: {fileID: 3435399336044504149}
   - component: {fileID: 4808748244934651188}
   m_Layer: 0
-  m_Name: pouch model
+  m_Name: right pouch model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54008,7 +54010,7 @@ GameObject:
   - component: {fileID: 7386216330034284074}
   - component: {fileID: 4235556552043871408}
   m_Layer: 0
-  m_Name: pouch model
+  m_Name: left pouch model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

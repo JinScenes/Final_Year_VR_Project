@@ -1,7 +1,6 @@
 ﻿using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections;
 using UnityEngine;
-using UnityEditor.PackageManager;
 
 public class MagazineSlide : MonoBehaviour
 {
