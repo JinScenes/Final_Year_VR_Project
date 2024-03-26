@@ -7,8 +7,11 @@ public class AmmoDispenser : MonoBehaviour
     [SerializeField] private Grabber LeftGrabber;
     [SerializeField] private Grabber RightGrabber;
 
+    [Header("Ammo Pouches")]
+    [SerializeField] private GameObject LeftAmmoDispenserObject;
+    [SerializeField] private GameObject RightAmmoDispenserObject;
+
     [Header("Clip Prefabs")]
-    [SerializeField] private GameObject AmmoDispenserObject;
     [SerializeField] private GameObject PistolClip;
     [SerializeField] private GameObject ShotgunShell;
     [SerializeField] private GameObject SCARClip;
@@ -28,16 +31,17 @@ public class AmmoDispenser : MonoBehaviour
 
     private void Update()
     {
-        bool weaponEquipped = false;
+        bool leftHandEquipped = grabberHasWeapon(LeftGrabber);
+        bool rightHandEquipped = grabberHasWeapon(RightGrabber);
 
-        if (grabberHasWeapon(LeftGrabber) || grabberHasWeapon(RightGrabber))
+        if (RightAmmoDispenserObject.activeSelf != leftHandEquipped)
         {
-            weaponEquipped = true;
+            RightAmmoDispenserObject.SetActive(leftHandEquipped);
         }
-
-        if (AmmoDispenserObject.activeSelf != weaponEquipped)
+        
+        if (LeftAmmoDispenserObject.activeSelf != rightHandEquipped)
         {
-            AmmoDispenserObject.SetActive(weaponEquipped);
+            LeftAmmoDispenserObject.SetActive(rightHandEquipped);
         }
     }
 
