@@ -19235,8 +19235,6 @@ MonoBehaviour:
   CurrentSIGMCXClip: 5
   CurrentLeader_50Clip: 5
   CurrentShotgunShells: 30
-  leftAmmoDispenserRenderer: {fileID: 4235556552043871408}
-  rightAmmoDispenserRenderer: {fileID: 4808748244934651188}
 --- !u!1 &2619929306304362989
 GameObject:
   m_ObjectHideFlags: 0
@@ -20247,7 +20245,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -20375,7 +20373,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
