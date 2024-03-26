@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: dabd91d95b12c93418de8da5c851e6c9
+  productGUID: 1fde8417aab9f4240931736de1229779
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Lab Task 2
+  productName: VR Weapons
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -213,7 +213,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.BeardedNinjaGames.VRInteractionFramework
-    Standalone: com.DefaultCompany.Lab-Task-2
+    Standalone: com.DefaultCompany.VR-Weapons
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -829,14 +829,14 @@ PlayerSettings:
     Standalone: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Final VR Project
+  metroPackageName: VR Weapons
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Final VR Project
+  metroApplicationDescription: VR Weapons
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0

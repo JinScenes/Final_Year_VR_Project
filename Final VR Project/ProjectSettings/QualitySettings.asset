@@ -44,7 +44,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 2ce5175913e3b004087bab9a58e41b3c,
+    customRenderPipeline: {fileID: 11400000, guid: 4624677ac7e31cd4099282f5de47452b,
       type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
@@ -72,7 +72,7 @@ QualitySettings:
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
     anisotropicTextures: 0
-    antiAliasing: 2
+    antiAliasing: 0
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 0
@@ -94,7 +94,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 6dfe5cf0c15453f40aa649f3cefaf598,
+    customRenderPipeline: {fileID: 11400000, guid: 5742b883b5c03e642963d60ea659b87c,
       type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
