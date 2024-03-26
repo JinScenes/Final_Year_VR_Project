@@ -1,10 +1,32 @@
-﻿namespace UnityEngine.XR.Interaction.Toolkit
+﻿using UnityEngine;
+using UnityEngine.XR;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+#if ENABLE_VR || (UNITY_GAMECORE && INPUT_SYSTEM_1_4_OR_NEWER)
+using UnityEngine.InputSystem.XR;
+#endif
+
+namespace UnityEngine.XR.Interaction.Toolkit
 {
-    using UnityEngine;
-    using UnityEngine.XR;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+    /// <summary>
+    /// Interprets feature values on a tracked input controller device using actions from the Input System
+    /// into XR Interaction states, such as Select. Additionally, it applies the current Pose value
+    /// of a tracked device to the transform of the GameObject.
+    /// </summary>
+    /// <remarks>
+    /// This behavior requires that the Input System is enabled in the <b>Active Input Handling</b>
+    /// setting in <b>Edit &gt; Project Settings &gt; Player</b> for input values to be read.
+    /// Each input action must also be enabled to read the current value of the action. Referenced
+    /// input actions in an Input Action Asset are not enabled by default.
+    /// </remarks>
+    /// <seealso cref="XRBaseController"/>
+    [AddComponentMenu("XR/XR Controller (Action-based)", 11)]
+
+    /// <summary>
+    /// The Input System action to use for Rotation Tracking for this GameObject. Must be a <see cref="QuaternionControl"/> Control.
+    /// </summary>
 
     #region Enums
     public enum ControllerHand {
@@ -12,6 +34,13 @@
         Right,
         None
     }
+
+    /// <summary>
+    /// The Input System action to read the Is Tracked state when updating this GameObject position and rotation;
+    /// falls back to the tracked device's is tracked state that drives the position or rotation action when not set.
+    /// Must be an action with a button-like interaction where phase equals performed when is tracked.
+    /// Typically a <see cref="ButtonControl"/> Control.
+    /// </summary>
 
     public enum ControllerBinding {
         None,
