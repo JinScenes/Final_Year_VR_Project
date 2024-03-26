@@ -5105,6 +5105,10 @@ MonoBehaviour:
   - {fileID: 8726307681074174160}
   DeactivateCollidersOnDeath:
   - {fileID: 5357969217081323519}
+  DestroyOnDeath: 0
+  DropOnDeath: 1
+  DestroyDelay: 10
+  Respawn: 1
   RespawnTime: 2
   RemoveBulletHolesOnDeath: 1
   onDamaged:
