@@ -5098,14 +5098,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 5
   SelfDestructDelay: 0.1
-  SpawnOnDeath: {fileID: 2920561618962350064}
+  SpawnOnDeath: {fileID: 0}
   ActivateGameObjectsOnDeath:
   - {fileID: 1389075438926666779}
   DeactivateGameObjectsOnDeath:
   - {fileID: 8726307681074174160}
   DeactivateCollidersOnDeath:
   - {fileID: 5357969217081323519}
-  RespawnTime: 10
+  RespawnTime: 2
   RemoveBulletHolesOnDeath: 1
   onDamaged:
     m_PersistentCalls:
