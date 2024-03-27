@@ -18,8 +18,8 @@ public class VendingMachine : MonoBehaviour
         if (slot != null)
         {
             // Call the method to vend the selected weapon
-            slot.HideWeapons(); // First hide all weapons
-            slot.RandomizeWeapon(); // Randomly select a new weapon for future use
+            // First hide all weapons
+            // Randomly select a new weapon for future use
             print("Dispensed Weapon: " + slot.selectedWeaponName);
             // Add more logic here to actually vend the weapon (e.g., instantiate it, apply effects, etc.)
         }
@@ -34,6 +34,7 @@ public class VendingMachine : MonoBehaviour
         // Initialize each weapon slot with a random weapon
         foreach (WeaponSlot slot in weaponSlots)
         {
+            slot.HideWeapons();
             slot.RandomizeWeapon();
         }
     }
