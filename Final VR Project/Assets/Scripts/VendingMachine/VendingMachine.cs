@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VendingMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
     public WeaponSlot[] weaponSlots;
+    public GameObject spawner; // Assign this in the Inspector
+    public Animation spawnerAnimation; // Assign this in the Inspector
+
     public void VendWeapon(int index)
     {
         if (index < 0 || index >= weaponSlots.Length)
@@ -17,11 +18,8 @@ public class VendingMachine : MonoBehaviour
         WeaponSlot slot = weaponSlots[index];
         if (slot != null)
         {
-            // Call the method to vend the selected weapon
-            // First hide all weapons
-            // Randomly select a new weapon for future use
+            slot.VendWeapon(spawner, spawnerAnimation);
             print("Dispensed Weapon: " + slot.selectedWeaponName);
-            // Add more logic here to actually vend the weapon (e.g., instantiate it, apply effects, etc.)
         }
         else
         {
@@ -38,6 +36,4 @@ public class VendingMachine : MonoBehaviour
             slot.RandomizeWeapon();
         }
     }
-
-
 }
