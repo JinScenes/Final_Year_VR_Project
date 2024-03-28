@@ -16,6 +16,8 @@ public class BulletInsert : MonoBehaviour
 
     private void Awake()
     {
+        grabbableComponent = Weapon.GetComponent<Grabbable>();
+
         if (insertRenderer != null)
         {
             insertRenderer.enabled = false;
@@ -24,13 +26,15 @@ public class BulletInsert : MonoBehaviour
 
     private void Update()
     {
-        if (Weapon.GetComponent<Grabbable>().BeingHeld &&
+        if (grabbableComponent != null && grabbableComponent.BeingHeld &&
             Weapon.GetBulletCount() < Weapon.MaxInternalAmmo &&
             flashRoutine == null)
         {
             StartFlashing();
         }
-        else if (Weapon.GetBulletCount() >= Weapon.MaxInternalAmmo && flashRoutine != null)
+        else if (grabbableComponent != null &&
+                 (Weapon.GetBulletCount() >= Weapon.MaxInternalAmmo || !grabbableComponent.BeingHeld) &&
+                 flashRoutine != null)
         {
             StopFlashing();
         }
@@ -38,19 +42,25 @@ public class BulletInsert : MonoBehaviour
 
     private void UpdateFlashingStatus()
     {
-        if (grabbableComponent.BeingHeld &&
-            Weapon.GetBulletCount() < Weapon.MaxInternalAmmo &&
-            flashRoutine == null)
+        if (grabbableComponent != null && Weapon != null)
         {
-            StartFlashing();
+            if (grabbableComponent.BeingHeld &&
+                Weapon.GetBulletCount() < Weapon.MaxInternalAmmo &&
+                flashRoutine == null)
+            {
+                StartFlashing();
+            }
+            else if ((!grabbableComponent.BeingHeld || Weapon.GetBulletCount() >= Weapon.MaxInternalAmmo) &&
+                    flashRoutine != null)
+            {
+                StopFlashing();
+            }
         }
-        else if ((!grabbableComponent.BeingHeld || Weapon.GetBulletCount() >= Weapon.MaxInternalAmmo) &&
-                 flashRoutine != null)
+        else
         {
-            StopFlashing();
+            Debug.LogError("UpdateFlashingStatus: grabbableComponent or Weapon is not assigned.");
         }
     }
-
 
     void OnTriggerEnter(Collider other)
     {
