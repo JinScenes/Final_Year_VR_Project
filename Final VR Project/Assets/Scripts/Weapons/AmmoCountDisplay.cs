@@ -8,7 +8,6 @@ public class AmmoCountDisplay : MonoBehaviour
     [SerializeField] private string weaponType;
 
     [SerializeField] private int lowAmmoThreshold = 5;
-    [SerializeField] private int shotgunShellRatio = 30;
 
     [SerializeField] private Color lowAmmoColor = Color.yellow;
     [SerializeField] private Color noAmmoColor = Color.red;
@@ -59,7 +58,7 @@ public class AmmoCountDisplay : MonoBehaviour
                 ammoCount = ammoDispenser.CurrentLeader_50Clip;
                 break;
             case "Shotgun":
-                ammoCount = ammoDispenser.CurrentShotgunShells / shotgunShellRatio;
+                ammoCount = ammoDispenser.CurrentShotgunShells;
                 break;
             default:
                 displayText.text = "Unknown Weapon Type";
