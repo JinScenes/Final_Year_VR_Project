@@ -1677,6 +1677,7 @@ GameObject:
   - component: {fileID: 4851199665506416626}
   - component: {fileID: 4608330178238812205}
   - component: {fileID: 4991958376408887180}
+  - component: {fileID: 1612974724454304340}
   m_Layer: 10
   m_Name: M4A4 Clip
   m_TagString: Untagged
@@ -1837,6 +1838,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02804017, y: 0.12258132, z: 0.06591272}
   m_Center: {x: 0.00009226799, y: 0.065934025, z: 0.0055621862}
+--- !u!114 &1612974724454304340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120252776290088528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d927bcbbfd82040982a72d2f9932b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5172318127852972073
 GameObject:
   m_ObjectHideFlags: 0
