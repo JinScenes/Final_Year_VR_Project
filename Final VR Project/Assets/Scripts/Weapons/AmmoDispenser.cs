@@ -181,21 +181,33 @@ public class AmmoDispenser : MonoBehaviour
 
     public virtual void AddAmmo(string AmmoName)
     {
-        if (AmmoName.Contains("Shotgun"))
+        if (AmmoName.Contains("SIG MCX Clip"))
         {
-            CurrentShotgunShells++;
+            CurrentSIGMCXClip++;
         }
-        else if (AmmoName.Contains("SCAR"))
+        else if (AmmoName.Contains("SCAR Clip"))
         {
-            CurrentSCARClips--;
+            CurrentSCARClips++;
         }
-        else if (AmmoName.Contains("Pistol"))
+        else if (AmmoName.Contains("M1911 Clip"))
         {
             CurrentPistolClips++;
         }
-        else if (AmmoName.Contains("M4A4"))
+        else if (AmmoName.Contains("M4A4 Clip"))
         {
-            CurrentM4A4Clips--;
+            CurrentM4A4Clips++;
+        }
+        else if (AmmoName.Contains("Shell"))
+        {
+            CurrentShotgunShells++;
+        }
+        else if (AmmoName.Contains("AK-74U Clip"))
+        {
+            CurrentAK74UClip++;
+        }
+        else if (AmmoName.Contains("Leader .50 Clip"))
+        {
+            CurrentLeader_50Clip++;
         }
     }
 }
