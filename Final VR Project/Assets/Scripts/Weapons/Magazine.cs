@@ -1,27 +1,44 @@
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 
 public class Magazine : MonoBehaviour
 {
-    private float cooldownTime = 3f;
-    private float lastInteractionTime = -10f;
+    private Grabbable grabbable;
+    private float destructionCooldown = 10f;
+    private float timeSinceUngrabbed = 0f;
+    private bool startCountdown = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (Time.time > lastInteractionTime + cooldownTime)
+        grabbable = GetComponent<Grabbable>();
+    }
+
+    private void Update()
+    {
+        if (grabbable.BeingHeld || HasAnyBullets())
         {
-            AmmoDispenser dispenser = other.GetComponentInParent<AmmoDispenser>();
-            if (dispenser != null)
-            {
-                lastInteractionTime = Time.time; // Capture the time at which interaction occurs
-                Debug.Log($"Interaction occurred. New lastInteractionTime: {lastInteractionTime}");
-                dispenser.AddAmmo(gameObject.name);
-                Destroy(gameObject); // Destroys the magazine object
-            }
+            startCountdown = false;
+            timeSinceUngrabbed = 0f;
         }
-        else
+        else if (!startCountdown)
         {
-            Debug.Log("Interaction skipped due to cooldown.");
+            startCountdown = true;
+        }
+
+        if (startCountdown && GetComponent<FixedJoint>() == null)
+        {
+            timeSinceUngrabbed += Time.deltaTime;
+
+            if (timeSinceUngrabbed >= destructionCooldown)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
+    private bool HasAnyBullets()
+    {
+        Bullet[] bullets = GetComponentsInChildren<Bullet>();
+        return bullets.Length > 0;
+    }
 }

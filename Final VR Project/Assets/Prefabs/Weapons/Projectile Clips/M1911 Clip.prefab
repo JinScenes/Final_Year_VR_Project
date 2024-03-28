@@ -1091,6 +1091,7 @@ GameObject:
   - component: {fileID: 3771612126134880049}
   - component: {fileID: 3771612126134880050}
   - component: {fileID: 3771612126134880051}
+  - component: {fileID: -5406595087965245107}
   m_Layer: 10
   m_Name: M1911 Clip
   m_TagString: Untagged
@@ -1252,6 +1253,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02256311, y: 0.11537261, z: 0.034034155}
   m_Center: {x: -0.0004135208, y: 0.013221316, z: -0.00026763618}
+--- !u!114 &-5406595087965245107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3771612126134880053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d927bcbbfd82040982a72d2f9932b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7938443241526724129
 GameObject:
   m_ObjectHideFlags: 0
