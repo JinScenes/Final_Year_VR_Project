@@ -34,19 +34,28 @@ public class JointHelper : MonoBehaviour
         if (LockXPosition || LockYPosition || LockZPosition)
         {
             currentPosition = transform.localPosition;
-            transform.localPosition = new Vector3(LockXPosition ? initialPosition.x : currentPosition.x, LockYPosition ? initialPosition.y : currentPosition.y, LockZPosition ? initialPosition.z : currentPosition.z);
+            transform.localPosition = new Vector3
+                (LockXPosition ? initialPosition.x : currentPosition.x,
+                LockYPosition ? initialPosition.y : currentPosition.y,
+                LockZPosition ? initialPosition.z : currentPosition.z);
         }
 
         if (LockXScale || LockYScale || LockZScale)
         {
             currentScale = transform.localScale;
-            transform.localScale = new Vector3(LockXScale ? initialScale.x : currentScale.x, LockYScale ? initialScale.y : currentScale.y, LockZScale ? initialScale.z : currentScale.z);
+            transform.localScale = new Vector3
+                (LockXScale ? initialScale.x : currentScale.x,
+                LockYScale ? initialScale.y : currentScale.y,
+                LockZScale ? initialScale.z : currentScale.z);
         }
 
         if (LockXRotation || LockYRotation || LockZRotation)
         {
             currentRotation = transform.localEulerAngles;
-            transform.localEulerAngles = new Vector3(LockXRotation ? initialRotation.x : currentRotation.x, LockYRotation ? initialRotation.y : currentRotation.y, LockZRotation ? initialRotation.z : currentRotation.z);
+            transform.localEulerAngles = new Vector3
+                (LockXRotation ? initialRotation.x : currentRotation.x,
+                LockYRotation ? initialRotation.y : currentRotation.y,
+                LockZRotation ? initialRotation.z : currentRotation.z);
         }
     }
 

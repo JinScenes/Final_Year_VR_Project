@@ -9,23 +9,31 @@ public class MagazineSlide : MonoBehaviour
     [SerializeField] private Grabbable AttachedWeapon;
     [SerializeField] private Grabbable HeldMagazine = null;
 
-    [SerializeField] private float ClipSnapDistance = 0.075f;
-    [SerializeField] private float ClipUnsnapDistance = 0.15f;
+    [SerializeField] private float ClipSnapDistance = .075f;
+    [SerializeField] private float ClipUnsnapDistance = .15f;
     [SerializeField] private float EjectForce = 1f;
+    [SerializeField] private float flashDuration = .5f;
 
     [SerializeField] private float MagazineDistance = 0f;
 
     [SerializeField] private AudioClip ClipAttachSound;
     [SerializeField] private AudioClip ClipDetachSound;
 
+    [SerializeField] private Renderer magRenderer;
+
     private Collider HeldCollider = null;
     private RaycastWeapon parentWeapon;
     private GrabberArea grabClipArea;
+    private Coroutine flashRoutine = null;
 
+    private float lastClipAttachSoundTime = 0f;
+    private float lastClipDetachSoundTime = 0f;
     private float lastEjectTime;
 
     private bool magazineInPlace = false;
     private bool lockedInPlace = false;
+
+    private bool IsWeaponHeld => AttachedWeapon != null && AttachedWeapon.BeingHeld;
 
     private void Awake()
     {
@@ -39,6 +47,23 @@ public class MagazineSlide : MonoBehaviour
         if (HeldMagazine != null)
         {
             AttachGrabbableMagazine(HeldMagazine, HeldMagazine.GetComponent<Collider>());
+        }
+
+        if (magRenderer != null)
+        {
+            magRenderer.enabled = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (HeldMagazine == null && IsWeaponHeld)
+        {
+            startFlashing();
+        }
+        else
+        {
+            stopFlashing();
         }
     }
 
@@ -87,6 +112,15 @@ public class MagazineSlide : MonoBehaviour
                 detachMagazine();
             }
         }
+
+        if (HeldMagazine == null && !magazineInPlace)
+        {
+            startFlashing();
+        }
+        else
+        {
+            stopFlashing();
+        }
     }
 
     private bool recentlyEjected()
@@ -125,14 +159,47 @@ public class MagazineSlide : MonoBehaviour
         }
     }
 
+    private void startFlashing()
+    {
+        if (flashRoutine == null && magRenderer != null)
+        {
+            flashRoutine = StartCoroutine(FlashMag());
+        }
+    }
+
+    private void stopFlashing()
+    {
+        if (flashRoutine != null)
+        {
+            StopCoroutine(flashRoutine);
+            flashRoutine = null;
+        }
+        if (magRenderer != null)
+        {
+            magRenderer.enabled = false;
+        }
+    }
+
+    private IEnumerator FlashMag()
+    {
+        while (IsWeaponHeld && HeldMagazine == null)
+        {
+            magRenderer.enabled = !magRenderer.enabled;
+            yield return new WaitForSeconds(flashDuration);
+        }
+
+        stopFlashing();
+    }
+
     private void attachMagazine()
     {
         var grabber = HeldMagazine.GetPrimaryGrabber();
         HeldMagazine.DropItem(grabber, false, false);
 
-        if (ClipAttachSound && Time.timeSinceLevelLoad > 0.1f)
+        if (ClipAttachSound && Time.timeSinceLevelLoad > .1f && Time.time - lastClipAttachSoundTime > 1f)
         {
             XRManager.Instance.PlaySpatialClipAt(ClipAttachSound, transform.position, 1f);
+            lastClipAttachSoundTime = Time.time;
         }
 
         moveMagazine(Vector3.zero);
@@ -166,7 +233,11 @@ public class MagazineSlide : MonoBehaviour
             return null;
         }
 
-        XRManager.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
+        if (ClipDetachSound && Time.time - lastClipDetachSoundTime > 1f)
+        {
+            XRManager.Instance.PlaySpatialClipAt(ClipDetachSound, transform.position, 1f, 0.9f);
+            lastClipDetachSoundTime = Time.time;
+        }
 
         HeldMagazine.transform.parent = null;
 
@@ -257,8 +328,8 @@ public class MagazineSlide : MonoBehaviour
     {
         HeldMagazine = mag;
         HeldMagazine.transform.parent = transform;
-
         HeldCollider = magCollider;
+        stopFlashing();
 
         if (HeldCollider != null)
         {

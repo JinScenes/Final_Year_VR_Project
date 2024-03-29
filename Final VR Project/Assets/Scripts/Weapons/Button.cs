@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
     public float MinLocalY = 0.25f;
     public float MaxLocalY = 0.55f;
 
-    [SerializeField] private float ClickTolerance = 0.01f;
+    public float actuationForce = 0.01f;
 
     private bool AllowPhysicsForces = true;
 
@@ -103,13 +103,13 @@ public class Button : MonoBehaviour
         }
 
         float buttonDownDistance = transform.localPosition.y - buttonDownPosition.y;
-        if (buttonDownDistance <= ClickTolerance && !clickingDown)
+        if (buttonDownDistance <= actuationForce && !clickingDown)
         {
             clickingDown = true;
             OnButtonDown();
         }
         float buttonUpDistance = buttonUpPosition.y - transform.localPosition.y;
-        if (buttonUpDistance <= ClickTolerance && clickingDown)
+        if (buttonUpDistance <= actuationForce && clickingDown)
         {
             clickingDown = false;
             OnButtonUp();

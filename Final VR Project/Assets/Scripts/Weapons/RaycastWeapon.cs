@@ -19,6 +19,7 @@ public enum ReloadType
 
 public class RaycastWeapon : GrabbableEvents
 {
+    [Header("Damage")]
     [SerializeField] private float MaxRange = 25f;
     [SerializeField] private float Damage = 25f;
 
@@ -82,9 +83,14 @@ public class RaycastWeapon : GrabbableEvents
 
     private float minSlideDistance = 0.001f;
 
-    [SerializeField] private List<GrabbedControllerBinding> EjectInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
-    [SerializeField] private List<GrabbedControllerBinding> ReleaseSlideInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button1Down };
-    [SerializeField] private List<GrabbedControllerBinding> ReloadInput = new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
+    [SerializeField] private List<GrabbedControllerBinding> EjectInput =
+        new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
+
+    [SerializeField] private List<GrabbedControllerBinding> ReleaseSlideInput = 
+        new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button1Down };
+
+    [SerializeField] private List<GrabbedControllerBinding> ReloadInput = 
+        new List<GrabbedControllerBinding>() { GrabbedControllerBinding.Button2Down };
 
     public bool BulletInChamber = false;
 
@@ -371,7 +377,6 @@ public class RaycastWeapon : GrabbableEvents
 
     public virtual void OnAttachedAmmo()
     {
-
         updateChamberedBullet();
 
         if (onAttachedAmmoEvent != null)
