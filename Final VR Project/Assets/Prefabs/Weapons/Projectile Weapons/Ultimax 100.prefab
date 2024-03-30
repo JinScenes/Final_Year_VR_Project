@@ -1303,7 +1303,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6ff064a0c03a603439d01450dfc8ca4d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d751e4d81d1016545a212b89f0e0d061, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1495,8 +1495,8 @@ MonoBehaviour:
   MaxLocalZ: 0
   slidingBack: 1
   ZeroMassWhenNotHeld: 1
-  SlideReleaseSound: {fileID: 8300000, guid: e27267faf69a56343bef8a8e06e10e53, type: 3}
-  LockedBackSound: {fileID: 8300000, guid: ddab559aaad0dd4419c2c24a94e98c29, type: 3}
+  SlideReleaseSound: {fileID: 8300000, guid: 826f28be1b7037140b4a63b0138b993c, type: 3}
+  LockedBackSound: {fileID: 8300000, guid: c8d3b3fca4955d045a8e0552716eaf25, type: 3}
   slideRenderer: {fileID: 6171745409451370521}
   flashMaterial: {fileID: 2100000, guid: fc69318049f082042bb7eb4cecce83e9, type: 2}
   LockedBack: 0
@@ -2530,7 +2530,7 @@ MonoBehaviour:
   BulletCasingForce: 3
   LaserGuided: 0
   LaserPoint: {fileID: 0}
-  RecoilForce: {x: 0, y: 0.8, z: 0.5}
+  RecoilForce: {x: 2.73, y: 1.22, z: 0.9}
   RecoilDuration: 0.3
   ValidLayers:
     serializedVersion: 2
@@ -2547,7 +2547,7 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 3454612190511497970, guid: fa39ce2ce96bec94b82f2c8124ce3930,
     type: 3}
-  GunShotSound: {fileID: 8300000, guid: 4a102a10ab982234ca3f42c1527a513c, type: 3}
+  GunShotSound: {fileID: 8300000, guid: d4cddbb909bed25459797742ba849ace, type: 3}
   GunShotVolume: 0.75
   slideSpeed: 1
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
