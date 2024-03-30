@@ -6,8 +6,9 @@ using UnityEngine;
 public class Music : MonoBehaviour
 {
     [SerializeField] AudioSource here;
-    [SerializeField] AudioClip[] clip;
+    [SerializeField] AudioClip [] clip;
     int i;
+    int f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +20,15 @@ public class Music : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (here.isPlaying!)
+        if (!here.isPlaying)
         {
-            if (i == 4)
-            {
-                i = 0;
-            }
             here.clip = clip[i];
-            i++;
+            f = i;
+            i = Random.Range(-1, 5);
+            if(i == f)
+            {
+                i = Random.Range(-1, 5);
+            }
             here.Play();
         }
     }
