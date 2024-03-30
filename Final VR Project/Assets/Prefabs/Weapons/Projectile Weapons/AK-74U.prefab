@@ -1134,7 +1134,7 @@ MonoBehaviour:
   FiringMethod: 1
   ReloadMethod: 1
   MaxInternalAmmo: 32
-  FiringRate: 0.12
+  FiringRate: 0.09
   BulletImpactForce: 1000
   InternalAmmo: 0
   AutoChamberRounds: 1

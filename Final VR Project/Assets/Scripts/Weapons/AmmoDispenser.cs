@@ -19,6 +19,7 @@ public class AmmoDispenser : MonoBehaviour
     [SerializeField] private GameObject AK74UClip;
     [SerializeField] private GameObject SIGMCXClip;
     [SerializeField] private GameObject Leader_50Clip;
+    [SerializeField] private GameObject Ultimax100Clip;
 
     [Header("Clip Amounts")]
     public int CurrentPistolClips = 5;
@@ -28,6 +29,7 @@ public class AmmoDispenser : MonoBehaviour
     public int CurrentSIGMCXClip = 5;
     public int CurrentLeader_50Clip = 5;
     public int CurrentShotgunShells = 30;
+    public int CurrentUltimax100Clip = 3;
 
     private void Update()
     {
@@ -61,7 +63,8 @@ public class AmmoDispenser : MonoBehaviour
             grabName.Contains("M4A4") ||
             grabName.Contains("AK-74U") ||
             grabName.Contains("Leader .50") ||
-            grabName.Contains("SIG MCX"))
+            grabName.Contains("SIG MCX") ||
+            grabName.Contains("Ultimax 100"))
         {
             return true;
         }
@@ -152,6 +155,17 @@ public class AmmoDispenser : MonoBehaviour
             return Leader_50Clip;
         }
 
+        if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Ultimax 100") && CurrentUltimax100Clip > 0)
+        {
+            CurrentUltimax100Clip--;
+            return Ultimax100Clip;
+        }
+        else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("Ultimax 100") && CurrentUltimax100Clip > 0)
+        {
+            CurrentUltimax100Clip--;
+            return Ultimax100Clip;
+        }
+
         return null;
     }
 
@@ -208,6 +222,10 @@ public class AmmoDispenser : MonoBehaviour
         else if (AmmoName.Contains("Leader .50 Clip"))
         {
             CurrentLeader_50Clip++;
+        }
+        else if (AmmoName.Contains("Ultimax 100"))
+        {
+            CurrentUltimax100Clip++;
         }
     }
 }

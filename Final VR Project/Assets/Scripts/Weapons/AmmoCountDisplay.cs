@@ -57,6 +57,9 @@ public class AmmoCountDisplay : MonoBehaviour
             case "Leader_50":
                 ammoCount = ammoDispenser.CurrentLeader_50Clip;
                 break;
+            case "Ultimax 100":
+                ammoCount = ammoDispenser.CurrentUltimax100Clip;
+                break;
             case "Shotgun":
                 ammoCount = ammoDispenser.CurrentShotgunShells;
                 break;
