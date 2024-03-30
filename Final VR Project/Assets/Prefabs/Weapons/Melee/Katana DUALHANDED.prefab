@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 2829697581920416870}
   - component: {fileID: 2829697581920416871}
   - component: {fileID: 2829697581920416865}
-  - component: {fileID: 7201324888920776995}
   - component: {fileID: 5785530623644122834}
   m_Layer: 10
   m_Name: Katana DUALHANDED
@@ -325,28 +324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CenterOfMass: {x: 0, y: 0, z: 0}
   CenterOfMassTransform: {fileID: 2829697581069487359}
---- !u!114 &7201324888920776995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2829697581920416864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c539204c5d04e1f46956776d6c3f32b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FRequiredPenetrationForce: 150
-  MinPenetration: 0.01
-  MaxPenetration: 0.2
-  BreakDistance: 0.005
-  PunctureColliders:
-  - {fileID: 1740029674765098774}
-  PuncturedObject: {fileID: 0}
-  HasPunctured: 0
-  PunctureValue: 0
-  TargetDistance: 0
 --- !u!114 &5785530623644122834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2418976482621967475
 Transform:
   m_ObjectHideFlags: 0
