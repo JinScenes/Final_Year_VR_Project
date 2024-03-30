@@ -232,7 +232,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 2
   BreakDistance: 2
   HideHandGraphics: 0
-  ParentToHands: 0
+  ParentToHands: 1
   ParentHandModel: 1
   SnapHandModel: 1
   CanBeDropped: 1
