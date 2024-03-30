@@ -352,22 +352,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pr:
   - ammoType: SIG MCX Clip
-    minAmount: 1
+    minAmount: 0
     maxAmount: 3
   - ammoType: SCAR Clip
-    minAmount: 1
+    minAmount: 0
     maxAmount: 3
   - ammoType: M4A4 Clip
-    minAmount: 1
+    minAmount: 0
     maxAmount: 3
   - ammoType: Shell
-    minAmount: 3
+    minAmount: 0
     maxAmount: 7
   - ammoType: AK-74U Clip
-    minAmount: 1
+    minAmount: 0
     maxAmount: 4
   - ammoType: Leader .50 Clip
-    minAmount: 1
+    minAmount: 0
+    maxAmount: 2
+  - ammoType: Ultimax 100
+    minAmount: 0
     maxAmount: 2
   vfxPrefab: {fileID: 2170620996699688337, guid: df9e05b90454ac24397b849ee00ba055,
     type: 3}
