@@ -4,7 +4,7 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour
 {
     public GameObject player;
-    public GameObject lDoor, rDoor;
+    public GameObject lDoor, rDoor, pistol;
     public string destroyableTag = "DestroyableWeapon";
     private GameObject ammoSpawner;
 
