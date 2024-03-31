@@ -4,7 +4,7 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour
 {
     public GameObject player;
-    public GameObject lDoor, rDoor, pistol;
+    public GameObject lDoor, rDoor;
     public string destroyableTag = "DestroyableWeapon";
     private GameObject ammoSpawner;
 
@@ -26,9 +26,8 @@ public class DoorOpen : MonoBehaviour
     {
         lDoor.transform.Rotate(0, -90, 0);
         rDoor.transform.Rotate(0, 90, 0);
-
-        ammoSpawner.GetComponent<AmmoSpawn>().SpawnAmmo();
         DestroyWeapons();
+
 
         yield return new WaitForSeconds(5);
 
@@ -36,6 +35,7 @@ public class DoorOpen : MonoBehaviour
 
         lDoor.transform.Rotate(0, 90, 0);
         rDoor.transform.Rotate(0, -90, 0);
+        ammoSpawner.GetComponent<AmmoSpawn>().SpawnAmmo();
     }
 
     private void DestroyWeapons()
