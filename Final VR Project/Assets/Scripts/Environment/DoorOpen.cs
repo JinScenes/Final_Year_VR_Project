@@ -21,8 +21,17 @@ public class DoorOpen : MonoBehaviour
     {
         if (other.gameObject == player)
         {
-            lDoor.transform.Rotate(0, -90, 0);
-            rDoor.transform.Rotate(0, 90, 0);
+            StartCoroutine(doorCloseandOpen());
         }
+    }
+
+ private  IEnumerator doorCloseandOpen()
+    {
+        lDoor.transform.Rotate(0, -90, 0);
+        rDoor.transform.Rotate(0, 90, 0);
+        yield return new WaitForSeconds(5);
+        print("Doors closing");
+        lDoor.transform.Rotate(0, 90, 0);
+        rDoor.transform.Rotate(0, -90, 0);
     }
 }
