@@ -18,11 +18,11 @@ public class Damageable : MonoBehaviour
     [SerializeField] private List<GameObject> DeactivateGameObjectsOnDeath;
     [SerializeField] private List<Collider> DeactivateCollidersOnDeath;
 
-    private bool DestroyOnDeath = true;
-    private bool DropOnDeath = true;
+    [SerializeField] private bool DestroyOnDeath = true;
+    [SerializeField] private bool DropOnDeath = true;
 
-    private float DestroyDelay = 0f;
-    private bool Respawn = false;
+    [SerializeField] private float DestroyDelay = 0f;
+    [SerializeField] private bool Respawn = false;
 
     [SerializeField] private float RespawnTime = 10f;
 

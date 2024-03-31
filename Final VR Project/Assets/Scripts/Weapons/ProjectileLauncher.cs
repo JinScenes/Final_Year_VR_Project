@@ -3,15 +3,11 @@
 public class ProjectileLauncher : MonoBehaviour
 {
     public GameObject ProjectileObject;
-
-    public float ProjectileForce = 15f;
-
     public AudioClip LaunchSound;
-
     public ParticleSystem LaunchParticles;
-
     public Transform MuzzleTransform;
 
+    public float ProjectileForce = 15f;
     private float _initialProjectileForce;
 
     private void Start()

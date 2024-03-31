@@ -9,7 +9,21 @@ public class AmmoDisplay : MonoBehaviour
     private void OnGUI()
     {
         string loadedShot = Weapon.BulletInChamber ? "1" : "0";
-        AmmoLabel.text = loadedShot + " / " + Weapon.GetBulletCount();
+        int currentAmmoCount = Weapon.GetBulletCount();
+        AmmoLabel.text = loadedShot + " / " + currentAmmoCount;
+
+        if (currentAmmoCount == 0)
+        {
+            AmmoLabel.color = Color.red;
+        }
+        else if (currentAmmoCount > 0 && currentAmmoCount < Weapon.MaxInternalAmmo)
+        {
+            AmmoLabel.color = Color.yellow;
+        }
+        else
+        {
+            AmmoLabel.color = Color.white;
+        }
     }
 }
 
