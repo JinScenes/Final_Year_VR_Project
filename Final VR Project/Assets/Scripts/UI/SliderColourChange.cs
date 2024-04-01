@@ -23,7 +23,7 @@ public class SliderColourChange : MonoBehaviour
 
         if (percentage > 0.66f)
         {
-            fillArea.color = Color.yellow;
+            fillArea.color = Color.green;
         }
         else if (percentage < 0.33f)
         {
@@ -31,7 +31,7 @@ public class SliderColourChange : MonoBehaviour
         }
         else
         {
-            fillArea.color = Color.green;
+            fillArea.color = Color.yellow;
         }
     }
 }
