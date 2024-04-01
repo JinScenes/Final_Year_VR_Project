@@ -79,10 +79,16 @@ public class ZombieAI : MonoBehaviour
     }
     private void MoveTowardsPlayer()
     {
-        // Reset attack booleans and make the zombie move.
-        ResetAttackBooleans();
-        //agent.isStopped = false;
-        agent.SetDestination(playerTransform.position);
+        float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
+
+
+        float maxChaseRange = 20.0f; //
+
+        if (distanceToPlayer <= maxChaseRange)
+        {
+            ResetAttackBooleans();
+            agent.SetDestination(playerTransform.position);
+        }
     }
 
     void setFalse()
