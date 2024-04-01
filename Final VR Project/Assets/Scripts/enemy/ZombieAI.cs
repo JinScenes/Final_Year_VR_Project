@@ -132,6 +132,7 @@ public class ZombieAI : MonoBehaviour
         {
             animator.SetBool("IsAttacking3", true);
         }
+        OnAttackHit();
     }
 
     private void ResetAttackBooleans()
@@ -140,4 +141,17 @@ public class ZombieAI : MonoBehaviour
         animator.SetBool("IsAttacking2", false);
         animator.SetBool("IsAttacking3", false);
     }
+
+    public void OnAttackHit()
+    {
+        // Here you'll check if the player is in range and then apply damage.
+        // This is called from the animation event.
+        float distance = Vector3.Distance(playerTransform.position, transform.position);
+        if (distance <= attackDistance)
+        {
+            // Assuming the player's script is called PlayerHealth and is attached to the player GameObject
+            playerTransform.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
+    }
+
 }
