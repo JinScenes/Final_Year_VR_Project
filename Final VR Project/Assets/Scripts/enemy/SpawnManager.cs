@@ -26,8 +26,12 @@ public class SpawnManager : MonoBehaviour
 
     public void ZombieKilled()
     {
-        totalZombiesAlive--;
-        UpdateZombieCountText();
+        if (totalZombiesAlive > 0)
+        {
+            totalZombiesAlive--;
+            UpdateZombieCountText();
+        }
+
         if (totalZombiesAlive <= 0)
         {
             StartCoroutine(WaitAndStartNextWave());
