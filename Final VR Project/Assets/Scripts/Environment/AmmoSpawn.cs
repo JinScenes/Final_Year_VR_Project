@@ -16,13 +16,25 @@ public class AmmoSpawn : MonoBehaviour
     {
         foreach (GameObject spawnLocation in spawnLocations)
         {
+            List<GameObject> objectsToDestroy = new List<GameObject>();
+
             foreach (Transform child in spawnLocation.transform)
             {
+                if (child == null) continue;
                 if (child.tag == "Ammo")
                 {
-                    Destroy(child.gameObject);
+                    objectsToDestroy.Add(child.gameObject);
+                }
+
+            }
+            foreach (GameObject obj in objectsToDestroy)
+            {
+                if (obj != null)
+                {
+                    Destroy(obj);
                 }
             }
+
             GameObject ammoToSpawn = ammoObjects[Random.Range(0, ammoObjects.Length)];
             GameObject spawnedAmmo = Instantiate(ammoToSpawn, spawnLocation.transform.position, Quaternion.identity);
             spawnedAmmo.transform.SetParent(spawnLocation.transform);
