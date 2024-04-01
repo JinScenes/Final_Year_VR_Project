@@ -14,6 +14,7 @@ public class ZombieAI : MonoBehaviour
     private float walkSpeed = 1.0f;
     private float runSpeed = 3.0f;
     private float crawlSpeed = 0.5f;
+    public bool isAlive = true;
 
     private enum MovementType { Walk, Run, Crawl }
     private MovementType movementType;
@@ -33,6 +34,7 @@ public class ZombieAI : MonoBehaviour
 
     private void Update()
     {
+        if (!isAlive) return;
         float distance = Vector3.Distance(playerTransform.position, transform.position);
 
         if (distance <= attackDistance)

@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviour
     void StartNextWave()
     {
         waveNumber++;
-        totalZombiesToSpawn = waveNumber * 5; // example formula for increasing zombie count each wave
+        totalZombiesToSpawn = waveNumber + 5; 
         StartCoroutine(SpawnZombies());
     }
 }
