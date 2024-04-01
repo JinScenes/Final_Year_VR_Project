@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PunctureCollider : MonoBehaviour
 {
-    [Header("Puncture properties : ")]
+    [Header("Puncture properties")]
     [SerializeField] private float FRequiredPenetrationForce = 150f;
     [SerializeField] private float MinPenetration = 0.01f;
     [SerializeField] private float MaxPenetration = 0.2f;
@@ -12,6 +12,7 @@ public class PunctureCollider : MonoBehaviour
 
     [SerializeField] private List<Collider> PunctureColliders;
 
+    [Header("Debug Values")]
     [SerializeField] private GameObject PuncturedObject;
     [SerializeField] private bool HasPunctured = false;
     [SerializeField] private float PunctureValue;
@@ -25,17 +26,17 @@ public class PunctureCollider : MonoBehaviour
     GameObject jointHelper;
     Rigidbody jointHelperRB;
     ConfigurableJoint configJoint;
-    Grabbable grabbable;
+    Grabbable grab;
     FixedJoint fixedJoint;
 
     private float yPuncture, yPunctureMin, yPunctureMax;
 
-    void Start()
+    private void Start()
     {
         col = GetComponent<Collider>();
         rb = col.attachedRigidbody;
         ignoreCols = GetComponentsInChildren<Collider>();
-        grabbable = GetComponent<Grabbable>();
+        grab = GetComponent<Grabbable>();
     }
 
     public float TargetDistance;
@@ -142,9 +143,9 @@ public class PunctureCollider : MonoBehaviour
 
     public virtual void AdjustJointMass()
     {
-        if (grabbable != null && configJoint != null)
+        if (grab != null && configJoint != null)
         {
-            if (HasPunctured && grabbable.BeingHeld)
+            if (HasPunctured && grab.BeingHeld)
             {
                 configJoint.massScale = 1f;
                 configJoint.connectedMassScale = 0.0001f;
@@ -161,7 +162,7 @@ public class PunctureCollider : MonoBehaviour
     {
         if (HasPunctured)
         {
-            if (grabbable != null && grabbable.BeingHeld)
+            if (grab != null && grab.BeingHeld)
             {
                 float punctureDifference = previousPunctureValue - PunctureValue;
                 if (punctureDifference != 0 && Mathf.Abs(punctureDifference) > 0.0001f)
