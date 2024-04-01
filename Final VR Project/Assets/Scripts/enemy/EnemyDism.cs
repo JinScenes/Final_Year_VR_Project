@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyDism : MonoBehaviour
 {
@@ -21,10 +22,13 @@ public class EnemyDism : MonoBehaviour
         
     }
 
-    private void StartRagdoll()
+    public void StartRagdoll()
     {
         anim.enabled = false;
-        for(int i = 0; i < rigidbodiesInRagdoll.Count ; i++)
+        anim.enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false; // Disable the NavMeshAgent
+        GetComponent<ZombieAI>().enabled = false;
+        for (int i = 0; i < rigidbodiesInRagdoll.Count ; i++)
         {
             rigidbodiesInRagdoll[i].useGravity = true;
             rigidbodiesInRagdoll[i].isKinematic = false ;
@@ -40,4 +44,7 @@ public class EnemyDism : MonoBehaviour
             rigidbodiesInRagdoll[i].isKinematic = true;
         }
     }
+
+
+
 }
