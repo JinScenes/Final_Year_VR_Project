@@ -41,6 +41,14 @@ public class WeaponSlide : MonoBehaviour
         thisGrabbable = GetComponent<Grabbable>();
         rigid = GetComponent<Rigidbody>();
         initialMass = rigid.mass;
+
+        if (slideRenderer == null)
+        {
+            string parentName = transform.parent != null ? transform.parent.gameObject.name : "No parent";
+            Debug.LogError($"slideRenderer not assigned in {gameObject.name}. Parent: {parentName}");
+            return;
+        }
+
         originalMaterial = slideRenderer.material;
 
         if (parentWeapon != null)
