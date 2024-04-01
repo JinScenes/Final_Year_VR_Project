@@ -1,44 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AmmoSpawn : MonoBehaviour
 {
-    public GameObject[] ammoObjects; 
-    private GameObject[] spawnLocations; 
+    [SerializeField] private GameObject ammoPrefab;
+    private List<Transform> spawnLocations = new List<Transform>();
 
     void Start()
     {
-        spawnLocations = GameObject.FindGameObjectsWithTag("AmmoSpawn");
+        foreach (Transform child in transform)
+        {
+            spawnLocations.Add(child);
+        }
     }
 
     public void SpawnAmmo()
     {
-        foreach (GameObject spawnLocation in spawnLocations)
+        foreach (Transform spawnLocation in spawnLocations)
         {
-            List<GameObject> objectsToDestroy = new List<GameObject>();
-
-            foreach (Transform child in spawnLocation.transform)
+            if (Random.value > 0.5f)
             {
-                if (child == null) continue;
-                if (child.tag == "Ammo")
-                {
-                    objectsToDestroy.Add(child.gameObject);
-                }
-
+                Instantiate(ammoPrefab, spawnLocation.position, Quaternion.identity, spawnLocation);
+                //print("Ammo box spawned at " + spawnLocation.name);
             }
-            foreach (GameObject obj in objectsToDestroy)
+            else
             {
-                if (obj != null)
-                {
-                    Destroy(obj);
-                }
+                //print("No ammo box spawned at " + spawnLocation.name);
             }
-
-            GameObject ammoToSpawn = ammoObjects[Random.Range(0, ammoObjects.Length)];
-            GameObject spawnedAmmo = Instantiate(ammoToSpawn, spawnLocation.transform.position, Quaternion.identity);
-            spawnedAmmo.transform.SetParent(spawnLocation.transform);
-            print("Ammo Spawned");
         }
     }
+
 }
