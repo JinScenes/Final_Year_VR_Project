@@ -6292,14 +6292,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748184704445231679}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0763, y: 0.0366, z: 0.0912}
+  m_LocalRotation: {x: -0, y: -0.11245741, z: -0, w: 0.99365664}
+  m_LocalPosition: {x: 0.054675892, y: -0.019, z: 0.13257217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 74268163582023130}
   m_Father: {fileID: 8320362180652782123}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -12.914, z: 0}
 --- !u!114 &1440829796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15746,6 +15746,7 @@ GameObject:
   - component: {fileID: 699835362}
   - component: {fileID: 1776643964}
   - component: {fileID: 4144118093911848930}
+  - component: {fileID: 2083816646231687148}
   m_Layer: 9
   m_Name: PlayerController
   m_TagString: Player
@@ -16084,6 +16085,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2083816646231687148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093207351254691191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194f697ad31b2e64d801a117aedf5270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthUI: {fileID: 5790641466348569554}
 --- !u!1 &2095857085823052182
 GameObject:
   m_ObjectHideFlags: 0
@@ -22876,14 +22891,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2790333850567859970}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0069811377, y: 0.22671305, z: 0.17202264, w: 0.95862436}
-  m_LocalPosition: {x: 0.0163, y: -0.0021, z: -0.0478}
+  m_LocalRotation: {x: 0.23200214, y: -0.13902485, z: 0.9624731, w: -0.022193614}
+  m_LocalPosition: {x: -0.049495384, y: -0.05612409, z: -0.044013977}
   m_LocalScale: {x: 0.49157333, y: 0.49157333, z: 0.49157333}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3762849393228126646}
   m_Father: {fileID: 8320362180652782123}
-  m_LocalEulerAnglesHint: {x: -5.243, y: 25.727, z: 19.148}
+  m_LocalEulerAnglesHint: {x: 14.911, y: 27.94, z: 186.371}
 --- !u!1 &2792241455297054672
 GameObject:
   m_ObjectHideFlags: 0
@@ -50176,8 +50191,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6331459650850404241}
-  m_LocalRotation: {x: -0.11764578, y: -0.71244097, z: -0.15216267, w: 0.6748584}
-  m_LocalPosition: {x: 0, y: 0, z: -0.153}
+  m_LocalRotation: {x: 0.064194754, y: -0.6042654, z: -0.034390014, w: 0.79344803}
+  m_LocalPosition: {x: 0, y: 0, z: -0.12510046}
   m_LocalScale: {x: 0.00059, y: 0.00058999995, z: 0.67502016}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50185,10 +50200,10 @@ RectTransform:
   - {fileID: 319899462671841725}
   - {fileID: 811945068364225448}
   m_Father: {fileID: 2693871403757619119}
-  m_LocalEulerAnglesHint: {x: -22.062, y: 987.351, z: 357.666}
+  m_LocalEulerAnglesHint: {x: 3.458, y: 1005.186, z: 352.392}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0085, y: -0.0338}
+  m_AnchoredPosition: {x: -0.016099785, y: -0.021899406}
   m_SizeDelta: {x: 480, y: 407.84424}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &803047245480412541
@@ -56957,7 +56972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 38532578076544350}
   - component: {fileID: 8653437337677203093}
-  - component: {fileID: 4430335719710105007}
+  - component: {fileID: 5790641466348569554}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -57038,7 +57053,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4430335719710105007
+--- !u!114 &5790641466348569554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57047,10 +57062,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7290527119069507019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be03227c1bb981844b84db8d197413a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 580c87f14d8337a439b1a0850a46b298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 8653437337677203093}
+  healthSlider: {fileID: 8653437337677203093}
+  healthText: {fileID: 6000852924552898987}
   fillArea: {fileID: 4757071812671802642}
 --- !u!1 &7294979933362423437
 GameObject:
