@@ -3963,8 +3963,6 @@ MonoBehaviour:
   ZeroMassWhenNotHeld: 1
   SlideReleaseSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
   LockedBackSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  slideRenderer: {fileID: 0}
-  flashMaterial: {fileID: 0}
   LockedBack: 0
 --- !u!1 &486720932265364349
 GameObject:
@@ -4325,11 +4323,9 @@ MonoBehaviour:
   ClipSnapDistance: 0.04
   ClipUnsnapDistance: 0.05
   EjectForce: 1
-  flashDuration: 0.5
   MagazineDistance: 0
   ClipAttachSound: {fileID: 8300000, guid: f6ba2c16c86180148906c2b6840404ae, type: 3}
   ClipDetachSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
-  magRenderer: {fileID: 0}
 --- !u!1 &486720932501335091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4351,7 +4347,7 @@ GameObject:
   - component: {fileID: 486720932501335089}
   - component: {fileID: 486720932501335090}
   - component: {fileID: 6553265111118033684}
-  - component: {fileID: -4592681669080367930}
+  - component: {fileID: -879587344859020318}
   m_Layer: 10
   m_Name: Missile Launcher
   m_TagString: Untagged
@@ -4821,7 +4817,7 @@ CapsuleCollider:
   m_Height: 0.79820776
   m_Direction: 2
   m_Center: {x: 8.0537646e-11, y: 0.045000143, z: 0.071603894}
---- !u!114 &-4592681669080367930
+--- !u!114 &-879587344859020318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4849,7 +4845,7 @@ MonoBehaviour:
   dipoleWeight: 0
   dipolePower: 0
   directivityValue: 1
-  occlusion: 1
+  occlusion: 0
   occlusionInput: 0
   occlusionType: 0
   occlusionRadius: 1
