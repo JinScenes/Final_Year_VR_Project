@@ -69,17 +69,18 @@ public class VendingMachine : MonoBehaviour
         WeaponSlot slot = weaponSlots[index];
         if (slot != null)
         {
-            slot.VendWeapon(spawner, spawnerAnimation);
-            Debug.Log("Dispensed Weapon: " + slot.selectedWeaponName);
-
-            // Find the corresponding TextMeshProUGUI for the index and update it
-            foreach (var pair in slotTextMapping)
+            int price = slot.GetPrice(); // Make sure you have a method to get the price
+            if (CreditsManager.Instance.CanAfford(price))
             {
-                if (pair.Value == index)
-                {
-                    UpdateWeaponSlotUI(pair.Key, index);
-                    break; // Exit the loop once we've found the correct TextMeshProUGUI
-                }
+                CreditsManager.Instance.SpendCredits(price);
+                slot.VendWeapon(spawner, spawnerAnimation);
+                Debug.Log("Dispensed Weapon: " + slot.selectedWeaponName);
+
+                // Update UI here as needed
+            }
+            else
+            {
+                Debug.Log("Not enough credits to purchase.");
             }
         }
         else
@@ -87,6 +88,7 @@ public class VendingMachine : MonoBehaviour
             Debug.LogError("Weapon Slot at index " + index + " is not assigned.");
         }
     }
+
 
     private void UpdateWeaponSlotUI(TextMeshProUGUI slotText, int index)
     {

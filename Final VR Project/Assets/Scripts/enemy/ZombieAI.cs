@@ -113,7 +113,7 @@ public class ZombieAI : MonoBehaviour
         // Update the speed parameter for walking/running/crawling animations.
         animator.SetFloat("Speed", agent.velocity.magnitude);
     }
-
+   
     private void ChooseAttackAnimation()
     {
         // Generate a random number and choose an attack based on that.

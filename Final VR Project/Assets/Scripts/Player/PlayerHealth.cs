@@ -35,5 +35,16 @@ public class PlayerHealth : MonoBehaviour
             healthUI.UpdateHealth(currentHealth);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = other.GetComponentInChildren<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(10);
+            }
+        }
+    }
 }
 

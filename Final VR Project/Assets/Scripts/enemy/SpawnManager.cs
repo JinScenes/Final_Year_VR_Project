@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour 
 {
     public GameObject[] spawnPoints;
     public GameObject[] zombiePrefabs; // Array of different zombie prefabs
@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        //vendingMachine.SetActive(false);
+        vendingMachine.SetActive(false);
         StartNextWave();
     }
 

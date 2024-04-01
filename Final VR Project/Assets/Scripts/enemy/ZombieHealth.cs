@@ -22,10 +22,13 @@ public class ZombieHealth : MonoBehaviour
 
     void Die()
     {
-        // You can add a death animation or effect here
-        GetComponent<EnemyDism>().StartRagdoll(); // This will start the ragdoll effect
-        Destroy(gameObject, 5f); // Remove the zombie object
+        FindObjectOfType<SpawnManager>().ZombieKilled();
+        
+        CreditsManager.Instance.AddCredits(25);
+        GetComponent<EnemyDism>().StartRagdoll(); 
+        Destroy(gameObject, 5f); 
     }
+
 
     public void TakeDamage(float amount, BodyPart hitPart = null)
     {
