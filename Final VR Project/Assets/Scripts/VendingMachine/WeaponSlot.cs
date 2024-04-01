@@ -79,8 +79,8 @@ public class WeaponSlot:MonoBehaviour
 
         int randomIndex = Random.Range(0, keys.Count);
         selectedWeaponName = keys[randomIndex];
-        Debug.Log("Randomized weapon name: " + selectedWeaponName); // Changed log message for clarity
-        Debug.Log("Selected weapon name: " + selectedWeaponName);
+        //Debug.Log("Randomized weapon name: " + selectedWeaponName);
+        //Debug.Log("Selected weapon name: " + selectedWeaponName);
     }
 
     // Add this to the WeaponSlot class
@@ -105,8 +105,7 @@ public class WeaponSlot:MonoBehaviour
         Rigidbody rb = details.weaponMesh.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = false; // Set the rigidbody to not kinematic so it falls
-                                    // You might want to apply a small force or change position if needed
+            rb.isKinematic = false;
         }
 
         StartCoroutine(SpawnWeaponPrefab(details.weaponPrefab, spawner));
@@ -140,10 +139,6 @@ public class WeaponSlot:MonoBehaviour
             rb.AddForce(forceDirection * forceMagnitude, ForceMode.VelocityChange); // Apply the force
         }
     }
-
-
-
-
 }
 
 
