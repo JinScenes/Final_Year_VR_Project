@@ -11,9 +11,9 @@ public class ZombieAI : MonoBehaviour
     private float lastAttackTime = -Mathf.Infinity;
 
     // Zombie type speeds
-    private float walkSpeed = 2.0f;
-    private float runSpeed = 4.0f;
-    private float crawlSpeed = 1.0f;
+    private float walkSpeed = 1.0f;
+    private float runSpeed = 3.0f;
+    private float crawlSpeed = 0.5f;
 
     private enum MovementType { Walk, Run, Crawl }
     private MovementType movementType;
@@ -56,18 +56,21 @@ public class ZombieAI : MonoBehaviour
         {
             case MovementType.Walk:
                 agent.speed = walkSpeed;
+                animator.speed = 1;
                 animator.SetBool("IsWalking", true);
                 animator.SetBool("IsRunning", false);
                 animator.SetBool("IsCrawling", false);
                 break;
             case MovementType.Run:
                 agent.speed = runSpeed;
+                animator.speed = 3;
                 animator.SetBool("IsWalking", false);
                 animator.SetBool("IsRunning", true);
                 animator.SetBool("IsCrawling", false);
                 break;
             case MovementType.Crawl:
                 agent.speed = crawlSpeed;
+                animator.speed = 1;
                 animator.SetBool("IsWalking", false);
                 animator.SetBool("IsRunning", false);
                 animator.SetBool("IsCrawling", true);
@@ -78,7 +81,7 @@ public class ZombieAI : MonoBehaviour
     {
         // Reset attack booleans and make the zombie move.
         ResetAttackBooleans();
-        agent.isStopped = false;
+        //agent.isStopped = false;
         agent.SetDestination(playerTransform.position);
     }
 
@@ -92,7 +95,7 @@ public class ZombieAI : MonoBehaviour
     private void PerformAttack()
     {
         // Stop the zombie and initiate the attack.
-        agent.isStopped = true;
+       //agent.isStopped = true;
         ChooseAttackAnimation();
 
         // Set the time when the attack started.
