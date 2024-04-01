@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class Slider : MonoBehaviour
+public class VRSlider : MonoBehaviour
 {
     public float SlidePercentage
     {
