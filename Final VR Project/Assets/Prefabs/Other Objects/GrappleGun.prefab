@@ -10853,6 +10853,7 @@ GameObject:
   - component: {fileID: 7236927940254548682}
   - component: {fileID: 7236927940254548799}
   - component: {fileID: 4243461306403605890}
+  - component: {fileID: -6442389615723022175}
   m_Layer: 10
   m_Name: GrappleGun
   m_TagString: Untagged
@@ -11100,10 +11101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRange: 100
+  currentGrappleDistance: 0
   GrappleReelForce: 1.1
   MinReelDistance: 0.1125
   GrappleForce: 3
   GrappleForceMode: 5
+  ClimbHelper: {fileID: 5660403289457992062}
   GrappleLayers:
     serializedVersion: 2
     m_Bits: 1281
@@ -11112,8 +11115,6 @@ MonoBehaviour:
   GrappleLine: {fileID: 5660403290208085475}
   HelperLine: {fileID: 5660403288974288059}
   GrappleShotSound: {fileID: 8300000, guid: 83dc0287d0634ed4cb587d44b592210c, type: 3}
-  currentGrappleDistance: 0
-  ClimbHelper: {fileID: 5660403289457992062}
 --- !u!114 &7236927940254548799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11152,6 +11153,88 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0.000000014364423, y: 0, z: -0.01}
+--- !u!114 &-6442389615723022175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236927940254548679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directBinaural: 1
+  interpolation: 0
+  perspectiveCorrection: 0
+  distanceAttenuation: 1
+  distanceAttenuationInput: 0
+  distanceAttenuationValue: 1
+  airAbsorption: 1
+  airAbsorptionInput: 0
+  airAbsorptionLow: 1
+  airAbsorptionMid: 1
+  airAbsorptionHigh: 1
+  directivity: 0
+  directivityInput: 0
+  dipoleWeight: 0
+  dipolePower: 0
+  directivityValue: 1
+  occlusion: 1
+  occlusionInput: 0
+  occlusionType: 0
+  occlusionRadius: 1
+  occlusionSamples: 16
+  occlusionValue: 1
+  transmission: 0
+  transmissionType: 0
+  transmissionInput: 0
+  transmissionLow: 1
+  transmissionMid: 1
+  transmissionHigh: 1
+  maxTransmissionSurfaces: 1
+  directMixLevel: 1
+  reflections: 0
+  reflectionsType: 0
+  useDistanceCurveForReflections: 0
+  currentBakedSource: {fileID: 0}
+  reverbTimeLow: 0
+  reverbTimeMid: 0
+  reverbTimeHigh: 0
+  hybridReverbEQLow: 1
+  hybridReverbEQMid: 1
+  hybridReverbEQHigh: 1
+  hybridReverbDelay: 0
+  applyHRTFToReflections: 0
+  reflectionsMixLevel: 1
+  pathing: 0
+  pathingProbeBatch: {fileID: 0}
+  pathValidation: 1
+  findAlternatePaths: 1
+  pathingEQ:
+  - 1
+  - 1
+  - 1
+  pathingSH:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applyHRTFToPathing: 0
+  pathingMixLevel: 1
 --- !u!1 &7770416303026625768
 GameObject:
   m_ObjectHideFlags: 0

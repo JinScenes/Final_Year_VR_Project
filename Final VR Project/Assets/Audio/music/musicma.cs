@@ -21,14 +21,15 @@ public class musicma : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!source.isPlaying)
+        if(source.isPlaying == false)
         {
             i = Random.Range(-1, 5);
-            if(i == f)
+                        if(i == f)
             {
                 i = Random.Range(-1, 5);
             }
             f = i;
+            source.clip = clip[i];
             source.Play();
         }
     }
