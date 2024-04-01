@@ -17623,7 +17623,7 @@ GameObject:
   - component: {fileID: 8120168463570024947}
   - component: {fileID: 3721776993224010487}
   m_Layer: 5
-  m_Name: FPS Counter
+  m_Name: Clock Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17637,15 +17637,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2295998988006884236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.008}
+  m_LocalScale: {x: 0.5776429, y: 1.0972, z: 1.0972}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5677737031521247296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -153.6, y: -20.2}
+  m_AnchoredPosition: {x: -370, y: -1}
   m_SizeDelta: {x: 168.4, y: 33.69995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5794230340108883625
@@ -23028,15 +23028,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2790333850567859970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.00710095, y: 0.09638539, z: 0.13573878, w: 0.98601955}
+  m_LocalPosition: {x: 0.0023, y: -0.0028, z: -0.0571}
+  m_LocalScale: {x: 0.58458, y: 0.58458, z: 0.58458}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5677737031521247296}
   - {fileID: 3762849393228126646}
   m_Father: {fileID: 8320362180652782123}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.697, y: 11.071, z: 15.609}
 --- !u!1 &2792241455297054672
 GameObject:
   m_ObjectHideFlags: 0
