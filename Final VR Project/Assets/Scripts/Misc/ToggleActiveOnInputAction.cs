@@ -5,6 +5,7 @@ public class ToggleActiveOnInputAction : MonoBehaviour
 {
     [SerializeField] private InputActionReference InputAction = default;
     [SerializeField] private GameObject ToggleObject = default;
+    [SerializeField] private GameObject SettingsObject = default;
 
     private void OnEnable()
     {
@@ -21,6 +22,12 @@ public class ToggleActiveOnInputAction : MonoBehaviour
         if (ToggleObject)
         {
             ToggleObject.SetActive(!ToggleObject.activeSelf);
+        }
+
+        if (SettingsObject && SettingsObject.activeSelf)
+        {
+            SettingsObject.SetActive(false);
+            ToggleObject.SetActive(false);
         }
     }
 }
