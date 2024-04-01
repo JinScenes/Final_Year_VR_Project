@@ -8836,7 +8836,6 @@ GameObject:
   - component: {fileID: 4376018428306016888}
   - component: {fileID: 6840816388690508174}
   - component: {fileID: 877663762356400381}
-  - component: {fileID: -5340370250223655411}
   m_Layer: 0
   m_Name: Zombie_Underwear_Male_01
   m_TagString: Untagged
@@ -8893,18 +8892,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2950caa7101a04ca3552a7f0992bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5340370250223655411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9114625916839608784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8ebcefcd76a3e4d92fb3b9428e58b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  track:
-  - {fileID: 8300000, guid: 2b5cb90aaa8961f41bc3a5c5ee3b9005, type: 3}
-  - {fileID: 8300000, guid: a6d3c448b70e88549847f1213b6f120b, type: 3}
