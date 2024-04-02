@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: partHealth
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 7000629225402982317, guid: 5090368b8e8213146ba1934c73da6149,
+        type: 3}
+      propertyPath: neckTransform
+      value: 
+      objectReference: {fileID: 643328802417322031}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87,6 +92,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6960383110782688461}
   m_SourcePrefab: {fileID: 100100000, guid: 5090368b8e8213146ba1934c73da6149, type: 3}
+--- !u!4 &643328802417322031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4821245074461962, guid: 5090368b8e8213146ba1934c73da6149,
+    type: 3}
+  m_PrefabInstance: {fileID: 647586814069407013}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &647098738058593415 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1763724247660962, guid: 5090368b8e8213146ba1934c73da6149,

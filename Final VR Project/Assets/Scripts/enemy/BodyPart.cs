@@ -47,7 +47,8 @@ public class BodyPart : MonoBehaviour
         {
             if (headVFX != null)
             {
-                Instantiate(headVFX, neckTransform.position, neckTransform.rotation);
+                GameObject vfxInstance = Instantiate(headVFX, neckTransform.position, neckTransform.rotation);
+                vfxInstance.transform.SetParent(neckTransform);
             }
             else
             {
@@ -73,7 +74,7 @@ public class BodyPart : MonoBehaviour
             newLimb.AddComponent<BoxCollider>();
         }
 
-        gameObject.SetActive(false);
+        transform.localScale = Vector3.zero;
         Destroy(this);
     }
 

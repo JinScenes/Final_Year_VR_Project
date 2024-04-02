@@ -519,6 +519,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7972572839538997034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1137703782348306, guid: 08eb0c5855619374381691dec1799669,
@@ -638,6 +639,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7972600964474385412 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1143679528400188, guid: 08eb0c5855619374381691dec1799669,
@@ -857,6 +859,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7972835190725273318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1544954237265886, guid: 08eb0c5855619374381691dec1799669,
@@ -976,6 +979,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7972869701095418604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1438976265956308, guid: 08eb0c5855619374381691dec1799669,
@@ -1095,6 +1099,7 @@ MonoBehaviour:
   partHealth: 0
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7972927420850482326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1628663152635310, guid: 08eb0c5855619374381691dec1799669,
@@ -1212,6 +1217,7 @@ MonoBehaviour:
   partHealth: 60
   headVFX: {fileID: 5937023477294368983, guid: 368f3d53c5f0ec3468166a76f629b1b2, type: 3}
   isHeadPart: 1
+  neckTransform: {fileID: 7975678559493570038}
 --- !u!1 &7972960383314163912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1666053731760624, guid: 08eb0c5855619374381691dec1799669,
@@ -1598,6 +1604,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7973233072059141094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1921128806419166, guid: 08eb0c5855619374381691dec1799669,
@@ -1717,6 +1724,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7973235291165017926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1918911311742590, guid: 08eb0c5855619374381691dec1799669,
@@ -1936,6 +1944,7 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
 --- !u!1 &7973437483543853166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1998194577914198, guid: 08eb0c5855619374381691dec1799669,
@@ -2055,3 +2064,10 @@ MonoBehaviour:
   partHealth: 25
   headVFX: {fileID: 0}
   isHeadPart: 0
+  neckTransform: {fileID: 0}
+--- !u!4 &7975678559493570038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4225530932526286, guid: 08eb0c5855619374381691dec1799669,
+    type: 3}
+  m_PrefabInstance: {fileID: 7971457641428304184}
+  m_PrefabAsset: {fileID: 0}
