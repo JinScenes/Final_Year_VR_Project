@@ -57,10 +57,10 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4814124728607088415, guid: 83620e573d3f2254199cd946a8601720,
+    - target: {fileID: 1891606015751219439, guid: 83620e573d3f2254199cd946a8601720,
         type: 3}
-      propertyPath: partHealth
-      value: 60
+      propertyPath: health
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

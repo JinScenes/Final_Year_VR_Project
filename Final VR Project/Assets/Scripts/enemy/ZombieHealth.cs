@@ -44,8 +44,8 @@
         {
             // Adjust the amount of damage if needed based on body part
             // For example, head hits could do more damage
-            float damageMultiplier = 1.0f; // Default multiplier
-                                           // Example: if(hitPart.partType == BodyPartType.Head) damageMultiplier = 2.0f;
+            float damageMultiplier = 2.0f; // Default multiplier
+               
 
             health -= (amount * damageMultiplier);
         }

@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae1334e1a843914ea215ac160781472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRange: 25
-  Damage: 25
+  MaxRange: 50
+  Damage: 34
   FiringMethod: 1
   ReloadMethod: 1
   MaxInternalAmmo: 31
