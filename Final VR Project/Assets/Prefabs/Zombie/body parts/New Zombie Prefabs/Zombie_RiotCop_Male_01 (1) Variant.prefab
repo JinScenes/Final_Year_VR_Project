@@ -64,6 +64,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4814124728607088415, guid: 83620e573d3f2254199cd946a8601720,
         type: 3}
+      propertyPath: headVFX
+      value: 
+      objectReference: {fileID: 6998238745895241654, guid: 66ba75c631bd8354892c80fe7071992b,
+        type: 3}
+    - target: {fileID: 4814124728607088415, guid: 83620e573d3f2254199cd946a8601720,
+        type: 3}
+      propertyPath: isHeadPart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814124728607088415, guid: 83620e573d3f2254199cd946a8601720,
+        type: 3}
       propertyPath: partHealth
       value: 60
       objectReference: {fileID: 0}

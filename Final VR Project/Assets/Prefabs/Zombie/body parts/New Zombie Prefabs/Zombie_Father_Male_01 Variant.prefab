@@ -517,6 +517,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 0}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7972572839538997034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1137703782348306, guid: 08eb0c5855619374381691dec1799669,
@@ -634,6 +636,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 0}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7972600964474385412 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1143679528400188, guid: 08eb0c5855619374381691dec1799669,
@@ -851,6 +855,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 1774619796312080, guid: 1804cdc27b3976e4f9e5e6f49f111477, type: 3}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7972835190725273318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1544954237265886, guid: 08eb0c5855619374381691dec1799669,
@@ -968,6 +974,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 0}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7972869701095418604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1438976265956308, guid: 08eb0c5855619374381691dec1799669,
@@ -1085,6 +1093,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 1581538933006698, guid: f2f7a69296e6a1445a21e69fe29961c2, type: 3}
   partHealth: 0
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7972927420850482326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1628663152635310, guid: 08eb0c5855619374381691dec1799669,
@@ -1200,6 +1210,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 1791137125428618, guid: 6cd3d43741f543847ab0575862c6fafa, type: 3}
   partHealth: 60
+  headVFX: {fileID: 5937023477294368983, guid: 368f3d53c5f0ec3468166a76f629b1b2, type: 3}
+  isHeadPart: 1
 --- !u!1 &7972960383314163912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1666053731760624, guid: 08eb0c5855619374381691dec1799669,
@@ -1584,6 +1596,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 1123163710934634, guid: 0033af290f47dd14a8c0ea83a0871c8b, type: 3}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7973233072059141094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1921128806419166, guid: 08eb0c5855619374381691dec1799669,
@@ -1701,6 +1715,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 0}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7973235291165017926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1918911311742590, guid: 08eb0c5855619374381691dec1799669,
@@ -1918,6 +1934,8 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 1581538933006698, guid: f2f7a69296e6a1445a21e69fe29961c2, type: 3}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0
 --- !u!1 &7973437483543853166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1998194577914198, guid: 08eb0c5855619374381691dec1799669,
@@ -2035,3 +2053,5 @@ MonoBehaviour:
   parts: []
   Limb: {fileID: 0}
   partHealth: 25
+  headVFX: {fileID: 0}
+  isHeadPart: 0

@@ -8,8 +8,11 @@ public class BodyPart : MonoBehaviour
     [SerializeField] BodyPart[] parts;
     [SerializeField] GameObject Limb;
     [SerializeField] float partHealth;
-    private ZombieHealth zombieHealth;
+    [SerializeField] private GameObject headVFX; // Assign the VFX prefab for the head in the inspector
+    [SerializeField] private bool isHeadPart;
+    [SerializeField] private Transform neckTransform;
 
+    private ZombieHealth zombieHealth;
 
     void Start()
     {
@@ -39,30 +42,39 @@ public class BodyPart : MonoBehaviour
 
 
     public void hitBodyPart()
-    { 
-
-        if(parts.Length > 0) {
-        
-                foreach(BodyPart part in parts) 
-                    { 
-            
-                    if(part != null)
-                        {
-                    part.hitBodyPart();
-                        }
-
-                    }
-
-        }
-
-        if(Limb != null)
+    {
+        if (isHeadPart)
         {
-            GameObject NewLimb = Instantiate(Limb, transform.position, transform.rotation);
-           NewLimb.AddComponent<Rigidbody>();
-            NewLimb.AddComponent<BoxCollider>();
+            if (headVFX != null)
+            {
+                Instantiate(headVFX, neckTransform.position, neckTransform.rotation);
+            }
+            else
+            {
+                Debug.LogError("Head VFX prefab is not assigned.");
+            }
         }
-                transform.localScale = Vector3.zero;
-                  
-                Destroy(this);
+
+        if (parts.Length > 0)
+        {
+            foreach (BodyPart part in parts)
+            {
+                if (part != null)
+                {
+                    part.hitBodyPart();
+                }
+            }
+        }
+
+        if (Limb != null)
+        {
+            GameObject newLimb = Instantiate(Limb, transform.position, transform.rotation);
+            newLimb.AddComponent<Rigidbody>();
+            newLimb.AddComponent<BoxCollider>();
+        }
+
+        gameObject.SetActive(false);
+        Destroy(this);
     }
+
 }
