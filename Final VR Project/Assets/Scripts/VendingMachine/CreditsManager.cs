@@ -4,7 +4,7 @@ public class CreditsManager : MonoBehaviour
 {
     public static CreditsManager Instance { get; private set; }
 
-    public int Credits { get; private set; } = 300;
+    public int Credits { get; private set; }
 
     private void Awake()
     {
