@@ -57,31 +57,20 @@ public class WeaponSlot:MonoBehaviour
     }
     public void RandomizeWeapon()
     {
+        int randomIndex = Random.Range(0, weaponEntries.Count);
+        WeaponEntry selectedEntry = weaponEntries[randomIndex];
 
-        // This is called at Awake, but you can call it again to randomize as needed.
-        List<string> keys = new List<string>(weaponDict.Keys);
-        string randomKey = keys[Random.Range(0, keys.Count)];
-        selectedWeaponDetails = weaponDict[randomKey];
+        selectedWeaponName = selectedEntry.weaponName;
+        selectedWeaponDetails = selectedEntry.weaponDetails;
+
+        // Activate the selected weapon mesh
+        HideWeapons();
         selectedWeaponDetails.weaponMesh.SetActive(true);
 
-        if (weaponDict.Count == 0)
-        {
-            Debug.LogError("weaponDict is empty. Make sure weaponEntries are properly initialized and Awake() has run.");
-            return;
-        }
-
-        
-        if (keys.Count == 0)
-        {
-            Debug.LogError("No keys found in weaponDict. Make sure weaponEntries are properly initialized.");
-            return;
-        }
-
-        int randomIndex = Random.Range(0, keys.Count);
-        selectedWeaponName = keys[randomIndex];
-        //Debug.Log("Randomized weapon name: " + selectedWeaponName);
-        //Debug.Log("Selected weapon name: " + selectedWeaponName);
+        // Notify the VendingMachine to update the UI for this slot
+        VendingMachine.Instance.UpdateUIForSlot(this);
     }
+
 
     // Add this to the WeaponSlot class
     public void VendWeapon(GameObject spawner)
