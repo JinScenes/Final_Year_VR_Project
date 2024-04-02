@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class AmmoSpawn : MonoBehaviour
@@ -12,6 +13,7 @@ public class AmmoSpawn : MonoBehaviour
         {
             spawnLocations.Add(child);
         }
+        StartCoroutine(AmmoSpawner());
     }
 
     public void SpawnAmmo()
@@ -28,6 +30,12 @@ public class AmmoSpawn : MonoBehaviour
                 //print("No ammo box spawned at " + spawnLocation.name);
             }
         }
+    }
+
+    private IEnumerator AmmoSpawner()
+    {
+        yield return new WaitForSeconds(60);
+        SpawnAmmo();
     }
 
 }
