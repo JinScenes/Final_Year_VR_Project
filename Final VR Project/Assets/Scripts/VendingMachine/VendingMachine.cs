@@ -23,20 +23,23 @@ public class VendingMachine : MonoBehaviour
     {
         InitializeSlotTextMapping();
 
-        foreach (WeaponSlotUI slotUI in weaponSlotUIs)
+        for (int i = 0; i < weaponSlotUIs.Length; i++)
         {
+            WeaponSlotUI slotUI = weaponSlotUIs[i];
+
             // Ensure the weapon slot index is within bounds
             if (slotUI.weaponSlotIndex < 0 || slotUI.weaponSlotIndex >= weaponSlots.Length)
             {
-                Debug.LogError($"WeaponSlotUI at index {Array.IndexOf(weaponSlotUIs, slotUI)} has an out-of-range weaponSlotIndex of {slotUI.weaponSlotIndex}.");
+                Debug.LogError($"WeaponSlotUI at index {i} has an out-of-range weaponSlotIndex of {slotUI.weaponSlotIndex}.");
                 continue;
             }
 
             // Proceed to hide weapons and randomize
             weaponSlots[slotUI.weaponSlotIndex].HideWeapons();
             weaponSlots[slotUI.weaponSlotIndex].RandomizeWeapon();
-            UpdateUIForSlot(slotUI.textMeshProUGUI, slotUI.weaponSlotIndex);
+            UpdateUIForSlot(weaponSlots[slotUI.weaponSlotIndex]);
         }
+
     }
 
 
