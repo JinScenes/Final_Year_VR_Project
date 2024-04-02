@@ -4843,6 +4843,7 @@ GameObject:
   - component: {fileID: 1617075437836214339}
   - component: {fileID: 857965906688937770}
   - component: {fileID: 3085739031592594639}
+  - component: {fileID: 1842568217820926346}
   m_Layer: 2
   m_Name: Missile
   m_TagString: Untagged
@@ -5042,19 +5043,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c079485b3cec8a14c85546b51a8b27b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 5
   HitFXPrefab: {fileID: 4892610510716178938, guid: 7812c01b0c492d94caceaf9c1586a1fc,
     type: 3}
-  Damage: 5
-  AddRigidForce: 0
+  MuzzleOrigin: {fileID: 0}
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1537
+  MinForceHit: 0.02
+  AddRigidForce: 0
   IsLaserGuided: 0
   MissileForce: 40
   TurningSpeed: 500
-  MuzzleOrigin: {fileID: 0}
   StickToObject: 0
-  MinForceHit: 0.02
   onDealtDamageEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5154,6 +5155,88 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1842568217820926346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449094533667961452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directBinaural: 1
+  interpolation: 0
+  perspectiveCorrection: 0
+  distanceAttenuation: 1
+  distanceAttenuationInput: 0
+  distanceAttenuationValue: 1
+  airAbsorption: 1
+  airAbsorptionInput: 0
+  airAbsorptionLow: 1
+  airAbsorptionMid: 1
+  airAbsorptionHigh: 1
+  directivity: 0
+  directivityInput: 0
+  dipoleWeight: 0
+  dipolePower: 0
+  directivityValue: 1
+  occlusion: 1
+  occlusionInput: 0
+  occlusionType: 0
+  occlusionRadius: 1
+  occlusionSamples: 16
+  occlusionValue: 1
+  transmission: 1
+  transmissionType: 0
+  transmissionInput: 0
+  transmissionLow: 1
+  transmissionMid: 1
+  transmissionHigh: 1
+  maxTransmissionSurfaces: 4
+  directMixLevel: 1
+  reflections: 0
+  reflectionsType: 0
+  useDistanceCurveForReflections: 0
+  currentBakedSource: {fileID: 0}
+  reverbTimeLow: 0
+  reverbTimeMid: 0
+  reverbTimeHigh: 0
+  hybridReverbEQLow: 1
+  hybridReverbEQMid: 1
+  hybridReverbEQHigh: 1
+  hybridReverbDelay: 0
+  applyHRTFToReflections: 0
+  reflectionsMixLevel: 1
+  pathing: 0
+  pathingProbeBatch: {fileID: 0}
+  pathValidation: 1
+  findAlternatePaths: 1
+  pathingEQ:
+  - 1
+  - 1
+  - 1
+  pathingSH:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applyHRTFToPathing: 0
+  pathingMixLevel: 1
 --- !u!1 &2015372024433791314
 GameObject:
   m_ObjectHideFlags: 0

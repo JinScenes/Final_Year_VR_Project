@@ -1819,8 +1819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea191e1b1592ab4ab21fc2d668a9d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InArea: {fileID: 0}
   grabbersInArea: []
+  InArea: {fileID: 0}
 --- !u!1 &486720931121336783
 GameObject:
   m_ObjectHideFlags: 0
@@ -3959,10 +3959,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinLocalZ: -0.1
   MaxLocalZ: 0
-  LockedBack: 0
+  slidingBack: 1
+  ZeroMassWhenNotHeld: 1
   SlideReleaseSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
   LockedBackSound: {fileID: 8300000, guid: 2fd08de76faac0d46a95ff13ae5d85f2, type: 3}
-  ZeroMassWhenNotHeld: 1
+  slideRenderer: {fileID: 0}
+  flashMaterial: {fileID: 0}
+  LockedBack: 0
 --- !u!1 &486720932265364349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,13 +4321,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AcceptableMagazineName: RifleClip
   AttachedWeapon: {fileID: 486720932501335097}
+  HeldMagazine: {fileID: 0}
   ClipSnapDistance: 0.04
   ClipUnsnapDistance: 0.05
   EjectForce: 1
-  HeldMagazine: {fileID: 0}
+  flashDuration: 0.5
   MagazineDistance: 0
   ClipAttachSound: {fileID: 8300000, guid: f6ba2c16c86180148906c2b6840404ae, type: 3}
   ClipDetachSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
+  magRenderer: {fileID: 0}
 --- !u!1 &486720932501335091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4346,6 +4351,7 @@ GameObject:
   - component: {fileID: 486720932501335089}
   - component: {fileID: 486720932501335090}
   - component: {fileID: 6553265111118033684}
+  - component: {fileID: 7621904733963389497}
   m_Layer: 10
   m_Name: Missile Launcher
   m_TagString: Untagged
@@ -4593,10 +4599,10 @@ MonoBehaviour:
   Damage: 25
   FiringMethod: 1
   ReloadMethod: 0
+  MaxInternalAmmo: 32
   FiringRate: 2
   BulletImpactForce: 2000
   InternalAmmo: 0
-  MaxInternalAmmo: 32
   AutoChamberRounds: 1
   MustChamberRounds: 0
   AlwaysFireProjectile: 1
@@ -4611,10 +4617,10 @@ MonoBehaviour:
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1281
-  TriggerTransform: {fileID: 486720931300912952}
-  SlideTransform: {fileID: 486720932260318463}
   MuzzlePointTransform: {fileID: 486720931850490440}
   EjectPointTransform: {fileID: 486720931455761081}
+  TriggerTransform: {fileID: 486720931300912952}
+  SlideTransform: {fileID: 486720932260318463}
   ChamberedBullet: {fileID: 4620476648074675789}
   MuzzleFlashObject: {fileID: 486720931231164598}
   BulletCasingPrefab: {fileID: 1282233564399203881, guid: e6d6d8266008ffe438ce58f774e874fa,
@@ -4625,16 +4631,16 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 5b096d3829195954e959ce0ec63ca481, type: 3}
   GunShotVolume: 0.75
+  slideSpeed: 1
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: -0.028
   ForceSlideBackOnLastShot: 1
-  slideSpeed: 1
+  EmptyBulletInChamber: 0
   EjectInput: 04000000
   ReleaseSlideInput: 02000000
   ReloadInput: 04000000
   BulletInChamber: 0
-  EmptyBulletInChamber: 0
   onShootEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -4815,6 +4821,88 @@ CapsuleCollider:
   m_Height: 0.79820776
   m_Direction: 2
   m_Center: {x: 8.0537646e-11, y: 0.045000143, z: 0.071603894}
+--- !u!114 &7621904733963389497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486720932501335091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directBinaural: 1
+  interpolation: 0
+  perspectiveCorrection: 0
+  distanceAttenuation: 1
+  distanceAttenuationInput: 0
+  distanceAttenuationValue: 1
+  airAbsorption: 1
+  airAbsorptionInput: 0
+  airAbsorptionLow: 1
+  airAbsorptionMid: 1
+  airAbsorptionHigh: 1
+  directivity: 0
+  directivityInput: 0
+  dipoleWeight: 0
+  dipolePower: 0
+  directivityValue: 1
+  occlusion: 1
+  occlusionInput: 0
+  occlusionType: 0
+  occlusionRadius: 1
+  occlusionSamples: 16
+  occlusionValue: 1
+  transmission: 1
+  transmissionType: 0
+  transmissionInput: 0
+  transmissionLow: 1
+  transmissionMid: 1
+  transmissionHigh: 1
+  maxTransmissionSurfaces: 3
+  directMixLevel: 1
+  reflections: 0
+  reflectionsType: 0
+  useDistanceCurveForReflections: 0
+  currentBakedSource: {fileID: 0}
+  reverbTimeLow: 0
+  reverbTimeMid: 0
+  reverbTimeHigh: 0
+  hybridReverbEQLow: 1
+  hybridReverbEQMid: 1
+  hybridReverbEQHigh: 1
+  hybridReverbDelay: 0
+  applyHRTFToReflections: 0
+  reflectionsMixLevel: 1
+  pathing: 0
+  pathingProbeBatch: {fileID: 0}
+  pathValidation: 1
+  findAlternatePaths: 1
+  pathingEQ:
+  - 1
+  - 1
+  - 1
+  pathingSH:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applyHRTFToPathing: 0
+  pathingMixLevel: 1
 --- !u!1 &645227089657802190
 GameObject:
   m_ObjectHideFlags: 0
@@ -5151,11 +5239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cb39b3fbb608e43adfca37db68576c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRange: 2000
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1793
   LaserEnd: {fileID: 4899585188375989130}
+  MaxRange: 2000
   Active: 1
 --- !u!120 &4379844661683133845
 LineRenderer:
