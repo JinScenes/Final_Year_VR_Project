@@ -51,5 +51,12 @@ public class DamageCollider : MonoBehaviour
                 thisDamageable.DealDamage(CollisionDamage, collision.GetContact(0).point, collision.GetContact(0).normal, true, gameObject, collision.gameObject);
             }
         }
+
+        BodyPart hitPart = collision.collider.GetComponent<BodyPart>();
+        if (hitPart != null)
+        {
+            // If it's a body part, deal damage specifically to that part.
+            hitPart.TakeDamage(CollisionDamage);
+        }
     }
 }

@@ -12,7 +12,7 @@ public class ZombieAI : MonoBehaviour
 
     // Zombie type speeds
     private float walkSpeed = 1.0f;
-    private float runSpeed = 3.0f;
+    private float runSpeed = 1.25f;
     private float crawlSpeed = 0.5f;
     public bool isAlive = true;
 

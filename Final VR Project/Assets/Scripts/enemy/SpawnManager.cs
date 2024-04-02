@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour 
+public class SpawnManager : MonoBehaviour
 {
     public GameObject[] spawnPoints;
     public GameObject[] zombiePrefabs; // Array of different zombie prefabs
@@ -12,11 +12,12 @@ public class SpawnManager : MonoBehaviour
     private int totalZombiesToSpawn;
     private int totalZombiesAlive;
     private int waveNumber = 0;
+    private bool canSpawn = false;
 
     void Start()
     {
         
-        //StartNextWave();
+        // StartNextWave();
     }
 
     void UpdateZombieCountText()
@@ -40,21 +41,23 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnZombies()
     {
-        for (int i = 0; i < totalZombiesToSpawn; i++)
+        canSpawn = true; 
+        for (int i = 0; i < totalZombiesToSpawn && canSpawn; i++)
         {
             GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            GameObject zombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)]; // Randomly select a zombie prefab
+            GameObject zombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)]; 
             Instantiate(zombiePrefab, spawnPoint.transform.position, Quaternion.identity);
             totalZombiesAlive++;
             yield return new WaitForSeconds(1f); // spawn interval
         }
+        canSpawn = false; // Prevent further spawning after the wave's zombies are all spawned
         UpdateZombieCountText();
     }
 
     IEnumerator WaitAndStartNextWave()
     {
         vendingMachine.SetActive(true);
-        yield return new WaitForSeconds(60); // time between waves
+        yield return new WaitForSeconds(30); // time between waves
         vendingMachine.SetActive(false);
         StartNextWave();
     }
@@ -63,7 +66,7 @@ public class SpawnManager : MonoBehaviour
     {
         vendingMachine.SetActive(false);
         waveNumber++;
-        totalZombiesToSpawn = waveNumber + 5; 
+        totalZombiesToSpawn = waveNumber * 5; // Adjust the formula as needed for your game's difficulty curve
         StartCoroutine(SpawnZombies());
     }
 }
