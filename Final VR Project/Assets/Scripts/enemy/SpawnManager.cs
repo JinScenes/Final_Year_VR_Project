@@ -8,15 +8,16 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] spawnPoints;
     public GameObject[] zombiePrefabs; // Array of different zombie prefabs
     public GameObject vendingMachine;
-    public TextMeshProUGUI zombieCountText;
+    public TextMeshProUGUI zombieCountText, vendingMachineText;
     private int totalZombiesToSpawn;
     private int totalZombiesAlive;
     private int waveNumber = 0;
     private bool canSpawn = false;
+    public float timeBetweenWaves = 30;
 
     void Start()
     {
-        
+        vendingMachineText.enabled = false;
         // StartNextWave();
     }
 
@@ -60,17 +61,40 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator WaitAndStartNextWave()
     {
+        zombieCountText.enabled = false;
+        vendingMachineText.enabled = true;
         vendingMachine.SetActive(true);
+
         yield return new WaitForSeconds(30); // time between waves
         vendingMachine.SetActive(false);
+        vendingMachineText.enabled = false;
         StartNextWave();
+        zombieCountText.enabled = true;
     }
 
     public void StartNextWave()
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth <= 75)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth += 25;
+        }
+        GameObject.Find("AmmoSpawner").GetComponent<AmmoSpawn>().SpawnAmmo();
         vendingMachine.SetActive(false);
         waveNumber++;
         totalZombiesToSpawn = waveNumber + 5;
         StartCoroutine(SpawnZombies());
+    }
+
+    private void Update()
+    {
+        if (vendingMachineText.enabled)
+        {
+            timeBetweenWaves -= Time.deltaTime;
+            vendingMachineText.text = "Time for weapons shopping!" + "\n" + "Time left: " + Mathf.Round(timeBetweenWaves);
+        }
+        else
+        {
+            timeBetweenWaves = 30;
+        }
     }
 }

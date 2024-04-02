@@ -13,7 +13,7 @@ public class AmmoSpawn : MonoBehaviour
         {
             spawnLocations.Add(child);
         }
-        StartCoroutine(AmmoSpawner());
+        /*StartCoroutine(AmmoSpawner());*/
     }
 
     public void SpawnAmmo()
@@ -32,10 +32,10 @@ public class AmmoSpawn : MonoBehaviour
         }
     }
 
-    private IEnumerator AmmoSpawner()
+/*    private IEnumerator AmmoSpawner()
     {
         yield return new WaitForSeconds(60);
         SpawnAmmo();
-    }
+    }*/
 
 }
