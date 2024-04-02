@@ -62,6 +62,11 @@ PrefabInstance:
       propertyPath: health
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 1295885794871390585, guid: d04ae7ac97d4d1348887e36a18d950cc,
+        type: 3}
+      propertyPath: partHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
