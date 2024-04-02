@@ -21,7 +21,7 @@
     {
         if (!isDead)
         {
-            isDead = true; // Prevents multiple death processing
+            isDead = true; 
 
             if (spawnManager != null)
             {
@@ -39,19 +39,18 @@
 
     public void TakeDamage(float amount, BodyPart hitPart = null)
     {
-        // Check if the damage is from a specific body part
+        
         if (hitPart != null)
         {
-            // Adjust the amount of damage if needed based on body part
-            // For example, head hits could do more damage
-            float damageMultiplier = 2.0f; // Default multiplier
+           
+            float damageMultiplier = 2.0f; 
                
 
             health -= (amount * damageMultiplier);
         }
         else
         {
-            // Direct damage to the zombie, not through a body part
+            
             health -= amount;
         }
 

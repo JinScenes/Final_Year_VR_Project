@@ -13,6 +13,7 @@ public class DoorOpen : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         ammoSpawner = GameObject.Find("AmmoSpawner");
+        Spawner = GameObject.Find("Spawner");
     }
 
     private void OnTriggerEnter(Collider other)

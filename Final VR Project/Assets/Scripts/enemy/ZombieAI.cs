@@ -106,11 +106,10 @@ public class ZombieAI : MonoBehaviour
 
     private void PerformAttack()
     {
-        // Stop the zombie and initiate the attack.
-       //agent.isStopped = true;
+        
         ChooseAttackAnimation();
 
-        // Set the time when the attack started.
+        
         lastAttackTime = Time.time;
     }
 
@@ -122,7 +121,7 @@ public class ZombieAI : MonoBehaviour
    
     private void ChooseAttackAnimation()
     {
-        // Generate a random number and choose an attack based on that.
+        
         float attackChoice = Random.Range(0.0f, 1.0f);
         ResetAttackBooleans();
 
@@ -150,12 +149,11 @@ public class ZombieAI : MonoBehaviour
 
     public void OnAttackHit()
     {
-        // Here you'll check if the player is in range and then apply damage.
-        // This is called from the animation event.
+        
         float distance = Vector3.Distance(playerTransform.position, transform.position);
         if (distance <= attackDistance)
         {
-            // Assuming the player's script is called PlayerHealth and is attached to the player GameObject
+            
             playerTransform.GetComponent<PlayerHealth>().TakeDamage(5);
         }
     }
