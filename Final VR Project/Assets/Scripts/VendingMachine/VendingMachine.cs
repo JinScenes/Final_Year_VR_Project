@@ -23,20 +23,23 @@ public class VendingMachine : MonoBehaviour
     {
         InitializeSlotTextMapping();
 
-        foreach (WeaponSlotUI slotUI in weaponSlotUIs)
+        for (int i = 0; i < weaponSlotUIs.Length; i++)
         {
+            WeaponSlotUI slotUI = weaponSlotUIs[i];
+
             // Ensure the weapon slot index is within bounds
             if (slotUI.weaponSlotIndex < 0 || slotUI.weaponSlotIndex >= weaponSlots.Length)
             {
-                Debug.LogError($"WeaponSlotUI at index {Array.IndexOf(weaponSlotUIs, slotUI)} has an out-of-range weaponSlotIndex of {slotUI.weaponSlotIndex}.");
+                Debug.LogError($"WeaponSlotUI at index {i} has an out-of-range weaponSlotIndex of {slotUI.weaponSlotIndex}.");
                 continue;
             }
 
             // Proceed to hide weapons and randomize
             weaponSlots[slotUI.weaponSlotIndex].HideWeapons();
             weaponSlots[slotUI.weaponSlotIndex].RandomizeWeapon();
-            UpdateWeaponSlotUI(slotUI.textMeshProUGUI, slotUI.weaponSlotIndex);
+            UpdateUIForSlot(weaponSlots[slotUI.weaponSlotIndex]);
         }
+
     }
 
 
@@ -69,7 +72,8 @@ public class VendingMachine : MonoBehaviour
         WeaponSlot slot = weaponSlots[index];
         if (slot != null)
         {
-            int price = slot.GetPrice(); 
+            int price = slot.GetPrice();
+            print(price);
             if (CreditsManager.Instance.Credits >= slot.GetPrice())
             {
                 CreditsManager.Instance.SpendCredits(price);
@@ -89,33 +93,25 @@ public class VendingMachine : MonoBehaviour
         }
     }
 
+    public static VendingMachine Instance;
 
-    private void UpdateWeaponSlotUI(TextMeshProUGUI slotText, int index)
+    void Awake()
     {
-        if (index < 0 || index >= weaponSlots.Length || slotText == null)
-        {
-            Debug.LogError("Invalid index or TextMeshProUGUI for updating weapon slot UI.");
-            return;
-        }
+        Instance = this;
+    }
 
-        WeaponSlot slot = weaponSlots[index];
-        if (slot != null)
+    public void UpdateUIForSlot(WeaponSlot slot)
+    {
+        // Find the UI element associated with this slot and update it
+        foreach (var slotUI in weaponSlotUIs)
         {
-            // Here we use GetPrice() instead of a non-existent property
-            int price = slot.GetPrice();
-            if (price != -1)
+            if (slotUI.weaponSlotIndex == Array.IndexOf(weaponSlots, slot))
             {
-                // Update the TextMeshProUGUI with weapon name and price
-                slotText.text = slot.selectedWeaponName + "\n$" + price.ToString();
+                slotUI.textMeshProUGUI.text = $"{slot.selectedWeaponName}\n${slot.GetPrice()}";
+                break;
             }
-            else
-            {
-                Debug.LogError("Could not get price for weapon slot at index " + index);
-            }
-        }
-        else
-        {
-            Debug.LogError("Weapon Slot at index " + index + " is not assigned.");
         }
     }
+
+    
 }
