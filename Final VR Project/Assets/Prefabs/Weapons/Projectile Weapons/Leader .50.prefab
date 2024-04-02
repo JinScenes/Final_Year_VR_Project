@@ -2600,7 +2600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRange: 5000
-  Damage: 25
+  Damage: 80
   FiringMethod: 0
   ReloadMethod: 1
   MaxInternalAmmo: 5
