@@ -295,36 +295,6 @@ public class HandPoser : MonoBehaviour
         };
     }
 
-    public virtual void SavePoseAsScriptablObject(string poseName)
-    {
-
-        string fileName = poseName + ".asset";
-
-        var poseObject = GetHandPoseScriptableObject();
-
-        string fullPath = ResourcePath + fileName;
-        bool exists = System.IO.File.Exists(fullPath);
-
-        if (exists)
-        {
-            UnityEditor.AssetDatabase.DeleteAsset(fullPath);
-        }
-
-        UnityEditor.AssetDatabase.CreateAsset(poseObject, fullPath);
-        UnityEditor.AssetDatabase.SaveAssets();
-        UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceUpdate);
-        UnityEditor.EditorUtility.SetDirty(poseObject);
-
-        if (exists)
-        {
-            Debug.Log("Updated Hand Pose : " + poseName);
-        }
-        else
-        {
-            Debug.Log("Created new Hand Pose : " + poseName);
-        }
-    }
-
     public virtual void CreateUniquePose(string poseName)
     {
         if (string.IsNullOrEmpty(poseName))
@@ -344,25 +314,6 @@ public class HandPoser : MonoBehaviour
 
             checkCount++;
         }
-
-        SavePoseAsScriptablObject(formattedPoseName);
-    }
-
-    public virtual HandPose GetHandPoseScriptableObject()
-    {
-        var poseObject = UnityEditor.Editor.CreateInstance<HandPose>();
-        poseObject.PoseName = PoseName;
-
-        poseObject.Joints = new HandPoseDefinition();
-        poseObject.Joints.WristJoint = GetWristJoint();
-        poseObject.Joints.ThumbJoints = GetThumbJoints();
-        poseObject.Joints.IndexJoints = GetIndexJoints();
-        poseObject.Joints.MiddleJoints = GetMiddleJoints();
-        poseObject.Joints.RingJoints = GetRingJoints();
-        poseObject.Joints.PinkyJoints = GetPinkyJoints();
-        poseObject.Joints.OtherJoints = GetOtherJoints();
-
-        return poseObject;
     }
 
     public virtual void DoPoseUpdate()
@@ -381,27 +332,6 @@ public class HandPoser : MonoBehaviour
                 editorAnimationTime = 0;
                 doSingleAnimation = false;
             }
-        }
-    }
-
-    public virtual void ResetEditorHandles()
-    {
-        EditorHandle[] handles = GetComponentsInChildren<EditorHandle>();
-        for (int i = 0; i < handles.Length; i++)
-        {
-            if (handles[i] != null && handles[i].gameObject != null)
-            {
-                GameObject.DestroyImmediate((handles[i]));
-            }
-        }
-    }
-
-    void OnDrawGizmos()
-    {
-        if (!Application.isPlaying)
-        {
-            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-            UnityEditor.SceneView.RepaintAll();
         }
     }
 }

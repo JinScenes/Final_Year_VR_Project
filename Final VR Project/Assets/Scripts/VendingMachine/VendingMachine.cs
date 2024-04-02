@@ -3,7 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using System;
 
-[System.Serializable] // This makes WeaponSlotUI visible in the inspector.
+[System.Serializable] 
 public class WeaponSlotUI
 {
     public TextMeshProUGUI textMeshProUGUI;
@@ -12,10 +12,10 @@ public class WeaponSlotUI
 
 public class VendingMachine : MonoBehaviour
 {
-    public WeaponSlot[] weaponSlots; // Your existing WeaponSlot array
-    public GameObject spawner; // Assign this in the Inspector
-    public Animation spawnerAnimation; // Assign this in the Inspector
-    public WeaponSlotUI[] weaponSlotUIs; // Array for setting up in the inspector
+    public WeaponSlot[] weaponSlots;
+    public GameObject spawner; 
+    public Animation spawnerAnimation; 
+    public WeaponSlotUI[] weaponSlotUIs; 
 
     private Dictionary<TextMeshProUGUI, int> slotTextMapping;
 
@@ -27,14 +27,14 @@ public class VendingMachine : MonoBehaviour
         {
             WeaponSlotUI slotUI = weaponSlotUIs[i];
 
-            // Ensure the weapon slot index is within bounds
+            
             if (slotUI.weaponSlotIndex < 0 || slotUI.weaponSlotIndex >= weaponSlots.Length)
             {
                 Debug.LogError($"WeaponSlotUI at index {i} has an out-of-range weaponSlotIndex of {slotUI.weaponSlotIndex}.");
                 continue;
             }
 
-            // Proceed to hide weapons and randomize
+            
             weaponSlots[slotUI.weaponSlotIndex].HideWeapons();
             weaponSlots[slotUI.weaponSlotIndex].RandomizeWeapon();
             UpdateUIForSlot(weaponSlots[slotUI.weaponSlotIndex]);
@@ -80,7 +80,7 @@ public class VendingMachine : MonoBehaviour
                 slot.VendWeapon(spawner);
                 Debug.Log("Dispensed Weapon: " + slot.selectedWeaponName);
 
-                // Update UI here as needed
+                
             }
             else
             {
@@ -102,7 +102,7 @@ public class VendingMachine : MonoBehaviour
 
     public void UpdateUIForSlot(WeaponSlot slot)
     {
-        // Find the UI element associated with this slot and update it
+       
         foreach (var slotUI in weaponSlotUIs)
         {
             if (slotUI.weaponSlotIndex == Array.IndexOf(weaponSlots, slot))

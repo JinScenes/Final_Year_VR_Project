@@ -8,7 +8,7 @@ public class BodyPart : MonoBehaviour
     [SerializeField] BodyPart[] parts;
     [SerializeField] GameObject Limb;
     [SerializeField] float partHealth;
-    [SerializeField] private GameObject headVFX; // Assign the VFX prefab for the head in the inspector
+    [SerializeField] private GameObject headVFX; 
     [SerializeField] private bool isHeadPart;
     [SerializeField] private Transform neckTransform;
 
@@ -29,12 +29,11 @@ public class BodyPart : MonoBehaviour
         partHealth -= amount;
         if (partHealth <= 0f && Limb != null)
         {
-            // Process the body part destruction or damage effect here
+            
             hitBodyPart();
         }
 
-        // Always notify the central health script, regardless of part health
-        // This way, damage is centralized and can be modified easily
+        
         zombieHealth.TakeDamage(amount, this);
     }
 

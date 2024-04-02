@@ -10,15 +10,15 @@ public class WeaponSlot:MonoBehaviour
     private List<WeaponEntry> weaponEntries;
     public Dictionary<string, WeaponDetails> weaponDict = new Dictionary<string, WeaponDetails>();
     public string selectedWeaponName;
-    [HideInInspector] // Hide in Inspector since we set it at runtime.
-    public WeaponDetails selectedWeaponDetails;// The name of the currently selected weapon
+    [HideInInspector] 
+    public WeaponDetails selectedWeaponDetails;
     [SerializeField] private GameObject spawner;
 
-    // Call this method to pick a random weapon and update the mesh
+    
 
     void Awake()
     {
-        weaponDict.Clear(); // Ensure the dictionary is clear before initializing it.
+        weaponDict.Clear(); 
 
         foreach (WeaponEntry entry in weaponEntries)
         {
@@ -38,7 +38,7 @@ public class WeaponSlot:MonoBehaviour
         }
     }
 
-    // Call this to deactivate the weapon slot and hide all weapon meshes
+    
     public void HideWeapons()
     {
         foreach (var weaponDetail in weaponDict.Values)
@@ -53,7 +53,7 @@ public class WeaponSlot:MonoBehaviour
         {
             return details.price;
         }
-        return -1; // Return -1 or some other value to indicate that the price wasn't found
+        return -1; 
     }
     public void RandomizeWeapon()
     {
@@ -63,16 +63,16 @@ public class WeaponSlot:MonoBehaviour
         selectedWeaponName = selectedEntry.weaponName;
         selectedWeaponDetails = selectedEntry.weaponDetails;
 
-        // Activate the selected weapon mesh
+       
         HideWeapons();
         selectedWeaponDetails.weaponMesh.SetActive(true);
 
-        // Notify the VendingMachine to update the UI for this slot
+       
         VendingMachine.Instance.UpdateUIForSlot(this);
     }
 
 
-    // Add this to the WeaponSlot class
+    
     public void VendWeapon(GameObject spawner)
     {
         foreach (var kvp in weaponDict)
@@ -89,7 +89,7 @@ public class WeaponSlot:MonoBehaviour
         }
 
         WeaponDetails details = weaponDict[selectedWeaponName];
-        details.weaponMesh.SetActive(false); // Hide the mesh
+        details.weaponMesh.SetActive(false); 
 
         Rigidbody rb = details.weaponMesh.GetComponent<Rigidbody>();
         if (rb != null)
@@ -102,30 +102,26 @@ public class WeaponSlot:MonoBehaviour
 
     private IEnumerator SpawnWeaponPrefab(GameObject prefab, GameObject spawner)
     {
-        yield return new WaitForSeconds(1); // Wait for a second, if needed
+        yield return new WaitForSeconds(1); 
 
-        // Instantiate the prefab at the spawner's position
+        
         GameObject spawnedWeapon = Instantiate(prefab, spawner.transform.position, spawner.transform.rotation);
 
-        // Optionally, temporarily parent the prefab to the spawner for alignment before ejection
+        
         spawnedWeapon.transform.SetParent(spawner.transform);
 
-        // Play the spawner animation, if any
-       
-
-        // Unparent the prefab from the spawner after the animation
+        
         spawnedWeapon.transform.SetParent(null);
 
-        // Now apply a force to the weapon to "shoot" it out from the vending machine
+        
         Rigidbody rb = spawnedWeapon.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Assuming the vending machine's bottom is along the negative y-axis
-            // Adjust the force direction and magnitude as needed
-            Vector3 forceDirection = -spawner.transform.up; // This will shoot the weapon downward
-            float forceMagnitude = 10.0f; // Change this value to achieve the desired ejection speed
-            rb.isKinematic = false; // Make sure the Rigidbody is not kinematic
-            rb.AddForce(forceDirection * forceMagnitude, ForceMode.VelocityChange); // Apply the force
+            
+            Vector3 forceDirection = -spawner.transform.up; 
+            float forceMagnitude = 10.0f; 
+            rb.isKinematic = false; 
+            rb.AddForce(forceDirection * forceMagnitude, ForceMode.VelocityChange); 
         }
     }
 }

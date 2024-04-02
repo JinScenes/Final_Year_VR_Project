@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEditor;
 
 public enum RemoteGrabType
 {
@@ -176,54 +177,4 @@ public class RemoteGrabber : MonoBehaviour
 
     public bool ShowGizmos = true;
 
-    void OnDrawGizmos()
-    {
-
-        if (!this.isActiveAndEnabled)
-        {
-            return;
-        }
-
-        if (ShowGizmos)
-        {
-            if (PhysicsCheckType == RemoteGrabType.Raycast)
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RaycastLength, Color.green);
-            }
-            else if (PhysicsCheckType == RemoteGrabType.Spherecast)
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * SphereCastLength, Color.green);
-
-                DrawWireCapsule(transform.position + (transform.forward * SphereCastLength / 2), transform.rotation * Quaternion.Euler(90f, 0, 0), SphereCastRadius, SphereCastLength, Color.green);
-            }
-        }
-    }
-
-    public void DrawWireCapsule(Vector3 position, Quaternion rotation, float radius, float height, Color color)
-    {
-
-        UnityEditor.Handles.color = color;
-        Matrix4x4 angleMatrix = Matrix4x4.TRS(position, rotation, UnityEditor.Handles.matrix.lossyScale);
-
-        using (new UnityEditor.Handles.DrawingScope(angleMatrix))
-        {
-            var pointOffset = (height - (radius * 2)) / 2;
-
-            // Draw sideways
-            UnityEditor.Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.left, Vector3.back, -180, radius);
-            UnityEditor.Handles.DrawLine(new Vector3(0, pointOffset, -radius), new Vector3(0, -pointOffset, -radius));
-            UnityEditor.Handles.DrawLine(new Vector3(0, pointOffset, radius), new Vector3(0, -pointOffset, radius));
-            UnityEditor.Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.left, Vector3.back, 180, radius);
-
-            // Draw frontways
-            UnityEditor.Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.back, Vector3.left, 180, radius);
-            UnityEditor.Handles.DrawLine(new Vector3(-radius, pointOffset, 0), new Vector3(-radius, -pointOffset, 0));
-            UnityEditor.Handles.DrawLine(new Vector3(radius, pointOffset, 0), new Vector3(radius, -pointOffset, 0));
-            UnityEditor.Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.back, Vector3.left, -180, radius);
-
-            // Draw center
-            UnityEditor.Handles.DrawWireDisc(Vector3.up * pointOffset, Vector3.up, radius);
-            UnityEditor.Handles.DrawWireDisc(Vector3.down * pointOffset, Vector3.up, radius);
-        }
-    }
 }
