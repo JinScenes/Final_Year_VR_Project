@@ -7,6 +7,7 @@ public class DoorOpen : MonoBehaviour
     public GameObject lDoor, rDoor;
     public string destroyableTag = "DestroyableWeapon";
     private GameObject ammoSpawner;
+    [SerializeField] private GameObject Spawner;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class DoorOpen : MonoBehaviour
         if (other.gameObject == player)
         {
             StartCoroutine(DoorCloseAndOpen());
+            Spawner.GetComponent<SpawnManager>().StartNextWave();
         }
     }
 

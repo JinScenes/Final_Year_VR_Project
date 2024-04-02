@@ -15,8 +15,8 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        vendingMachine.SetActive(false);
-        StartNextWave();
+        
+        //StartNextWave();
     }
 
     void UpdateZombieCountText()
@@ -59,8 +59,9 @@ public class SpawnManager : MonoBehaviour
         StartNextWave();
     }
 
-    void StartNextWave()
+    public void StartNextWave()
     {
+        vendingMachine.SetActive(false);
         waveNumber++;
         totalZombiesToSpawn = waveNumber + 5; 
         StartCoroutine(SpawnZombies());
