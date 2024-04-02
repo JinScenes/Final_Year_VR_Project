@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         if (healthUI != null)
         {

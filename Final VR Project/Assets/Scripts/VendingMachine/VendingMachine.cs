@@ -35,7 +35,7 @@ public class VendingMachine : MonoBehaviour
             // Proceed to hide weapons and randomize
             weaponSlots[slotUI.weaponSlotIndex].HideWeapons();
             weaponSlots[slotUI.weaponSlotIndex].RandomizeWeapon();
-            UpdateWeaponSlotUI(slotUI.textMeshProUGUI, slotUI.weaponSlotIndex);
+            UpdateUIForSlot(slotUI.textMeshProUGUI, slotUI.weaponSlotIndex);
         }
     }
 
@@ -90,33 +90,25 @@ public class VendingMachine : MonoBehaviour
         }
     }
 
+    public static VendingMachine Instance;
 
-    private void UpdateWeaponSlotUI(TextMeshProUGUI slotText, int index)
+    void Awake()
     {
-        if (index < 0 || index >= weaponSlots.Length || slotText == null)
-        {
-            Debug.LogError("Invalid index or TextMeshProUGUI for updating weapon slot UI.");
-            return;
-        }
+        Instance = this;
+    }
 
-        WeaponSlot slot = weaponSlots[index];
-        if (slot != null)
+    public void UpdateUIForSlot(WeaponSlot slot)
+    {
+        // Find the UI element associated with this slot and update it
+        foreach (var slotUI in weaponSlotUIs)
         {
-            // Here we use GetPrice() instead of a non-existent property
-            int price = slot.GetPrice();
-            if (price != -1)
+            if (slotUI.weaponSlotIndex == Array.IndexOf(weaponSlots, slot))
             {
-                // Update the TextMeshProUGUI with weapon name and price
-                slotText.text = slot.selectedWeaponName + "\n$" + price.ToString();
+                slotUI.textMeshProUGUI.text = $"{slot.selectedWeaponName}\n${slot.GetPrice()}";
+                break;
             }
-            else
-            {
-                Debug.LogError("Could not get price for weapon slot at index " + index);
-            }
-        }
-        else
-        {
-            Debug.LogError("Weapon Slot at index " + index + " is not assigned.");
         }
     }
+
+    
 }
