@@ -293,40 +293,5 @@ public class SteeringWheel : GrabbableEvents
         return returnValue;
     }
 
-    public void OnDrawGizmosSelected()
-    {
-        if (ShowEditorGizmos && !Application.isPlaying)
-        {
-
-            Vector3 origin = transform.position;
-            float rotationDifference = MaxAngle - MinAngle;
-
-            float lineLength = 0.1f;
-            float arcLength = 0.1f;
-
-            Handles.color = Color.cyan;
-
-            Vector3 minPosition = origin + Quaternion.AngleAxis(MinAngle, transform.forward) * transform.up * lineLength;
-            Vector3 maxPosition = origin + Quaternion.AngleAxis(MaxAngle, transform.forward) * transform.up * lineLength;
-
-            Handles.DrawLine(origin, minPosition);
-            Handles.DrawLine(origin, maxPosition);
-
-            Debug.DrawLine(transform.position, origin + Quaternion.AngleAxis(0, transform.up) * transform.up * lineLength, Color.magenta);
-
-            if (rotationDifference == 180)
-            {
-                minPosition = origin + Quaternion.AngleAxis(MinAngle + 0.01f, transform.up) * transform.up * lineLength;
-            }
-
-            Vector3 cross = Vector3.Cross(minPosition - origin, maxPosition - origin);
-            if (rotationDifference > 180)
-            {
-                cross = Vector3.Cross(maxPosition - origin, minPosition - origin);
-            }
-
-            Handles.color = new Color(0, 255, 255, 0.1f);
-            Handles.DrawSolidArc(origin, cross, minPosition - origin, rotationDifference, arcLength);
-        }
-    }
+    
 }

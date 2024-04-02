@@ -208,40 +208,4 @@ public class Lever : MonoBehaviour
             grab.DropItem(false, false);
         }
     }
-
-    void OnDrawGizmosSelected()
-    {
-        if (ShowEditorGizmos && !Application.isPlaying)
-        {
-            Vector3 _origin = transform.position;
-            float rotationDifference = MaximumXRotation - MinimumXRotation;
-
-            float lineLength = 0.1f;
-            float arcLength = 0.1f;
-
-            Handles.color = Color.cyan;
-
-            Vector3 minPosition = _origin + Quaternion.AngleAxis(MinimumXRotation, transform.right) * transform.forward * lineLength;
-            Vector3 maxPosition = _origin + Quaternion.AngleAxis(MaximumXRotation, transform.right) * transform.forward * lineLength;
-
-            Handles.DrawLine(_origin, minPosition);
-            Handles.DrawLine(_origin, maxPosition);
-
-            Debug.DrawLine(transform.position, _origin + Quaternion.AngleAxis(InitialXRotation, transform.right) * transform.forward * lineLength, Color.magenta);
-
-            if (rotationDifference == 180)
-            {
-                minPosition = _origin + Quaternion.AngleAxis(MinimumXRotation + 0.01f, transform.right) * transform.forward * lineLength;
-            }
-
-            Vector3 _cross = Vector3.Cross(minPosition - _origin, maxPosition - _origin);
-            if (rotationDifference > 180)
-            {
-                _cross = Vector3.Cross(maxPosition - _origin, minPosition - _origin);
-            }
-
-            Handles.color = new Color(0, 255, 255, 0.1f);
-            Handles.DrawSolidArc(_origin, _cross, minPosition - _origin, rotationDifference, arcLength);
-        }
-    }
 }
