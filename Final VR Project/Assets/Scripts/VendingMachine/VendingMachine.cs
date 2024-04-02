@@ -69,11 +69,11 @@ public class VendingMachine : MonoBehaviour
         WeaponSlot slot = weaponSlots[index];
         if (slot != null)
         {
-            int price = slot.GetPrice(); // Make sure you have a method to get the price
+            int price = slot.GetPrice(); 
             if (CreditsManager.Instance.CanAfford(price))
             {
                 CreditsManager.Instance.SpendCredits(price);
-                slot.VendWeapon(spawner, spawnerAnimation);
+                slot.VendWeapon(spawner);
                 Debug.Log("Dispensed Weapon: " + slot.selectedWeaponName);
 
                 // Update UI here as needed

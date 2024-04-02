@@ -5,9 +5,9 @@ public class ZombieAI : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Animator animator;
-    private Transform playerTransform; // Assuming you have a way to get the player's transform
-    private float attackDistance = 2.0f; // Distance at which the zombie will attack
-    private float attackCooldown = 2.0f; // Cooldown in seconds
+    private Transform playerTransform; 
+    private float attackDistance = 2.0f; 
+    private float attackCooldown = 2.0f; 
     private float lastAttackTime = -Mathf.Infinity;
 
     // Zombie type speeds
@@ -46,7 +46,10 @@ public class ZombieAI : MonoBehaviour
         }
         else
         {
-            MoveTowardsPlayer();
+            if (agent.isOnNavMesh)
+            {
+                MoveTowardsPlayer(); 
+            }
         }
 
         UpdateAnimatorParameters();
@@ -113,7 +116,7 @@ public class ZombieAI : MonoBehaviour
 
     private void UpdateAnimatorParameters()
     {
-        // Update the speed parameter for walking/running/crawling animations.
+        
         animator.SetFloat("Speed", agent.velocity.magnitude);
     }
    
@@ -153,7 +156,7 @@ public class ZombieAI : MonoBehaviour
         if (distance <= attackDistance)
         {
             // Assuming the player's script is called PlayerHealth and is attached to the player GameObject
-            playerTransform.GetComponent<PlayerHealth>().TakeDamage(10);
+            playerTransform.GetComponent<PlayerHealth>().TakeDamage(5);
         }
     }
 

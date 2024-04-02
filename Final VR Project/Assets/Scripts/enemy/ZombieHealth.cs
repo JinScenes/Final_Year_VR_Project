@@ -2,49 +2,65 @@
 
     public class ZombieHealth : MonoBehaviour
     {
-        public float health = 100f;
-        public float totalHealth = 100f;
+        public SpawnManager spawnManager;
+        public float health = 70f;
+        //public float totalHealth = 100f;
         private EnemyDism enemyDism;
+        private bool isDead = false;
 
         void Start()
         {
             enemyDism = GetComponent<EnemyDism>();
         }
 
-        public void TakeDamage(float amount)
-        {
-            health -= amount;
-            if (health <= 0f)
-            {
-                Die();
-            }
-        }
 
-        void Die()
+
+    
+
+    void Die()
+    {
+        if (!isDead)
         {
-            FindObjectOfType<SpawnManager>().ZombieKilled();
+            isDead = true; // Prevents multiple death processing
+
+            if (spawnManager != null)
+            {
+                spawnManager.ZombieKilled();
+            }
+
             GetComponent<ZombieAI>().isAlive = false;
             CreditsManager.Instance.AddCredits(25);
-            GetComponent<EnemyDism>().StartRagdoll(); 
-            Destroy(gameObject, 5f); 
+            enemyDism.StartRagdoll();
+            Destroy(gameObject, 5f);
         }
-
-
-        public void TakeDamage(float amount, BodyPart hitPart = null)
-        {
-            if (hitPart != null)
-            {
-                hitPart.TakeDamage(amount); // You should add a TakeDamage method in BodyPart that reduces its health
-            }
-            else
-            {
-                health -= amount;
-            }
-
-            if (health <= 0f)
-            {
-                Die();
-            }
-        }
-
     }
+
+
+
+    public void TakeDamage(float amount, BodyPart hitPart = null)
+    {
+        // Check if the damage is from a specific body part
+        if (hitPart != null)
+        {
+            // Adjust the amount of damage if needed based on body part
+            // For example, head hits could do more damage
+            float damageMultiplier = 1.0f; // Default multiplier
+                                           // Example: if(hitPart.partType == BodyPartType.Head) damageMultiplier = 2.0f;
+
+            health -= (amount * damageMultiplier);
+        }
+        else
+        {
+            // Direct damage to the zombie, not through a body part
+            health -= amount;
+        }
+
+        if (health <= 0f)
+        {
+            Die();
+        }
+    }
+}
+        
+
+    
