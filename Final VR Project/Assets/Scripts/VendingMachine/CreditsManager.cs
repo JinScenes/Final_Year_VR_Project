@@ -4,7 +4,7 @@ public class CreditsManager : MonoBehaviour
 {
     public static CreditsManager Instance { get; private set; }
 
-    public int Credits { get; private set; }
+    public int Credits { get; private set; } 
 
     private void Awake()
     {
@@ -32,14 +32,12 @@ public class CreditsManager : MonoBehaviour
 
     public void SpendCredits(int amount)
     {
-        if (CanAfford(amount))
-        {
+        
             Credits -= amount;
-            // Optionally, update UI or notify the player here
-        }
-        else
-        {
-            Debug.LogWarning("Not enough credits to spend.");
-        }
+           
+        
+        
+           // Debug.LogWarning("Not enough credits to spend.");
+        
     }
 }

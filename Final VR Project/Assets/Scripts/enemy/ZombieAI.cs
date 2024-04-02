@@ -88,7 +88,7 @@ public class ZombieAI : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
 
 
-        float maxChaseRange = 10.0f; 
+        float maxChaseRange = 15.0f; 
 
         if (distanceToPlayer <= maxChaseRange)
         {

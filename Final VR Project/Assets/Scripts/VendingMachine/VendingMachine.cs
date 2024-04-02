@@ -70,7 +70,7 @@ public class VendingMachine : MonoBehaviour
         if (slot != null)
         {
             int price = slot.GetPrice(); 
-            if (CreditsManager.Instance.CanAfford(price))
+            if (CreditsManager.Instance.Credits >= slot.GetPrice())
             {
                 CreditsManager.Instance.SpendCredits(price);
                 slot.VendWeapon(spawner);
