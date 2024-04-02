@@ -70,6 +70,7 @@ public class SpawnManager : MonoBehaviour
 
     public void StartNextWave()
     {
+        GameObject.Find("AmmoSpawner").GetComponent<AmmoSpawn>().SpawnAmmo();
         vendingMachine.SetActive(false);
         waveNumber++;
         totalZombiesToSpawn = waveNumber * 5; // Adjust the formula as needed for your game's difficulty curve
