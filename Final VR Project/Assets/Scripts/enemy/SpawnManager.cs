@@ -81,8 +81,8 @@ public class SpawnManager : MonoBehaviour
         GameObject.Find("AmmoSpawner").GetComponent<AmmoSpawn>().SpawnAmmo();
         vendingMachine.SetActive(false);
         waveNumber++;
-        //totalZombiesToSpawn = waveNumber + 5;
-        totalZombiesToSpawn = 1;
+        totalZombiesToSpawn = waveNumber + 5;
+        //totalZombiesToSpawn = 1;
         StartCoroutine(SpawnZombies());
     }
 
