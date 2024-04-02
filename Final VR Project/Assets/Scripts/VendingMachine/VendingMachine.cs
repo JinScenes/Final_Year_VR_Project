@@ -69,7 +69,8 @@ public class VendingMachine : MonoBehaviour
         WeaponSlot slot = weaponSlots[index];
         if (slot != null)
         {
-            int price = slot.GetPrice(); 
+            int price = slot.GetPrice();
+            print(price);
             if (CreditsManager.Instance.Credits >= slot.GetPrice())
             {
                 CreditsManager.Instance.SpendCredits(price);
