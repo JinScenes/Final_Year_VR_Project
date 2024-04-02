@@ -9,6 +9,8 @@ public class BodyPart : MonoBehaviour
     [SerializeField] GameObject Limb;
     [SerializeField] float partHealth;
     private ZombieHealth zombieHealth;
+
+
     void Start()
     {
         zombieHealth = GetComponentInParent<ZombieHealth>();

@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         vendingMachineText.enabled = true;
         vendingMachine.SetActive(true);
 
-        yield return new WaitForSeconds(30); // time between waves
+        yield return new WaitForSeconds(45); // time between waves
         vendingMachine.SetActive(false);
         vendingMachineText.enabled = false;
         StartNextWave();
@@ -94,7 +94,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            timeBetweenWaves = 30;
+            timeBetweenWaves = 45;
         }
     }
 }

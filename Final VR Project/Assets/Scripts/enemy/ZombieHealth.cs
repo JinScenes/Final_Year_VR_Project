@@ -29,7 +29,7 @@
             }
 
             GetComponent<ZombieAI>().isAlive = false;
-            CreditsManager.Instance.AddCredits(25);
+            CreditsManager.Instance.AddCredits(30);
             enemyDism.StartRagdoll();
             Destroy(gameObject, 5f);
         }
