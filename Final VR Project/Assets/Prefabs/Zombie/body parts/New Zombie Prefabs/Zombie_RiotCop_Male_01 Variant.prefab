@@ -57,6 +57,11 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1891606015751219439, guid: 83620e573d3f2254199cd946a8601720,
+        type: 3}
+      propertyPath: health
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -92,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27fb6e23aea98b43966ab96a55298e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
 --- !u!114 &4172274083234824128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99136d922eed0a24b99bbfcaaea66107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 0}
   health: 100
-  totalHealth: 100
 --- !u!114 &2576420371608280627
 MonoBehaviour:
   m_ObjectHideFlags: 0

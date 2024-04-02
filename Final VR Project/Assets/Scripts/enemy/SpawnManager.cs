@@ -42,16 +42,20 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnZombies()
     {
+
+
         canSpawn = true; 
         for (int i = 0; i < totalZombiesToSpawn && canSpawn; i++)
         {
             GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            GameObject zombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)]; 
-            Instantiate(zombiePrefab, spawnPoint.transform.position, Quaternion.identity);
+            GameObject zombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+            GameObject zombie = Instantiate(zombiePrefab, spawnPoint.transform.position, Quaternion.identity);
+            zombie.GetComponent<ZombieHealth>().spawnManager = this; 
+
             totalZombiesAlive++;
             yield return new WaitForSeconds(1f); // spawn interval
         }
-        canSpawn = false; // Prevent further spawning after the wave's zombies are all spawned
+        canSpawn = false;
         UpdateZombieCountText();
     }
 
@@ -70,10 +74,14 @@ public class SpawnManager : MonoBehaviour
 
     public void StartNextWave()
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth <= 75)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth += 25;
+        }
         GameObject.Find("AmmoSpawner").GetComponent<AmmoSpawn>().SpawnAmmo();
         vendingMachine.SetActive(false);
         waveNumber++;
-        totalZombiesToSpawn = waveNumber * 5; // Adjust the formula as needed for your game's difficulty curve
+        totalZombiesToSpawn = waveNumber + 5;
         StartCoroutine(SpawnZombies());
     }
 

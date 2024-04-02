@@ -22,17 +22,17 @@ public class BodyPart : MonoBehaviour
     public void TakeDamage(float amount)
     {
         partHealth -= amount;
-        if (partHealth <= 0f)
+        if (partHealth <= 0f && Limb != null)
         {
-            // Part-specific logic
-            if (Limb != null)
-            {
-                hitBodyPart();
-            }
-            // Notify the central health script
-            zombieHealth.TakeDamage(amount);
+            // Process the body part destruction or damage effect here
+            hitBodyPart();
         }
+
+        // Always notify the central health script, regardless of part health
+        // This way, damage is centralized and can be modified easily
+        zombieHealth.TakeDamage(amount, this);
     }
+
 
 
 

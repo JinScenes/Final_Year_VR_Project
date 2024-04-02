@@ -84,7 +84,7 @@ public class WeaponSlot:MonoBehaviour
     }
 
     // Add this to the WeaponSlot class
-    public void VendWeapon(GameObject spawner, Animation spawnerAnim)
+    public void VendWeapon(GameObject spawner)
     {
         foreach (var kvp in weaponDict)
         {
