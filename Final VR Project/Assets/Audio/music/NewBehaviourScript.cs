@@ -13,7 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         source = gameObject.GetComponent<AudioSource>();
        
-        source.clip = track[Random.Range(-1, 2)];
+        source.clip = track[Random.Range(0, track.Length)];
         source.PlayDelayed(Random.Range(15, 100));
     }
 
