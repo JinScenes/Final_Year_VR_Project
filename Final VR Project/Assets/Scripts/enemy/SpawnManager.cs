@@ -70,6 +70,10 @@ public class SpawnManager : MonoBehaviour
 
     public void StartNextWave()
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth <= 75)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth += 25;
+        }
         GameObject.Find("AmmoSpawner").GetComponent<AmmoSpawn>().SpawnAmmo();
         vendingMachine.SetActive(false);
         waveNumber++;
