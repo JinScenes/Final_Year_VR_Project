@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -7,18 +8,12 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private HealthUISlider healthUI;
 
+    public UnityEvent OnDeath;
+
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthUI();
-    }
-
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    TakeDamage(10);
-        //}
     }
 
     public void TakeDamage(int damageAmount)
@@ -26,6 +21,11 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
+
+        if (currentHealth <= 0)
+        {
+            OnDeath?.Invoke();
+        }
     }
 
     private void UpdateHealthUI()
@@ -35,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
             healthUI.UpdateHealth(currentHealth);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

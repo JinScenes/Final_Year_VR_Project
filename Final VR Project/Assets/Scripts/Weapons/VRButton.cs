@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class VRButton : MonoBehaviour
 {
     public float MinLocalY = 0.25f;
     public float MaxLocalY = 0.55f;
