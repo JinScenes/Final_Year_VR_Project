@@ -20,14 +20,12 @@ public class UINotificationManager : MonoBehaviour
     {
         Time.timeScale = 0;
         notificationUI.SetActive(true);
-        StartCoroutine(playTimeTracker.FlashImage(notificationUI.GetComponent<Image>()));
     }
 
     public void IgnoreNotification()
     {
         Time.timeScale = 1;
         notificationUI.SetActive(false);
-        StopCoroutine(playTimeTracker.FlashImage(notificationUI.GetComponent<Image>()));
     }
 
     public void QuitGame()
