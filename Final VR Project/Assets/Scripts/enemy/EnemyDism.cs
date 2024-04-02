@@ -26,7 +26,7 @@ public class EnemyDism : MonoBehaviour
     {
         anim.enabled = false;
         anim.enabled = false;
-        GetComponent<NavMeshAgent>().enabled = false; // Disable the NavMeshAgent
+        GetComponent<NavMeshAgent>().enabled = false; 
         GetComponent<ZombieAI>().enabled = false;
         for (int i = 0; i < rigidbodiesInRagdoll.Count ; i++)
         {

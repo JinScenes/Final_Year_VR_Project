@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] spawnPoints;
-    public GameObject[] zombiePrefabs; // Array of different zombie prefabs
+    public GameObject[] zombiePrefabs; 
     public GameObject vendingMachine;
     public TextMeshProUGUI zombieCountText, vendingMachineText;
     private int totalZombiesToSpawn;
@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
             zombie.GetComponent<ZombieHealth>().spawnManager = this; 
 
             totalZombiesAlive++;
-            yield return new WaitForSeconds(1f); // spawn interval
+            yield return new WaitForSeconds(1f); 
         }
         canSpawn = false;
         UpdateZombieCountText();
@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         vendingMachineText.enabled = true;
         vendingMachine.SetActive(true);
 
-        yield return new WaitForSeconds(45); // time between waves
+        yield return new WaitForSeconds(45); 
         vendingMachine.SetActive(false);
         vendingMachineText.enabled = false;
         StartNextWave();

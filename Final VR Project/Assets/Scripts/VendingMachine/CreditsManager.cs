@@ -22,7 +22,7 @@ public class CreditsManager : MonoBehaviour
     public void AddCredits(int amount)
     {
         Credits += amount;
-        // Optionally, update UI or notify the player here
+        
     }
 
     public bool CanAfford(int amount)
