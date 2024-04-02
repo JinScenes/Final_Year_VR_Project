@@ -359,6 +359,12 @@ public class RaycastWeapon : GrabbableEvents
         {
             onRaycastHitEvent.Invoke(hit);
         }
+        BodyPart hitPart = hit.collider.GetComponent<BodyPart>();
+        if (hitPart != null)
+        {
+            // If it's a body part, deal damage specifically to that part.
+            hitPart.TakeDamage(Damage);
+        }
     }
 
     public virtual void ApplyParticleFX(Vector3 position, Quaternion rotation, Collider attachTo)
