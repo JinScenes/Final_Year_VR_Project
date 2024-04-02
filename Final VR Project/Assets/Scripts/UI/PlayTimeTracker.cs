@@ -13,7 +13,6 @@ public class PlayTimeTracker : MonoBehaviour
     [SerializeField] private int notificationIntervalMinutes = 20;
 
     public UnityAction OnNotificationTimeReached;
-    private Coroutine flashCoroutine;
 
     private float playTime = 0f;
     private float notificationInterval;
@@ -55,17 +54,6 @@ public class PlayTimeTracker : MonoBehaviour
         if (notificationUI != null)
         {
             notificationUI.SetActive(show);
-
-            if (show && flashCoroutine == null)
-            {
-                flashCoroutine = StartCoroutine(FlashImage(notificationImage));
-            }
-            else if (!show && flashCoroutine != null)
-            {
-                StopCoroutine(flashCoroutine);
-                flashCoroutine = null;
-                notificationImage.color = Color.black;
-            }
         }
     }
 
@@ -77,18 +65,5 @@ public class PlayTimeTracker : MonoBehaviour
     public bool IsNotificationVisible()
     {
         return notificationVisible;
-    }
-
-    public IEnumerator FlashImage(Image image)
-    {
-        Color originalColor = image.color;
-
-        while (true)
-        {
-            image.color = Color.red;
-            yield return new WaitForSeconds(0.5f);
-            image.color = originalColor;
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 }
