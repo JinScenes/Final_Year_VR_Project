@@ -10,6 +10,7 @@ public class BodyPart : MonoBehaviour
     [SerializeField] float partHealth;
     [SerializeField] private GameObject headVFX; // Assign the VFX prefab for the head in the inspector
     [SerializeField] private bool isHeadPart;
+    [SerializeField] private Transform neckTransform;
 
     private ZombieHealth zombieHealth;
 
@@ -46,7 +47,7 @@ public class BodyPart : MonoBehaviour
         {
             if (headVFX != null)
             {
-                Instantiate(headVFX, transform.position, Quaternion.identity);
+                Instantiate(headVFX, neckTransform.position, neckTransform.rotation);
             }
             else
             {
