@@ -374,7 +374,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -728,7 +728,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -905,7 +905,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1259,7 +1259,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1613,7 +1613,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 0
   SnapHandModel: 1
   CanBeDropped: 1
