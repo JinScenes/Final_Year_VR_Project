@@ -1,6 +1,6 @@
 Final Year VR Group Project
-<br>
-Contributors:
+<br><br>
+Contributors:<br>
 <br>Jin
 <br>Chris
 <br>Ben
